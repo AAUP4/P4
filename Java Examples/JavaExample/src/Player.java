@@ -46,7 +46,7 @@ public class Player{
 
     public void printHand() {
         for (Card card : hand) {
-            System.out.println(card.id + " " + card.suit + " " + card.rank);
+            System.out.println(card.rank + " of " + card.suit + "s");
         }
     }
 
@@ -74,8 +74,8 @@ public class Player{
         return discardPile;
     }
 
-    public void draw(int numberOfCardsToDraw, Deck deck) { // Added deck to list of parameters
-        for (int i = 0; i < numberOfCardsToDraw; i++) { //How can it be made without the deck?
+    public void draw(int numberOfCardsToDraw, Deck deck) {
+        for (int i = 0; i < numberOfCardsToDraw; i++) {
             this.hand.add(deck.getCard(deck.getCards().size() - 1));
             deck.getCards().remove(deck.getCards().size() - 1);
         }

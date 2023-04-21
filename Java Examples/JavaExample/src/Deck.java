@@ -22,8 +22,7 @@ public class Deck {
         }
 
         for (int i = 0; i < n; i++) {
-            String s = Integer.toString(i);
-            Card joker = new Card("Joker", s, 1, false);
+            Card joker = new Card("Joker", "Joker", 1, false);
             cards.add(joker);
         }
     }
