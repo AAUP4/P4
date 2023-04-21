@@ -62,7 +62,7 @@ public class Player{
 
     public void printTable() {
         for (Card card : this.table.getCards()) {
-            System.out.println(card.id + " " + card.suit + " " + card.rank);
+            System.out.println(card.rank + " of " + card.suit + "s");
         }
     }
 
@@ -112,6 +112,7 @@ public class Player{
             if (cardToTake == card.id) {
                 hand.add(card);
                 discardPileToTakeFrom.remove(card);
+                break;
             }
         }
     }
@@ -122,6 +123,7 @@ public class Player{
                 card.isFaceUp = isFaceUp;
                 tableToLayTo.getCards().add(card);
                 hand.remove(card);
+                break;
             }
         }
     }
