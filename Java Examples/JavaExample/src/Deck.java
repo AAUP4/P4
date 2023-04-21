@@ -74,13 +74,18 @@ public class Deck {
             }
         }
     }
-
+    // Returns all cards from player discard pile to the deck.
     public void returnDiscardPile(Player p) {
-        
+        for(Card card : p.getDiscardPile()){
+            cards.add(card);
+            p.getDiscardPile().remove(cards.size()-1); // Removes one card from the player discard pile
+        }
     }
 
     public void returnDiscardPile() {
-
+        for(Card card : Main.discardPile){
+            cards.add(card);
+            Main.discardPile.remove(cards.size()-1); 
+        }
     }
-
 }
