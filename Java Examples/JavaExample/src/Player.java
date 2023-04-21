@@ -40,6 +40,10 @@ public class Player{
         return handPoints;
     }
 
+    public int handSize(){
+        return this.hand.size();
+    }
+
     public void printHand() {
         for (Card card : hand) {
             System.out.println(card.id + " " + card.suit + " " + card.rank);
