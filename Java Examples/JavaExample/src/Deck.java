@@ -26,9 +26,21 @@ public class Deck {
             cards.add(joker);
         }
     }
-    // public void assignPoints([], n){
+    public void assignPoints(String[] cardList, int points){
 
-    // }
+        for(int i = 0; i < cardList.length; i++){
+            boolean isSet = false;
+            int n = 0;
+            while(!isSet && n<Main.deck.cards.size()){
+                if(Main.deck.cards.get(n).id==cardList[i]) {
+                    Main.deck.cards.get(n).setPoints(points);
+                    isSet=true;
+                }
+                n++;
+            }
+        }
+
+    }
 
     // Shuffles the deck
     public void shuffle() {
