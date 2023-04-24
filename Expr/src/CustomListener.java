@@ -26,7 +26,12 @@ public class CustomListener extends ExprBaseListener {
     @Override
     public void visitTerminal(TerminalNode node) {
         Token token = node.getSymbol();
-        String symbolName = tokenNames[token.getType()];
+        String symbolName;
+        if(token.getType()>=0) {
+            symbolName = tokenNames[token.getType()];
+        } else {
+            symbolName = tokenNames[0];
+        }
         printIndent();
         System.out.println(symbolName + ": " + node.getText());
     }
