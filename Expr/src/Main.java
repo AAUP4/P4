@@ -1,6 +1,7 @@
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.antlr.v4.runtime.tree.*;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -26,7 +27,7 @@ public class Main {
             ExprParser parser = new ExprParser(new CommonTokenStream(lexer));
 
             ParseTreeWalker walker = new ParseTreeWalker();
-            ExprBaseListener listener = new ExprBaseListener() {
+            CustomListener listener = new CustomListener() {
                 @Override
                 // If start rule changes name remember to rename this function as well
                 public void exitProgram(ExprParser.ProgramContext ctx) {
@@ -48,3 +49,5 @@ public class Main {
         }
     }
 }
+
+

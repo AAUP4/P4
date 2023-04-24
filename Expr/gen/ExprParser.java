@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class ExprParser extends Parser {
+
 	static { RuntimeMetaData.checkVersion("4.12.0", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -60,7 +61,7 @@ public class ExprParser extends Parser {
 			"VARID", "FUNCID", "STRINGVAL"
 		};
 	}
-	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
+	public static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
 	/**
