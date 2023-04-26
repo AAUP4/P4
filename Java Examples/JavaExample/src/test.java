@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class test {
     
-    private static final Object NULL = null;
+    // private static final Object NULL = null;
     public int Threeplus2(){
         int i = 2;
         int x = 3;
@@ -51,7 +51,7 @@ public class test {
         assertEquals(52, x);
     }
     @Test
-    public void testDeckDeal(){
+    public void testDeckReturnToDiscardPile(){
         Deck y = new Deck();
         Player p = new Player("Player 1");
         assertEquals(52, y.size());
@@ -62,6 +62,7 @@ public class test {
         assertEquals(3, dpilesize);
         y.returnDiscardPile();
         assertEquals(52, y.size());
+        assertEquals(0, Main.discardPile.size());
     }
 
 }

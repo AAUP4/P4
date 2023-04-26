@@ -15,10 +15,10 @@ public class Main {
         System.out.println(deck.size());
 
         p.discardAll(discardPile);
-
+        System.out.println("discard pile:" + discardPile.size());
         deck.returnDiscardPile();
         System.out.println(deck.size());
-
+        System.out.println("discard pile:" + discardPile.size());
         System.out.println("hello world");
     }
 }
