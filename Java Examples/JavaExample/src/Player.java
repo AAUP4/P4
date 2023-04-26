@@ -90,6 +90,13 @@ public class Player{
             }
         }
     }
+    public void discardAll(ArrayList<Card> discardPile){
+        int size = hand.size();
+        for(int i = size - 1; i >= 0; i--){
+            discardPile.add(hand.get(i));
+            hand.remove(i);
+        }
+    }
 
     public void takeCard(String cardToTake, Player playerToTakeFrom) {
         for (Card card : playerToTakeFrom.hand) {

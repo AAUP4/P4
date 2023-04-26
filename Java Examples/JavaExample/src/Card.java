@@ -32,6 +32,7 @@ public class Card {
 
     public void setPoints(int x) {
         points = x;
+        
     }
 
     private static String RankToIntString(String rank) {

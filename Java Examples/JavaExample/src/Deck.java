@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 public class Deck {
 
     Deck() {
@@ -94,9 +95,11 @@ public class Deck {
     }
 
     public void returnDiscardPile() {
-        for(Card card : Main.discardPile){
+        Iterator<Card> iterator = Main.discardPile.iterator();
+        while (iterator.hasNext()) {
+            Card card = iterator.next();
             cards.add(card);
-            Main.discardPile.remove(cards.size()-1); 
+            iterator.remove(); 
         }
     }
 }
