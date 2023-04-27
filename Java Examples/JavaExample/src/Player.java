@@ -138,4 +138,7 @@ public class Player{
             }
         }
     }
+    public Card getCard(int index){
+        return this.hand.get(index);
+    }
 }

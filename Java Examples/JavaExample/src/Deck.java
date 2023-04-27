@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+
 public class Deck {
 
     Deck() {
@@ -27,27 +28,31 @@ public class Deck {
             cards.add(joker);
         }
     }
-    public void assignPoints(String[] cardList, int points){
 
-        for(int i = 0; i < cardList.length; i++){
-            boolean isSet = false;
-            int n = 0;
-            while(!isSet && n<Main.deck.cards.size()){
-                if(Main.deck.cards.get(n).id==cardList[i]) {
-                    Main.deck.cards.get(n).setPoints(points);
-                    isSet=true;
-                }
-                n++;
+    public void assignPoints(String input, int points) {
+        for (Card card : cards) {
+            // rank
+            if (input == card.rank) {
+                card.setPoints(points);
+            } else if (input == card.suit) {
+                card.setPoints(points);
             }
         }
+    }
 
+    public void assignPoints(String rank, String suit, int points) {
+        for (Card card : cards) {
+            if (rank == card.rank && suit == card.suit) {
+                card.setPoints(points);
+            }
+        }
     }
 
     // Shuffles the deck
     public void shuffle() {
         Collections.shuffle(this.cards);
     }
-    
+
     // Deals a number of cards to each player
     public void deal(int numberOfCardToDeal) {
         for (int i = 0; i < numberOfCardToDeal; i++) {
@@ -57,40 +62,44 @@ public class Deck {
             }
         }
     }
-    
+
     // Returns card object for the index
-    public Card getCard(int index){
+    public Card getCard(int index) {
         return this.cards.get(index);
     }
+
     // Returns card objects in the list
     public ArrayList<Card> getCards() {
         return this.cards;
     }
+
     // prints all cards with their id followed by points
     public void print() {
-        for(Card card : cards){
+        for (Card card : cards) {
             System.out.println(card.id + "  " + card.getPoints());
         }
     }
+
     // returns the size of the deck(amount of remaining cards)
     public int size() {
         return cards.size();
     }
 
     public void returnCards() {
-        for(Player player : Player.getPlayers()){
-            for(Card card : player.getHand()){
-                    cards.add(card);
-                    player.getHand().remove(cards.size()-1); // Changed from getCards, best regards - Skytte
+        for (Player player : Player.getPlayers()) {
+            for (Card card : player.getHand()) {
+                cards.add(card);
+                player.getHand().remove(cards.size() - 1); // Changed from getCards, best regards - Skytte
 
             }
         }
     }
+
     // Returns all cards from player discard pile to the deck.
     public void returnDiscardPile(Player p) {
-        for(Card card : p.getDiscardPile()){
+        for (Card card : p.getDiscardPile()) {
             cards.add(card);
-            p.getDiscardPile().remove(cards.size()-1); // Removes one card from the player discard pile
+            p.getDiscardPile().remove(cards.size() - 1); // Removes one card from the player discard pile
         }
     }
 
@@ -99,7 +108,7 @@ public class Deck {
         while (iterator.hasNext()) {
             Card card = iterator.next();
             cards.add(card);
-            iterator.remove(); 
+            iterator.remove();
         }
     }
 }
