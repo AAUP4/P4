@@ -63,6 +63,7 @@ public class TestDeck {
         assertEquals(3, dpilesize);
         y.returnDiscardPile();
         assertEquals(52, y.size());
+        Main.discardPile.clear();
     }
     
     @Test

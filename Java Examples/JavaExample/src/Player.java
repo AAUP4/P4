@@ -81,7 +81,7 @@ public class Player{
 
     public void discard(String cardId, ArrayList<Card> discardPile) {
         for (int i = 0; i < hand.size(); i++) {
-            if (cardId == hand.get(i).id) {
+            if (cardId.equals(hand.get(i).id)) {
                 discardPile.add(hand.get(i));
                 hand.remove(i);
                 break;
@@ -98,7 +98,7 @@ public class Player{
 
     public void takeCard(String cardToTake, Player playerToTakeFrom) {
         for (Card card : playerToTakeFrom.hand) {
-            if (cardToTake == card.id) { 
+            if (cardToTake.equals(card.id)) { 
                 hand.add(card);
                 playerToTakeFrom.hand.remove(card);
                 break;
@@ -108,7 +108,7 @@ public class Player{
 
     public void takeCard(String cardToTake, Table tableToTakeFrom) {
         for (Card card : tableToTakeFrom.getCards()) {
-            if (cardToTake == card.id) {
+            if (cardToTake.equals(card.id)) {
                 hand.add(card);
                 tableToTakeFrom.getCards().remove(card);
                 break;
@@ -118,7 +118,7 @@ public class Player{
 
     public void takeCard(String cardToTake, ArrayList<Card> discardPileToTakeFrom) {
         for (Card card : discardPileToTakeFrom) {
-            if (cardToTake == card.id) {
+            if (cardToTake.equals(card.id)) {
                 hand.add(card);
                 discardPileToTakeFrom.remove(card);
                 break;
@@ -128,7 +128,7 @@ public class Player{
 
     public void layDown(String cardToLayDown, Table tableToLayTo, Boolean isFaceUp) {
         for(Card card : hand){
-            if(cardToLayDown == card.id){
+            if(cardToLayDown.equals(card.id)){
                 card.isFaceUp = isFaceUp;
                 tableToLayTo.getCards().add(card);
                 hand.remove(card);
