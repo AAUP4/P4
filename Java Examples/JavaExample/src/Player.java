@@ -32,11 +32,9 @@ public class Player{
 
     public int getHandPoints() {
         int handPoints = 0;
-
         for (Card card : this.hand) {
             handPoints += card.getPoints(); 
         }
-
         return handPoints;
     }
 
