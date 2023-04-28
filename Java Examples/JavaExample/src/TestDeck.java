@@ -64,4 +64,20 @@ public class TestDeck {
         y.returnDiscardPile();
         assertEquals(52, y.size());
     }
+    
+    @Test
+    public void testDeckAddJokers() {
+        int jokerAmount = 3;
+        Deck y = new Deck();
+        int ysize = y.size();
+        assertEquals(52, ysize);
+        y.addJokers(jokerAmount);
+        int jsize = y.size();
+        assertEquals(55, jsize);
+        for (int i = 0; i < jokerAmount; i++) {
+            Card getcard = y.getCard(52 + i);
+            assertEquals("Joker", getcard.rank);
+        }
+    }
+
 }
