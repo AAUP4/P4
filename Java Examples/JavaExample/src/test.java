@@ -131,4 +131,24 @@ public class test {
         }
     }
 
+    @Test
+    public void testPlayerGetHand(){
+        Deck y = new Deck();
+        Player p = new Player("Player 1");
+        p.draw(3, y);
+        p.getHand();
+        assertEquals(3, p.handSize());
+    }
+
+    //Virker ikke endnu
+    @Test
+    public void testPlayerGetHandPoints() {
+        Deck y = new Deck();
+        Player p = new Player("Player 1");
+        p.draw(3, y);
+        p.getHandPoints();
+        int ppoints = p.score;
+        assertEquals(3, ppoints);
+    }
+
 }
