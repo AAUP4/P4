@@ -28,18 +28,18 @@ public class Deck {
             cards.add(joker);
         }
     }
-
-    public void assignPoints(String input, int points) {
+    // Assigns points for either a rank or a suit.
+    public void assignPoints(String rankOrSuit, int points) {
         for (Card card : cards) {
             // rank
-            if (input == card.rank) {
+            if (rankOrSuit == card.rank) {
                 card.setPoints(points);
-            } else if (input == card.suit) {
+            } else if (rankOrSuit == card.suit) {
                 card.setPoints(points);
             }
         }
     }
-
+    // Assign points for specific rank and specific suit
     public void assignPoints(String rank, String suit, int points) {
         for (Card card : cards) {
             if (rank == card.rank && suit == card.suit) {
@@ -102,7 +102,7 @@ public class Deck {
             p.getDiscardPile().remove(cards.size() - 1); // Removes one card from the player discard pile
         }
     }
-
+    // return cards for main discard pile to the deck.
     public void returnDiscardPile() {
         Iterator<Card> iterator = Main.discardPile.iterator();
         while (iterator.hasNext()) {

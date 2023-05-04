@@ -26,6 +26,15 @@ public class testPlayer {
         assertEquals(3, p.handSize());
     }
     @Test
+    public void playerGetTable(){
+        Deck y = new Deck();
+        Player p = new Player("yeet");
+        p.draw(5, y);
+        p.layDown("D13", p.getTable(), true);
+        String x = p.getTable().getCardIndex(0).id;
+        assertEquals("D13", x);
+    }
+    @Test
     public void testPlayerGetHandPoints() {
         Deck y = new Deck();
         Player p = new Player("Player 1");
@@ -72,7 +81,10 @@ public class testPlayer {
         int amountOfCards = 5;
         p.draw(amountOfCards, y);
         int x = p.handSize();
+        int t = y.size();
         assertEquals(amountOfCards, x);
+        assertEquals(52 - amountOfCards, t);
+        
     }
 
     @Test
@@ -84,6 +96,15 @@ public class testPlayer {
         p1.takeCard("D13", p2);
         Card ide = p1.getCard(0);
         assertEquals("D13", ide.id);        
+    }
+    @Test
+    public void testPlayerGetTablePoints(){
+        Deck y = new Deck();
+        Player p = new Player("player1");
+        p.draw(1, y);
+        p.layDown("D13", p.getTable(), true);
+        int x = p.getTablePoints();
+        assertEquals(1, x);
     }
 
     @Test
@@ -122,5 +143,6 @@ public class testPlayer {
         assertEquals("D13", x.id);
         Main.discardPile.clear();
     }
+
     
 }

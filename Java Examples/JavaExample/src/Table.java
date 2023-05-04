@@ -11,6 +11,48 @@ public class Table {
     // }
     public ArrayList<Card> getCards() {
         return tableCards;
-    }  
+    }
+    public Card getCardIndex(int x){
+        return tableCards.get(x);
+    }
+    public void draw(int numberOfCardsToDraw, Deck deck) {
+        for (int i = 0; i < numberOfCardsToDraw; i++) {
+            this.tableCards.add(deck.getCard(deck.getCards().size() - 1));
+            deck.getCards().remove(deck.getCards().size() - 1);
+        }
+    }
+    public void discard(String cardId, ArrayList<Card> discardPile) {
+        for (int i = 0; i < tableCards.size(); i++) {
+            if (cardId.equals(tableCards.get(i).id)) {
+                discardPile.add(tableCards.get(i));
+                tableCards.remove(i);
+                break;
+            }
+        }
+    }
+    
+    public void discardAll(ArrayList<Card> discardPile){
+        int size = tableCards.size();
+        for(int i = size - 1; i >= 0; i--){
+            discardPile.add(tableCards.get(i));
+            tableCards.remove(i);
+        }
+    }
+
+    public Card getCard(int index){
+        return this.tableCards.get(index);
+    }
+    public void print(){
+        for(int i = 0; i < tableCards.size(); i++)
+        System.out.println(tableCards.get(i));
+    }
+    public int size(){        
+        return tableCards.size();
+    }
+    
+
+
+
+
 }
 
