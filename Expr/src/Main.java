@@ -3,6 +3,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.runtime.tree.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,7 +12,11 @@ import java.util.logging.Logger;
 public class Main {
     public static void main(String[] args) {
         try {
-            CharStream input = CharStreams.fromFileName("C:\\Users\\night\\Documents\\GitHub\\P4\\Expr\\src\\test.expr");
+            File directory = new File("Expr/src/test.expr");
+            System.out.println("TEST: " + directory.getAbsolutePath());
+            String filePath = directory.getAbsolutePath();
+            CharStream input = CharStreams.fromFileName(filePath);
+            //CharStream input = CharStreams.fromFileName("C:\\Users\\night\\Documents\\GitHub\\P4\\Expr\\src\\test.expr");
             ExprLexer lexer = new ExprLexer(input);
 
             /*for (Token token = lexer.nextToken(); token.getType() != Token.EOF; token = lexer.nextToken()) {
