@@ -84,7 +84,6 @@ public class testPlayer {
         int t = y.size();
         assertEquals(amountOfCards, x);
         assertEquals(52 - amountOfCards, t);
-        
     }
 
     @Test
