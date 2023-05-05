@@ -19,8 +19,14 @@ public class Deck {
     private ArrayList<Card> cards = new ArrayList<Card>();
 
     public void addJokers(int n) {
-        if (n < 1 || n > 3) {
+        /*if (n < 1 || n > 3) {
             throw new IllegalArgumentException("Jokers must be between 1 and 3");
+        }*/
+        if (n < 0) {
+            n = 0;
+        }
+        if (n > 3) {
+            n = 3;
         }
 
         for (int i = 0; i < n; i++) {

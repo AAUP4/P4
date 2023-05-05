@@ -81,4 +81,25 @@ public class TestDeck {
         }
     }
 
+    @Test
+    public void testDeckAddJokersMoreThanThree() {
+        int jokerAmount = 4;
+        Deck deck = new Deck();
+        assertEquals(52, deck.size());
+
+        deck.addJokers(jokerAmount);
+        assertEquals(55, deck.size());
+    }
+
+
+    @Test
+    public void testDeckAddJokersLessThanZero() {
+        int jokerAmount = -2;
+        Deck deck = new Deck();
+        assertEquals(52, deck.size());
+
+        deck.addJokers(jokerAmount);
+        assertEquals(52, deck.size());
+    }
+
 }
