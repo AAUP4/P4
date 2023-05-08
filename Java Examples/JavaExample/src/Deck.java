@@ -34,7 +34,7 @@ public class Deck {
             cards.add(joker);
         }
     }
-    public void assignPoints(String cardIDs[], int points){
+    public void assignPoints(int points, String... cardIDs){
         for (String cardId : cardIDs){
             for (Card card : this.cards){
                 if(cardId.equals(card.id)){
