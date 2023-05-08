@@ -34,6 +34,15 @@ public class Deck {
             cards.add(joker);
         }
     }
+    public void assignPoints(String cardIDs[], int points){
+        for (String cardId : cardIDs){
+            for (Card card : this.cards){
+                if(cardId.equals(card.id)){
+                    card.setPoints(points);
+                }
+            }            
+        }
+    }
     
     // Assigns points for either a rank or a suit.
     public void assignPoints(String rankOrSuit, int points) {

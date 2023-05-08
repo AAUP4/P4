@@ -36,6 +36,18 @@ public class TestDeck {
         x = y.getCard(51);
         assertNotEquals("King", x.rank);
     }
+    @Test
+    public void testAssignPointsArray(){
+        Deck y = new Deck(); 
+        String array[] = {"D12", "D13"};
+        y.assignPoints(array, 3);
+        Card x = y.getCard(51);
+        assertEquals("D13", x.id);
+        assertEquals(3, x.getPoints());
+
+    }
+
+
 
     @Test
     public void testDeckAssignPointsSingle() {
