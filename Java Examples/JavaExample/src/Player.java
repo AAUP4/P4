@@ -15,6 +15,9 @@ public class Player{
 
     private static ArrayList<Player> players = new ArrayList<Player>();    
 
+    public static int getPlayersAmount(){
+        return players.size();
+    }
     public static ArrayList<Player> getPlayers(){
         return players;
     }
@@ -70,6 +73,9 @@ public class Player{
 
     public ArrayList<Card> getDiscardPile() {
         return discardPile;
+    }
+    public Card getDiscardPileIndex(int index){
+        return discardPile.get(index);
     }
 
     public void draw(int numberOfCardsToDraw, Deck deck) {
@@ -136,7 +142,7 @@ public class Player{
             }
         }
     }
-    public Card getCard(int index){
+    public Card getCardIndex(int index){
         return this.hand.get(index);
     }
 }

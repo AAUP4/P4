@@ -12,8 +12,8 @@ public class Table {
     public ArrayList<Card> getCards() {
         return tableCards;
     }
-    public Card getCardIndex(int x){
-        return tableCards.get(x);
+    public Card getCardIndex(int index){
+        return tableCards.get(index);
     }
     public void draw(int numberOfCardsToDraw, Deck deck) {
         for (int i = 0; i < numberOfCardsToDraw; i++) {
@@ -37,10 +37,6 @@ public class Table {
             discardPile.add(tableCards.get(i));
             tableCards.remove(i);
         }
-    }
-
-    public Card getCard(int index){
-        return this.tableCards.get(index);
     }
     public void print(){
         for(int i = 0; i < tableCards.size(); i++)

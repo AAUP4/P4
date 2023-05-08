@@ -5,9 +5,7 @@ public class Main {
     public static Deck deck = new Deck();
     public static Table table = new Table();
     public static Player p = new Player("Nanna");
-    public static Game game = new Game();
     public static void main(String[] args) {
-        
-        game.exit();
+        Game.exit();
     }
 }

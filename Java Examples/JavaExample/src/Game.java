@@ -1,9 +1,6 @@
 import java.util.Scanner;
 
-public class Game {
-    Game() {
-        System.out.println("Welcome to a card game written in CLUB!");
-    }
+public class Game {    
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -12,14 +9,14 @@ public class Game {
 
         System.exit(0);
     }
-    public void exit(){
+    public static void exit(){
         System.out.println("It is a draw!");
         // Prints Scoreboard
         
 
         System.exit(0);
     }
-    public void print(String textToPrint){
+    public static void print(String textToPrint){
         System.out.println(textToPrint);
     }    
 

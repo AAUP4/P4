@@ -34,6 +34,7 @@ public class Deck {
             cards.add(joker);
         }
     }
+    
     // Assigns points for either a rank or a suit.
     public void assignPoints(String rankOrSuit, int points) {
         for (Card card : cards) {
@@ -45,6 +46,7 @@ public class Deck {
             }
         }
     }
+
     // Assign points for specific rank and specific suit
     public void assignPoints(String rank, String suit, int points) {
         for (Card card : cards) {
