@@ -1,7 +1,4 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
-import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -11,7 +8,7 @@ public class testPlayer {
         Deck y = new Deck();
         Player p = new Player("Player 1");
         p.draw(3, y);
-        Card x = p.getCard(2);
+        Card x = p.getCardIndex(2);
         assertEquals("Knight", x.rank);
         assertEquals("Diamond", x.suit);
         assertEquals(1, x.getPoints());
@@ -93,7 +90,7 @@ public class testPlayer {
         Player p2 = new Player("Player 2");        
         p2.draw(1, y);
         p1.takeCard("D13", p2);
-        Card ide = p1.getCard(0);
+        Card ide = p1.getCardIndex(0);
         assertEquals("D13", ide.id);        
     }
     @Test
@@ -127,7 +124,7 @@ public class testPlayer {
         p1.draw(1, y);
         p1.layDown("D13", t, true);
         p1.takeCard("D13", t);
-        Card x = p1.getCard(0);
+        Card x = p1.getCardIndex(0);
         assertEquals("D13", x.id);
     }   
 
@@ -138,7 +135,7 @@ public class testPlayer {
         p.draw(1, y);
         p.discardAll(Main.discardPile);
         p.takeCard("D13", Main.discardPile);
-        Card x = p.getCard(0);
+        Card x = p.getCardIndex(0);
         assertEquals("D13", x.id);
         Main.discardPile.clear();
     }
