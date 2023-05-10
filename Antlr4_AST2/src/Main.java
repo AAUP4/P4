@@ -8,7 +8,7 @@ import java.io.File;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        CharStream input = CharStreams.fromFileName("C:\\Users\\night\\IdeaProjects\\Antlr4_AST2\\src\\test.expr");
+        CharStream input = CharStreams.fromFileName("C:\\Users\\night\\Documents\\Github\\P4\\Antlr4_AST2\\src\\test.expr");
 //        File directory = new File("Antlr4_AST2/src/test.expr");
 //        System.out.println("TEST: " + directory.getAbsolutePath());
 //        String filePath = directory.getAbsolutePath();
