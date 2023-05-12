@@ -141,7 +141,7 @@ public class testPlayer {
     }
 
     @Test
-    public void testPlayerTableIntergration() {
+    public void testPlayerTableIntegration () {
         Deck y = new Deck();
         Player p = new Player("Player 1");
         Table t = new Table();
