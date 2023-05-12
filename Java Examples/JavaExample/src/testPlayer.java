@@ -140,5 +140,30 @@ public class testPlayer {
         Main.discardPile.clear();
     }
 
-    
+    @Test
+    public void testPlayerTableIntergration() {
+        Deck y = new Deck();
+        Player p = new Player("Player 1");
+        Table t = new Table();
+        p.draw(6, y); //d: k, q, j, 10, 9, 8
+        t.draw(3, y);//d: 7, 6, 5
+        assertEquals(43, y.size());
+
+        Card pc = p.getCardIndex(0);
+        assertEquals("D13", pc.id); // diamond king
+        Card tc = t.getCardIndex(0);
+        assertEquals("D7", tc.id); //diamond 7
+
+        p.takeCard("D7", t);//player takes card from table
+        assertEquals(t.size(), 2); //two cards should be left
+
+        t.discardAll(Main.discardPile); //discard all table cards to deck
+        assertEquals(0, t.size());
+        p.discardAll(Main.discardPile); //discard all player cards to deck
+        assertEquals(0, p.handSize());
+
+        y.returnDiscardPile(); // return cards from discard pile to deck
+        assertEquals(52, y.size()); //size of discard pile should be 52 again
+        Main.discardPile.clear();
+    }
 }
