@@ -14,24 +14,23 @@ func : FUNCID '(' tParams? ')' '{' stmt* '}'
          ;
 tParams : tParam (',' tParam)*
         ;
-stmt : tParam op='=' logicOrExpr ';'
-        | assignExpr  ';'
-//        | selectStmt
-//        | iterStmt
+stmt : tParam op='=' logicOrExpr ';'   #Stmt1
+        | assignExpr  ';'              #Stmt2
+        | selectStmt                   #Stmt3
+        | iterStmt                     #Stmt4
         ;
-iterStmt : WHILE '(' logicOrExpr ')' '{' stmt* '}'
-        | FOR '(' left1=INT left2=VARID op='=' right=addExpr ';' logicOrExpr ';' postfExpr ')' '{' stmt* '}'
+iterStmt : WHILE '(' logicOrExpr ')' '{' stmt* '}'                                                       #While
+        | FOR '(' tParam op='=' addExpr ';' logicOrExpr ';' right=VARID rop=('++'|'--')')' '{' stmt* '}' #For
         ;
 selectStmt : IF '(' logicOrExpr ')' '{' stmt* '}'
 	;
 
-tParam : left=TYPE right=VARID
+tParam : left=(BOOL|INT|STRING) right=VARID
 	;
 params : logicOrExpr (',' logicOrExpr)*
         ;
 
-assignExpr : logicOrExpr                 #Assign1
-        | left=VARID op='=' logicOrExpr  #Assign2
+assignExpr : left=VARID op='=' logicOrExpr
         ;
 logicOrExpr : logicAndExpr               #LogicOr1
         | logicAndExpr op='||' logicOrExpr  #LogicOr2
@@ -60,20 +59,18 @@ postfExpr : primaryExpr                                 #PostF1
         | primaryExpr op=('++'|'--')                    #PostF2
         | primaryExpr '('params')'                      #PostF3
         | primaryExpr op='.' postfExpr                  #PostF4
-        | METHODID'('params ')'                         #PostF5
+        | left=METHODID'('params ')'                    #PostF5
         | primaryExpr '(' ')'                           #PostF6
-        | METHODID'('')'                                #PostF7
+        | left=METHODID'('')'                           #PostF7
         ;
-primaryExpr : val
-        | VARID
-        | OBJID
-        | FUNCID
-        | CLASSID
+primaryExpr : val                                       #Primary1
+        | left=(VARID | OBJID| FUNCID| CLASSID)         #Primary2
         ;
-val : BOOLVAL
-        | INTVAL
-        | STRINGVAL
+val : left=INTVAL
+        | left=BOOLVAL
+        | left=STRINGVAL
         ;
+
 
 
 AND : '&&' ;
@@ -111,7 +108,6 @@ TURN : 'Turn' ;
 WHILE : 'while' ;
 FOR : 'for' ;
 IF : 'if' ;
-TYPE : BOOL | INT | STRING;
 BOOL : 'bool' ;
 INT : 'int' ;
 STRING : 'string' ;
@@ -140,21 +136,28 @@ METHODID : 'create'
         |'returnCards'
         |'returnDiscardPile'
         |'flip'
-        |'getPoints' ;
+        |'getPoints'
+        ;
 BOOLVAL : 'true'
-        | 'false' ;
+        | 'false'
+        ;
 CLASSID : 'Player'
         | 'Deck'
         | 'Card'
-        | 'Table' ;
-OBJID : [HDCS][2-9]
-        |[HDCS]'1'[0-3]?
+        | 'Table'
+        ;
+OBJID : ('H'|'D'|'C'|'S')[2-9]
+        |('H'|'D'|'C'|'S')'1'[0-3]?
         |'J'[1-3]
         |'player'[1-9][0-9]*
         |'deck'
-        |'table' ;
-INTVAL : '0'
-        | [1-9][0-9]* ;
-VARID : [a-z][a-zA-Z_0-9]* ;
-FUNCID : [A-Z][a-zA-Z_0-9]* ;
-STRINGVAL : '"'~["]*'"' ;
+        |'table'
+        ;
+INTVAL : [0]
+        | [1-9][0-9]*
+        ;
+VARID : [a-z][a-zA-Z_0-9]*
+        ;
+FUNCID : [A-Z][a-zA-Z_0-9]*
+        ;
+STRINGVAL : '"'~[/"]*'"' ;
