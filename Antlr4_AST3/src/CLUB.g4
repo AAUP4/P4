@@ -1,13 +1,13 @@
 grammar CLUB;
 
 program : setup round turn funcs EOF ;
-setup : SETUP LCURLY s=stmts RCURLY ;
-round : ROUND LCURLY s=stmts RCURLY ;
-turn : TURN '(' CLASSID VARID ')' '{' s=stmts '}'
+setup : SETUP LCURLY stmts RCURLY ;
+round : ROUND LCURLY stmts RCURLY ;
+turn : TURN '(' CLASSID VARID ')' '{' stmts '}'
         | ;
-funcs : func+
+funcs : func funcs
         | ;
-stmts : s1=stmt s2=stmts
+stmts : stmt stmts
         | ;
 func : FUNCID '(' tParams ')' '{' stmts '}'
         | FUNCID '(' ')' '{' stmts '}' ;

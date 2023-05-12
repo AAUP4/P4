@@ -3,10 +3,14 @@ import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.List;
+import java.util.Stack;
 
 
 public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
-    // Start på træet med hovednode
+
+    Stack<AST> stack = new Stack<AST>();
+
+    // Start of tree
     @Override
     public AST visitProgram(CLUBParser.ProgramContext ctx) {
         AST ast = new AST();
@@ -27,21 +31,32 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
     @Override
     public AST visitRound(CLUBParser.RoundContext ctx) {
         AST ast = new AST(ctx.ROUND().getSymbol());
-        ast.addChild(visit(ctx.stmts()));
+        AST stmtsAst = visit(ctx.stmts());
+        ast.addChild(stmtsAst);
         return ast;
     }
 
     @Override
     public AST visitStmts(CLUBParser.StmtsContext ctx) {
-        AST ast = new AST(ctx.getStart());
-        int childCount = ctx.getChildCount();
-        if (childCount > 0) {
-            for (int i = 0; i < childCount; i++) {
-                if (ctx.getChild(i) instanceof CLUBParser.StmtContext) {
-                    ast.addChild(visit(ctx.getChild(i)));
+        AST ast = new AST(new CommonToken(CLUBParser.ROUND));
+
+        if (ctx.stmt() != null) {
+            AST stmtChild = visit(ctx.stmt());
+            ast.addChild(stmtChild);
+        }
+
+        if (ctx.stmts() != null) {
+            AST stmtsChild = visit(ctx.stmts());
+            if (stmtsChild != null && !stmtsChild.isNil()) {
+                List<AST> children = stmtsChild.getChildren();
+                if (children != null) {
+                    for (AST child : children) {
+                        ast.addChild(child);
+                    }
                 }
             }
         }
+
         return ast;
     }
 //    @Override
