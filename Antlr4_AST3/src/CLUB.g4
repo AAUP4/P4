@@ -1,5 +1,8 @@
 grammar CLUB;
 
+tokens { VEC }       // define imaginary token for vector literal
+
+
 program : setup round turn funcs EOF ;
 setup : SETUP LCURLY stmts RCURLY ;
 round : ROUND LCURLY stmts RCURLY ;
@@ -7,11 +10,11 @@ turn : TURN '(' CLASSID VARID ')' '{' stmts '}'
         | ;
 funcs : func funcs
         | ;
-stmts : stmt stmts
+stmts : stmt*
         | ;
 func : FUNCID '(' tParams ')' '{' stmts '}'
         | FUNCID '(' ')' '{' stmts '}' ;
-tParams : tParam ',' tParams;
+tParams : tParam (',' tParams)*;
 stmt : INTVAL ';' ;
 iterStmt : 'while' '(' expr ')' '{' stmts '}'
         | 'for' '(' decl ';' expr ';' postfExpr ')' '{' stmts '}' ;

@@ -26,7 +26,6 @@ public class Main {
 
 
 
-
         /*Lexer Tokens and Parser for VecMath*/
         /*
         VecMathLexer lexer = new VecMathLexer(input);

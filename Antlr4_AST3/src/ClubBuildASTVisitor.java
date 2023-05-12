@@ -20,10 +20,12 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
         ast.addChild(visit(ctx.funcs()));
         return ast;
     }
+    public int i = 0;
 
     @Override
     public AST visitSetup(CLUBParser.SetupContext ctx) {
         AST ast = new AST(ctx.SETUP().getSymbol());
+        i = 0;
         ast.addChild(visit(ctx.stmts()));
         return ast;
     }
@@ -31,32 +33,28 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
     @Override
     public AST visitRound(CLUBParser.RoundContext ctx) {
         AST ast = new AST(ctx.ROUND().getSymbol());
-        AST stmtsAst = visit(ctx.stmts());
-        ast.addChild(stmtsAst);
+        i = 0;
+        ast.addChild(visit(ctx.stmts()));
         return ast;
     }
 
+
     @Override
     public AST visitStmts(CLUBParser.StmtsContext ctx) {
-        AST ast = new AST(new CommonToken(CLUBParser.ROUND));
-
-        if (ctx.stmt() != null) {
-            AST stmtChild = visit(ctx.stmt());
-            ast.addChild(stmtChild);
+        AST ast = new AST(ctx.getStart());
+        i = 0;
+        for(CLUBParser.StmtContext stmt : ctx.stmt()){
+            i++;
         }
-
-        if (ctx.stmts() != null) {
-            AST stmtsChild = visit(ctx.stmts());
-            if (stmtsChild != null && !stmtsChild.isNil()) {
-                List<AST> children = stmtsChild.getChildren();
-                if (children != null) {
-                    for (AST child : children) {
-                        ast.addChild(child);
-                    }
-                }
-            }
+        for(int x = 1; x < i; x++){
+            ast.addChild(visit(ctx.stmt(x)));
         }
-
+        return ast;
+    }
+    @Override
+    public AST visitStmt(CLUBParser.StmtContext ctx) {
+        AST ast = new AST(ctx.getStart());
+//        ast.addChild(new AST(ctx.INTVAL().getSymbol()));
         return ast;
     }
 //    @Override
