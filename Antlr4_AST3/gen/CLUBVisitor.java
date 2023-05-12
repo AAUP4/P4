@@ -40,12 +40,6 @@ public interface CLUBVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFuncs(CLUBParser.FuncsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CLUBParser#stmts}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStmts(CLUBParser.StmtsContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link CLUBParser#func}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -76,18 +70,6 @@ public interface CLUBVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSelectStmt(CLUBParser.SelectStmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CLUBParser#exprStmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExprStmt(CLUBParser.ExprStmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CLUBParser#type}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitType(CLUBParser.TypeContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link CLUBParser#tParam}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -100,77 +82,152 @@ public interface CLUBVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParams(CLUBParser.ParamsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CLUBParser#list}.
+	 * Visit a parse tree produced by the {@code Assign1}
+	 * labeled alternative in {@link CLUBParser#assignExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitList(CLUBParser.ListContext ctx);
+	T visitAssign1(CLUBParser.Assign1Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link CLUBParser#param}.
+	 * Visit a parse tree produced by the {@code Assign2}
+	 * labeled alternative in {@link CLUBParser#assignExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParam(CLUBParser.ParamContext ctx);
+	T visitAssign2(CLUBParser.Assign2Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link CLUBParser#expr}.
+	 * Visit a parse tree produced by the {@code LogicOr1}
+	 * labeled alternative in {@link CLUBParser#logicOrExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpr(CLUBParser.ExprContext ctx);
+	T visitLogicOr1(CLUBParser.LogicOr1Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link CLUBParser#assignExpr}.
+	 * Visit a parse tree produced by the {@code LogicOr2}
+	 * labeled alternative in {@link CLUBParser#logicOrExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAssignExpr(CLUBParser.AssignExprContext ctx);
+	T visitLogicOr2(CLUBParser.LogicOr2Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link CLUBParser#logicOrExpr}.
+	 * Visit a parse tree produced by the {@code LogicAnd1}
+	 * labeled alternative in {@link CLUBParser#logicAndExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLogicOrExpr(CLUBParser.LogicOrExprContext ctx);
+	T visitLogicAnd1(CLUBParser.LogicAnd1Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link CLUBParser#logicAndExpr}.
+	 * Visit a parse tree produced by the {@code LogicAnd2}
+	 * labeled alternative in {@link CLUBParser#logicAndExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLogicAndExpr(CLUBParser.LogicAndExprContext ctx);
+	T visitLogicAnd2(CLUBParser.LogicAnd2Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link CLUBParser#equalExpr}.
+	 * Visit a parse tree produced by the {@code Equal1}
+	 * labeled alternative in {@link CLUBParser#equalExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitEqualExpr(CLUBParser.EqualExprContext ctx);
+	T visitEqual1(CLUBParser.Equal1Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link CLUBParser#relatExpr}.
+	 * Visit a parse tree produced by the {@code Equal2}
+	 * labeled alternative in {@link CLUBParser#equalExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRelatExpr(CLUBParser.RelatExprContext ctx);
+	T visitEqual2(CLUBParser.Equal2Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link CLUBParser#addExpr}.
+	 * Visit a parse tree produced by the {@code Relat1}
+	 * labeled alternative in {@link CLUBParser#relatExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAddExpr(CLUBParser.AddExprContext ctx);
+	T visitRelat1(CLUBParser.Relat1Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link CLUBParser#multExpr}.
+	 * Visit a parse tree produced by the {@code Relat2}
+	 * labeled alternative in {@link CLUBParser#relatExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMultExpr(CLUBParser.MultExprContext ctx);
+	T visitRelat2(CLUBParser.Relat2Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link CLUBParser#unaryExpr}.
+	 * Visit a parse tree produced by the {@code Add1}
+	 * labeled alternative in {@link CLUBParser#addExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUnaryExpr(CLUBParser.UnaryExprContext ctx);
+	T visitAdd1(CLUBParser.Add1Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link CLUBParser#postfExpr}.
+	 * Visit a parse tree produced by the {@code Add2}
+	 * labeled alternative in {@link CLUBParser#addExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPostfExpr(CLUBParser.PostfExprContext ctx);
+	T visitAdd2(CLUBParser.Add2Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Mult1}
+	 * labeled alternative in {@link CLUBParser#multExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMult1(CLUBParser.Mult1Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Mult2}
+	 * labeled alternative in {@link CLUBParser#multExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMult2(CLUBParser.Mult2Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Unary1}
+	 * labeled alternative in {@link CLUBParser#unaryExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnary1(CLUBParser.Unary1Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Unary2}
+	 * labeled alternative in {@link CLUBParser#unaryExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnary2(CLUBParser.Unary2Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PostF1}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPostF1(CLUBParser.PostF1Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PostF2}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPostF2(CLUBParser.PostF2Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PostF3}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPostF3(CLUBParser.PostF3Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PostF4}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPostF4(CLUBParser.PostF4Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PostF5}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPostF5(CLUBParser.PostF5Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link CLUBParser#primaryExpr}.
 	 * @param ctx the parse tree
@@ -183,10 +240,4 @@ public interface CLUBVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitVal(CLUBParser.ValContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CLUBParser#decl}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDecl(CLUBParser.DeclContext ctx);
 }

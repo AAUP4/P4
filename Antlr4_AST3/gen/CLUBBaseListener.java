@@ -76,18 +76,6 @@ public class CLUBBaseListener implements CLUBListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStmts(CLUBParser.StmtsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitStmts(CLUBParser.StmtsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterFunc(CLUBParser.FuncContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -148,30 +136,6 @@ public class CLUBBaseListener implements CLUBListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExprStmt(CLUBParser.ExprStmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExprStmt(CLUBParser.ExprStmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterType(CLUBParser.TypeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitType(CLUBParser.TypeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterTParam(CLUBParser.TParamContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -196,145 +160,253 @@ public class CLUBBaseListener implements CLUBListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterList(CLUBParser.ListContext ctx) { }
+	@Override public void enterAssign1(CLUBParser.Assign1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitList(CLUBParser.ListContext ctx) { }
+	@Override public void exitAssign1(CLUBParser.Assign1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterParam(CLUBParser.ParamContext ctx) { }
+	@Override public void enterAssign2(CLUBParser.Assign2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitParam(CLUBParser.ParamContext ctx) { }
+	@Override public void exitAssign2(CLUBParser.Assign2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpr(CLUBParser.ExprContext ctx) { }
+	@Override public void enterLogicOr1(CLUBParser.LogicOr1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpr(CLUBParser.ExprContext ctx) { }
+	@Override public void exitLogicOr1(CLUBParser.LogicOr1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignExpr(CLUBParser.AssignExprContext ctx) { }
+	@Override public void enterLogicOr2(CLUBParser.LogicOr2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignExpr(CLUBParser.AssignExprContext ctx) { }
+	@Override public void exitLogicOr2(CLUBParser.LogicOr2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLogicOrExpr(CLUBParser.LogicOrExprContext ctx) { }
+	@Override public void enterLogicAnd1(CLUBParser.LogicAnd1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLogicOrExpr(CLUBParser.LogicOrExprContext ctx) { }
+	@Override public void exitLogicAnd1(CLUBParser.LogicAnd1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLogicAndExpr(CLUBParser.LogicAndExprContext ctx) { }
+	@Override public void enterLogicAnd2(CLUBParser.LogicAnd2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLogicAndExpr(CLUBParser.LogicAndExprContext ctx) { }
+	@Override public void exitLogicAnd2(CLUBParser.LogicAnd2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEqualExpr(CLUBParser.EqualExprContext ctx) { }
+	@Override public void enterEqual1(CLUBParser.Equal1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEqualExpr(CLUBParser.EqualExprContext ctx) { }
+	@Override public void exitEqual1(CLUBParser.Equal1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRelatExpr(CLUBParser.RelatExprContext ctx) { }
+	@Override public void enterEqual2(CLUBParser.Equal2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRelatExpr(CLUBParser.RelatExprContext ctx) { }
+	@Override public void exitEqual2(CLUBParser.Equal2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAddExpr(CLUBParser.AddExprContext ctx) { }
+	@Override public void enterRelat1(CLUBParser.Relat1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAddExpr(CLUBParser.AddExprContext ctx) { }
+	@Override public void exitRelat1(CLUBParser.Relat1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMultExpr(CLUBParser.MultExprContext ctx) { }
+	@Override public void enterRelat2(CLUBParser.Relat2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMultExpr(CLUBParser.MultExprContext ctx) { }
+	@Override public void exitRelat2(CLUBParser.Relat2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUnaryExpr(CLUBParser.UnaryExprContext ctx) { }
+	@Override public void enterAdd1(CLUBParser.Add1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUnaryExpr(CLUBParser.UnaryExprContext ctx) { }
+	@Override public void exitAdd1(CLUBParser.Add1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPostfExpr(CLUBParser.PostfExprContext ctx) { }
+	@Override public void enterAdd2(CLUBParser.Add2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPostfExpr(CLUBParser.PostfExprContext ctx) { }
+	@Override public void exitAdd2(CLUBParser.Add2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMult1(CLUBParser.Mult1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMult1(CLUBParser.Mult1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMult2(CLUBParser.Mult2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMult2(CLUBParser.Mult2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUnary1(CLUBParser.Unary1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUnary1(CLUBParser.Unary1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUnary2(CLUBParser.Unary2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUnary2(CLUBParser.Unary2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPostF1(CLUBParser.PostF1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPostF1(CLUBParser.PostF1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPostF2(CLUBParser.PostF2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPostF2(CLUBParser.PostF2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPostF3(CLUBParser.PostF3Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPostF3(CLUBParser.PostF3Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPostF4(CLUBParser.PostF4Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPostF4(CLUBParser.PostF4Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPostF5(CLUBParser.PostF5Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPostF5(CLUBParser.PostF5Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -359,18 +431,6 @@ public class CLUBBaseListener implements CLUBListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitVal(CLUBParser.ValContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDecl(CLUBParser.DeclContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDecl(CLUBParser.DeclContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

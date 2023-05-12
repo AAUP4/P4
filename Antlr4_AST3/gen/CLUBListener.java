@@ -57,16 +57,6 @@ public interface CLUBListener extends ParseTreeListener {
 	 */
 	void exitFuncs(CLUBParser.FuncsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CLUBParser#stmts}.
-	 * @param ctx the parse tree
-	 */
-	void enterStmts(CLUBParser.StmtsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CLUBParser#stmts}.
-	 * @param ctx the parse tree
-	 */
-	void exitStmts(CLUBParser.StmtsContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link CLUBParser#func}.
 	 * @param ctx the parse tree
 	 */
@@ -117,26 +107,6 @@ public interface CLUBListener extends ParseTreeListener {
 	 */
 	void exitSelectStmt(CLUBParser.SelectStmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CLUBParser#exprStmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterExprStmt(CLUBParser.ExprStmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CLUBParser#exprStmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitExprStmt(CLUBParser.ExprStmtContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CLUBParser#type}.
-	 * @param ctx the parse tree
-	 */
-	void enterType(CLUBParser.TypeContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CLUBParser#type}.
-	 * @param ctx the parse tree
-	 */
-	void exitType(CLUBParser.TypeContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link CLUBParser#tParam}.
 	 * @param ctx the parse tree
 	 */
@@ -157,125 +127,257 @@ public interface CLUBListener extends ParseTreeListener {
 	 */
 	void exitParams(CLUBParser.ParamsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CLUBParser#list}.
+	 * Enter a parse tree produced by the {@code Assign1}
+	 * labeled alternative in {@link CLUBParser#assignExpr}.
 	 * @param ctx the parse tree
 	 */
-	void enterList(CLUBParser.ListContext ctx);
+	void enterAssign1(CLUBParser.Assign1Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link CLUBParser#list}.
+	 * Exit a parse tree produced by the {@code Assign1}
+	 * labeled alternative in {@link CLUBParser#assignExpr}.
 	 * @param ctx the parse tree
 	 */
-	void exitList(CLUBParser.ListContext ctx);
+	void exitAssign1(CLUBParser.Assign1Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link CLUBParser#param}.
+	 * Enter a parse tree produced by the {@code Assign2}
+	 * labeled alternative in {@link CLUBParser#assignExpr}.
 	 * @param ctx the parse tree
 	 */
-	void enterParam(CLUBParser.ParamContext ctx);
+	void enterAssign2(CLUBParser.Assign2Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link CLUBParser#param}.
+	 * Exit a parse tree produced by the {@code Assign2}
+	 * labeled alternative in {@link CLUBParser#assignExpr}.
 	 * @param ctx the parse tree
 	 */
-	void exitParam(CLUBParser.ParamContext ctx);
+	void exitAssign2(CLUBParser.Assign2Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link CLUBParser#expr}.
+	 * Enter a parse tree produced by the {@code LogicOr1}
+	 * labeled alternative in {@link CLUBParser#logicOrExpr}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpr(CLUBParser.ExprContext ctx);
+	void enterLogicOr1(CLUBParser.LogicOr1Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link CLUBParser#expr}.
+	 * Exit a parse tree produced by the {@code LogicOr1}
+	 * labeled alternative in {@link CLUBParser#logicOrExpr}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpr(CLUBParser.ExprContext ctx);
+	void exitLogicOr1(CLUBParser.LogicOr1Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link CLUBParser#assignExpr}.
+	 * Enter a parse tree produced by the {@code LogicOr2}
+	 * labeled alternative in {@link CLUBParser#logicOrExpr}.
 	 * @param ctx the parse tree
 	 */
-	void enterAssignExpr(CLUBParser.AssignExprContext ctx);
+	void enterLogicOr2(CLUBParser.LogicOr2Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link CLUBParser#assignExpr}.
+	 * Exit a parse tree produced by the {@code LogicOr2}
+	 * labeled alternative in {@link CLUBParser#logicOrExpr}.
 	 * @param ctx the parse tree
 	 */
-	void exitAssignExpr(CLUBParser.AssignExprContext ctx);
+	void exitLogicOr2(CLUBParser.LogicOr2Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link CLUBParser#logicOrExpr}.
+	 * Enter a parse tree produced by the {@code LogicAnd1}
+	 * labeled alternative in {@link CLUBParser#logicAndExpr}.
 	 * @param ctx the parse tree
 	 */
-	void enterLogicOrExpr(CLUBParser.LogicOrExprContext ctx);
+	void enterLogicAnd1(CLUBParser.LogicAnd1Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link CLUBParser#logicOrExpr}.
+	 * Exit a parse tree produced by the {@code LogicAnd1}
+	 * labeled alternative in {@link CLUBParser#logicAndExpr}.
 	 * @param ctx the parse tree
 	 */
-	void exitLogicOrExpr(CLUBParser.LogicOrExprContext ctx);
+	void exitLogicAnd1(CLUBParser.LogicAnd1Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link CLUBParser#logicAndExpr}.
+	 * Enter a parse tree produced by the {@code LogicAnd2}
+	 * labeled alternative in {@link CLUBParser#logicAndExpr}.
 	 * @param ctx the parse tree
 	 */
-	void enterLogicAndExpr(CLUBParser.LogicAndExprContext ctx);
+	void enterLogicAnd2(CLUBParser.LogicAnd2Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link CLUBParser#logicAndExpr}.
+	 * Exit a parse tree produced by the {@code LogicAnd2}
+	 * labeled alternative in {@link CLUBParser#logicAndExpr}.
 	 * @param ctx the parse tree
 	 */
-	void exitLogicAndExpr(CLUBParser.LogicAndExprContext ctx);
+	void exitLogicAnd2(CLUBParser.LogicAnd2Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link CLUBParser#equalExpr}.
+	 * Enter a parse tree produced by the {@code Equal1}
+	 * labeled alternative in {@link CLUBParser#equalExpr}.
 	 * @param ctx the parse tree
 	 */
-	void enterEqualExpr(CLUBParser.EqualExprContext ctx);
+	void enterEqual1(CLUBParser.Equal1Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link CLUBParser#equalExpr}.
+	 * Exit a parse tree produced by the {@code Equal1}
+	 * labeled alternative in {@link CLUBParser#equalExpr}.
 	 * @param ctx the parse tree
 	 */
-	void exitEqualExpr(CLUBParser.EqualExprContext ctx);
+	void exitEqual1(CLUBParser.Equal1Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link CLUBParser#relatExpr}.
+	 * Enter a parse tree produced by the {@code Equal2}
+	 * labeled alternative in {@link CLUBParser#equalExpr}.
 	 * @param ctx the parse tree
 	 */
-	void enterRelatExpr(CLUBParser.RelatExprContext ctx);
+	void enterEqual2(CLUBParser.Equal2Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link CLUBParser#relatExpr}.
+	 * Exit a parse tree produced by the {@code Equal2}
+	 * labeled alternative in {@link CLUBParser#equalExpr}.
 	 * @param ctx the parse tree
 	 */
-	void exitRelatExpr(CLUBParser.RelatExprContext ctx);
+	void exitEqual2(CLUBParser.Equal2Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link CLUBParser#addExpr}.
+	 * Enter a parse tree produced by the {@code Relat1}
+	 * labeled alternative in {@link CLUBParser#relatExpr}.
 	 * @param ctx the parse tree
 	 */
-	void enterAddExpr(CLUBParser.AddExprContext ctx);
+	void enterRelat1(CLUBParser.Relat1Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link CLUBParser#addExpr}.
+	 * Exit a parse tree produced by the {@code Relat1}
+	 * labeled alternative in {@link CLUBParser#relatExpr}.
 	 * @param ctx the parse tree
 	 */
-	void exitAddExpr(CLUBParser.AddExprContext ctx);
+	void exitRelat1(CLUBParser.Relat1Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link CLUBParser#multExpr}.
+	 * Enter a parse tree produced by the {@code Relat2}
+	 * labeled alternative in {@link CLUBParser#relatExpr}.
 	 * @param ctx the parse tree
 	 */
-	void enterMultExpr(CLUBParser.MultExprContext ctx);
+	void enterRelat2(CLUBParser.Relat2Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link CLUBParser#multExpr}.
+	 * Exit a parse tree produced by the {@code Relat2}
+	 * labeled alternative in {@link CLUBParser#relatExpr}.
 	 * @param ctx the parse tree
 	 */
-	void exitMultExpr(CLUBParser.MultExprContext ctx);
+	void exitRelat2(CLUBParser.Relat2Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link CLUBParser#unaryExpr}.
+	 * Enter a parse tree produced by the {@code Add1}
+	 * labeled alternative in {@link CLUBParser#addExpr}.
 	 * @param ctx the parse tree
 	 */
-	void enterUnaryExpr(CLUBParser.UnaryExprContext ctx);
+	void enterAdd1(CLUBParser.Add1Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link CLUBParser#unaryExpr}.
+	 * Exit a parse tree produced by the {@code Add1}
+	 * labeled alternative in {@link CLUBParser#addExpr}.
 	 * @param ctx the parse tree
 	 */
-	void exitUnaryExpr(CLUBParser.UnaryExprContext ctx);
+	void exitAdd1(CLUBParser.Add1Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link CLUBParser#postfExpr}.
+	 * Enter a parse tree produced by the {@code Add2}
+	 * labeled alternative in {@link CLUBParser#addExpr}.
 	 * @param ctx the parse tree
 	 */
-	void enterPostfExpr(CLUBParser.PostfExprContext ctx);
+	void enterAdd2(CLUBParser.Add2Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link CLUBParser#postfExpr}.
+	 * Exit a parse tree produced by the {@code Add2}
+	 * labeled alternative in {@link CLUBParser#addExpr}.
 	 * @param ctx the parse tree
 	 */
-	void exitPostfExpr(CLUBParser.PostfExprContext ctx);
+	void exitAdd2(CLUBParser.Add2Context ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Mult1}
+	 * labeled alternative in {@link CLUBParser#multExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterMult1(CLUBParser.Mult1Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Mult1}
+	 * labeled alternative in {@link CLUBParser#multExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitMult1(CLUBParser.Mult1Context ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Mult2}
+	 * labeled alternative in {@link CLUBParser#multExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterMult2(CLUBParser.Mult2Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Mult2}
+	 * labeled alternative in {@link CLUBParser#multExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitMult2(CLUBParser.Mult2Context ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Unary1}
+	 * labeled alternative in {@link CLUBParser#unaryExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnary1(CLUBParser.Unary1Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Unary1}
+	 * labeled alternative in {@link CLUBParser#unaryExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnary1(CLUBParser.Unary1Context ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Unary2}
+	 * labeled alternative in {@link CLUBParser#unaryExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnary2(CLUBParser.Unary2Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Unary2}
+	 * labeled alternative in {@link CLUBParser#unaryExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnary2(CLUBParser.Unary2Context ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PostF1}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostF1(CLUBParser.PostF1Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PostF1}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostF1(CLUBParser.PostF1Context ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PostF2}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostF2(CLUBParser.PostF2Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PostF2}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostF2(CLUBParser.PostF2Context ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PostF3}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostF3(CLUBParser.PostF3Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PostF3}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostF3(CLUBParser.PostF3Context ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PostF4}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostF4(CLUBParser.PostF4Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PostF4}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostF4(CLUBParser.PostF4Context ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PostF5}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostF5(CLUBParser.PostF5Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PostF5}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostF5(CLUBParser.PostF5Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link CLUBParser#primaryExpr}.
 	 * @param ctx the parse tree
@@ -296,14 +398,4 @@ public interface CLUBListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitVal(CLUBParser.ValContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CLUBParser#decl}.
-	 * @param ctx the parse tree
-	 */
-	void enterDecl(CLUBParser.DeclContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CLUBParser#decl}.
-	 * @param ctx the parse tree
-	 */
-	void exitDecl(CLUBParser.DeclContext ctx);
 }

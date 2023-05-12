@@ -4,73 +4,77 @@ tokens { VEC }       // define imaginary token for vector literal
 
 
 program : setup round turn funcs EOF ;
-setup : SETUP LCURLY stmts RCURLY ;
-round : ROUND LCURLY stmts RCURLY ;
-turn : TURN '(' CLASSID VARID ')' '{' stmts '}'
-        | ;
-funcs : func funcs
-        | ;
-stmts : stmt*
-        | ;
-func : FUNCID '(' tParams ')' '{' stmts '}'
-        | FUNCID '(' ')' '{' stmts '}' ;
-tParams : tParam (',' tParams)*;
-stmt : INTVAL ';' ;
-iterStmt : 'while' '(' expr ')' '{' stmts '}'
-        | 'for' '(' decl ';' expr ';' postfExpr ')' '{' stmts '}' ;
-selectStmt : 'if' '(' expr ')' '{' stmts '}' ;
-exprStmt : expr ;
-type : 'bool'
-        | 'int'
-        | 'string' ;
-tParam : type VARID ;
-params : param ',' params
-        |'['list']' ',' param
-        | param ;
-list : OBJID ',' list
-        | OBJID ;
-param : assignExpr ;
-expr : assignExpr ;
-assignExpr : logicOrExpr
-        | primaryExpr '=' assignExpr ;
-logicOrExpr : logicAndExpr
-        | logicOrExpr '||' logicAndExpr ;
-logicAndExpr : equalExpr
-        | logicAndExpr '&&' equalExpr ;
-equalExpr : relatExpr
-        | equalExpr '==' relatExpr
-        | equalExpr '!=' relatExpr ;
-relatExpr : addExpr
-        | relatExpr '<' addExpr
-        | relatExpr '>' addExpr
-        | relatExpr '<=' addExpr
-        | relatExpr '>=' addExpr ;
-addExpr : multExpr
-        | addExpr '+' multExpr
-        | addExpr '-' multExpr ;
-multExpr : unaryExpr
-        | multExpr '*' unaryExpr
-        | multExpr '/' unaryExpr ;
-unaryExpr : postfExpr
-        | '-' postfExpr
-        | '!' postfExpr ;
-postfExpr : primaryExpr
-        | primaryExpr '++'
-        | primaryExpr '--'
-        | primaryExpr '(' params ')'
-        | primaryExpr '('  ')'
-        | METHODID '(' params ')'
-        | METHODID '(' ')'
-        | primaryExpr '.' postfExpr ;
+setup : 'Setup' '{' stmt* '}' ;
+round : 'Round' '{' stmt* '}' ;
+turn : ('Turn' '(' 'Player' 'player' ')' '{' stmt* '}')?
+        ;
+funcs : func*
+        ;
+func : FUNCID '(' tParams? ')' '{' stmt* '}'
+         ;
+tParams : tParam (',' tParam)*
+        ;
+stmt : tParam op='=' logicOrExpr ';'
+        | assignExpr  ';'
+//        | selectStmt
+//        | iterStmt
+        ;
+iterStmt : WHILE '(' logicOrExpr ')' '{' stmt* '}'
+        | FOR '(' left1=INT left2=VARID op='=' right=addExpr ';' logicOrExpr ';' postfExpr ')' '{' stmt* '}'
+        ;
+selectStmt : IF '(' logicOrExpr ')' '{' stmt* '}'
+	;
+
+tParam : left=TYPE right=VARID
+	;
+params : logicOrExpr (',' logicOrExpr)*
+        ;
+
+assignExpr : logicOrExpr                 #Assign1
+        | left=VARID op='=' logicOrExpr  #Assign2
+        ;
+logicOrExpr : logicAndExpr               #LogicOr1
+        | logicAndExpr op='||' logicOrExpr  #LogicOr2
+	    ;
+
+logicAndExpr : equalExpr                #LogicAnd1
+        | equalExpr op='&&' logicAndExpr #LogicAnd2
+	    ;
+
+equalExpr : relatExpr                       #Equal1
+        | relatExpr op=('=='|'!=') equalExpr #Equal2
+        ;
+relatExpr : addExpr                                 #Relat1
+        | addExpr op=('<'|'>'|'<='|'>=') relatExpr  #Relat2
+        ;
+addExpr : multExpr                          #Add1
+        | multExpr op=('+'|'-') addExpr      #Add2
+        ;
+multExpr : unaryExpr                        #Mult1
+        | unaryExpr op=('*'|'/') multExpr   #Mult2
+        ;
+unaryExpr : postfExpr                       #Unary1
+        | op=('-'|'!') postfExpr            #Unary2
+        ;
+postfExpr : primaryExpr                                 #PostF1
+        | primaryExpr op=('++'|'--')                    #PostF2
+        | primaryExpr '('params')'                      #PostF3
+        | primaryExpr op='.' postfExpr                  #PostF4
+        | METHODID'('params ')'                         #PostF5
+        | primaryExpr '(' ')'                           #PostF6
+        | METHODID'('')'                                #PostF7
+        ;
 primaryExpr : val
         | VARID
         | OBJID
         | FUNCID
-        | CLASSID ;
+        | CLASSID
+        ;
 val : BOOLVAL
         | INTVAL
-        | STRINGVAL  ;
-decl : tParam '=' logicOrExpr ;
+        | STRINGVAL
+        ;
+
 
 AND : '&&' ;
 OR : '||' ;
@@ -107,6 +111,7 @@ TURN : 'Turn' ;
 WHILE : 'while' ;
 FOR : 'for' ;
 IF : 'if' ;
+TYPE : BOOL | INT | STRING;
 BOOL : 'bool' ;
 INT : 'int' ;
 STRING : 'string' ;
