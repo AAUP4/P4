@@ -18,7 +18,7 @@ public class TestDeck {
         Card x = y.getCard(51);
         assertEquals("King", x.rank);
         assertEquals(1, x.getPoints());
-        y.assignPoints("King", 15);
+        y.assignPoints(15, "D13", "H13", "C13", "S13");
 
         for (Card card : y.getCards()) {
             if (card.rank == "King") {
