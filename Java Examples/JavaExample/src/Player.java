@@ -21,6 +21,13 @@ public class Player{
     public static ArrayList<Player> getPlayers(){
         return players;
     }
+    public static Player getPlayer(int playerNumber){
+        if(playerNumber > 0 && playerNumber <= Player.players.size()){
+            return Player.players.get(playerNumber-1);
+        } else {
+            return null;
+        }        
+    }
     
     public static void create(int numberOfPlayers) {
         for (int i = 0; i < numberOfPlayers; i++) {
