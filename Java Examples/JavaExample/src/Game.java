@@ -9,7 +9,7 @@ public class Game {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public void exit(Player player){
+    public static void exit(Player player){
         // Winner and scoreboard
         System.out.println("The winner is "+player+"!");
 
