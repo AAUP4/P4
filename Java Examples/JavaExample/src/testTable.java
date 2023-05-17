@@ -43,18 +43,18 @@ public class testTable {
         Table t = new Table();
         t.draw(3, y);
         Card c = t.getCardIndex(1);
-        t.discard(c.id, Main.discardPile);
+        t.discard(c.id, Game.discardPile);
         assertEquals(2, t.size());
-        Main.discardPile.clear();
+        Game.discardPile.clear();
     }
     @Test
     public void tableDiscardAll(){
         Deck y = new Deck();
         Table t = new Table();
         t.draw(3, y);
-        t.discardAll(Main.discardPile);
+        t.discardAll(Game.discardPile);
         assertEquals(0, t.size());
-        Main.discardPile.clear();
+        Game.discardPile.clear();
     }
 }
 

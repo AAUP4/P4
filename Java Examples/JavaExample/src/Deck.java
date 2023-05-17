@@ -121,7 +121,7 @@ public class Deck {
     }
     // return cards for main discard pile to the deck.
     public void returnDiscardPile() {
-        Iterator<Card> iterator = Main.discardPile.iterator();
+        Iterator<Card> iterator = Game.discardPile.iterator();
         while (iterator.hasNext()) {
             Card card = iterator.next();
             cards.add(card);

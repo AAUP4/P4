@@ -5,14 +5,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Game {    
+public class Game {
 
+    public static ArrayList<Card> discardPile = new ArrayList<Card>();
     private static final Scanner scanner = new Scanner(System.in);
+
+
+    public Card getCardIndex(int index){
+        return discardPile.get(index);
+    }
 
     public static void exit(Player player){
         // Winner and scoreboard
         System.out.println("The winner is "+player+"!");
-
         Map<String, Integer> scores = new HashMap<>();
         for(Player p : Player.getPlayers()){
             scores.put(p.name,p.score);
