@@ -39,8 +39,9 @@ public class Table {
         }
     }
     public void print(){
-        for(int i = 0; i < tableCards.size(); i++)
-        System.out.println(tableCards.get(i));
+        for (Card card : this.getCards()) {
+            System.out.println(card.rank + " of " + card.suit + "s");
+        }
     }
     public int size(){        
         return tableCards.size();

@@ -57,20 +57,11 @@ public class Player{
 
     public int getTablePoints() {
         int tablePoints = 0;
-
         for (Card card : this.table.getCards()) {
             tablePoints += card.getPoints(); 
         }
-
         return tablePoints;
     }
-
-    public void printTable() {
-        for (Card card : this.table.getCards()) {
-            System.out.println(card.rank + " of " + card.suit + "s");
-        }
-    }
-
     public ArrayList<Card> getDiscardPile() {
         return discardPile;
     }
