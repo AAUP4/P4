@@ -68,12 +68,12 @@ public class TestDeck {
         assertEquals(52, y.size());
         p.draw(3, y);
         assertEquals(49, y.size());
-        p.discardAll(Main.discardPile);
-        int dpilesize = Main.discardPile.size();
+        p.discardAll(Game.discardPile);
+        int dpilesize = Game.discardPile.size();
         assertEquals(3, dpilesize);
         y.returnDiscardPile();
         assertEquals(52, y.size());
-        Main.discardPile.clear();
+        Game.discardPile.clear();
     }
     
     @Test

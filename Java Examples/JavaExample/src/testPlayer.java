@@ -54,10 +54,10 @@ public class testPlayer {
         Deck y = new Deck();
         Player p = new Player("p1");
         p.draw(1, y);
-        p.discard("D13", Main.discardPile);
-        int x = Main.discardPile.size();
+        p.discard("D13", Game.discardPile);
+        int x = Game.discardPile.size();
         assertEquals(1, x);
-        Main.discardPile.clear(); 
+        Game.discardPile.clear(); 
     }
     
     @Test
@@ -65,10 +65,10 @@ public class testPlayer {
         Deck y = new Deck();
         Player p = new Player("p1");
         p.draw(3, y);
-        p.discardAll(Main.discardPile);
-        int x = Main.discardPile.size();
+        p.discardAll(Game.discardPile);
+        int x = Game.discardPile.size();
         assertEquals(3, x);
-        Main.discardPile.clear();
+        Game.discardPile.clear();
     }
 
     @Test
@@ -133,11 +133,11 @@ public class testPlayer {
         Deck y = new Deck();
         Player p = new Player("Player 1");
         p.draw(1, y);
-        p.discardAll(Main.discardPile);
-        p.takeCard("D13", Main.discardPile);
+        p.discardAll(Game.discardPile);
+        p.takeCard("D13", Game.discardPile);
         Card x = p.getCardIndex(0);
         assertEquals("D13", x.id);
-        Main.discardPile.clear();
+        Game.discardPile.clear();
     }
 
     
