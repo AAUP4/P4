@@ -569,7 +569,7 @@ public abstract class TypeCheck {
     }
 
 
-    static boolean checkValue(String value, String context) {
+    static boolean checkValidValue(String value, String context) {
         boolean result = false;
         if (context == "BOOL") {
             if (checkLogicExpr(value)==true) {
@@ -605,7 +605,11 @@ public abstract class TypeCheck {
                 if (checkVarType(value.substring(0,value.indexOf("++")).trim())=="INT") {
                     return true;
                 } else { return false;}
-            } while (value.contains("*")) {
+            } else if (value.startsWith("-")) {
+                value = value.substring(1);
+            
+            } 
+            while (value.contains("*")) {
                 temp = value.substring(0,value.indexOf("*"));
                 if (checkArithExpr(temp)) {
                     value = value.substring(temp.length()+1);
@@ -644,10 +648,147 @@ public abstract class TypeCheck {
     }
 
     public static boolean checkLogicExpr(String value) {
-        return true;
+        value.trim();
+        String temp1 = "";
+        String temp2 = "";
+
+        if (!value.contains(".") || !value.contains("{") || !value.contains("}") || !value.contains(",")) {
+
+            while(value.contains("(")){
+                value = value.substring(0, value.indexOf("("))+value.substring(value.indexOf("(")+1);
+            }
+            while(value.contains(")")){
+                value = value.substring(0, value.indexOf(")"))+value.substring(value.indexOf(")")+1);
+            }
+
+            if (value.startsWith("!")) {
+                value = value.substring(1);
+            
+            }
+            if (value.contains("&&")) {
+                temp1 = value.substring(0,value.indexOf("&&"));
+                temp2 = value.substring(temp1.length()+2);
+                if (checkLogicExpr(temp1) && checkLogicExpr(temp2)) {
+                    return true;
+                } else { return false;}
+            } if (value.contains("||")) {
+                temp1 = value.substring(0,value.indexOf("||"));
+                temp2 = value.substring(temp1.length()+2);
+                if (checkLogicExpr(temp1) && checkLogicExpr(temp2)) {
+                    return true;
+                } else { return false;}
+            } if (value.contains("==")) {
+                temp1 = value.substring(0,value.indexOf("=="));
+                temp2 = value.substring(temp1.length()+2);
+                if (checkLogicExpr(temp1) && checkLogicExpr(temp2)) {
+                    return true;
+                } else if (checkArithExpr(temp1) && checkArithExpr(temp2)) {
+                    return true;
+                } else if (checkStringExpr(temp1) && checkStringExpr(temp2)) {
+                    return true;
+                } else { return false;}
+            } if (value.contains("!=")) {
+                temp1 = value.substring(0,value.indexOf("!="));
+                temp2 = value.substring(temp1.length()+2);
+                if (checkLogicExpr(temp1) && checkLogicExpr(temp2)) {
+                    return true;
+                } else if (checkArithExpr(temp1) && checkArithExpr(temp2)) {
+                    return true;
+                } else if (checkStringExpr(temp1) && checkStringExpr(temp2)) {
+                    return true;
+                } else { return false;}
+            } if (value.contains(">=")) {
+                temp1 = value.substring(0,value.indexOf(">="));
+                temp2 = value.substring(temp1.length()+2);
+                if (checkArithExpr(temp1) && checkArithExpr(temp2)) {
+                    return true;
+                } else { return false;}
+            } if (value.contains("<=")) {
+                temp1 = value.substring(0,value.indexOf("<="));
+                temp2 = value.substring(temp1.length()+2);
+                if (checkArithExpr(temp1) && checkArithExpr(temp2)) {
+                    return true;
+                } else { return false;}
+            } if (value.contains(">")) {
+                temp1 = value.substring(0,value.indexOf(">"));
+                temp2 = value.substring(temp1.length()+1);
+                if (checkArithExpr(temp1) && checkArithExpr(temp2)) {
+                    return true;
+                } else { return false;}
+            } if (value.contains("<")) {
+                temp1 = value.substring(0,value.indexOf("<"));
+                temp2 = value.substring(temp1.length()+1);
+                if (checkArithExpr(temp1) && checkArithExpr(temp2)) {
+                    return true;
+                } else { return false;}
+            } 
+            
+            
+            value.trim();
+            if(value=="true" || value=="false") {
+                return true;
+            }
+            else if (checkVarType(value)=="BOOL") {
+                return true;
+            }
+
+        }
+
+        return false;
     }
+    
 
     public static boolean checkStringExpr(String value) {
-        return true;
+        String temp1 = "";
+        String temp2 = "";
+        value.trim();
+        char[] chars = {};
+        value.getChars(0, value.length()-1, chars, 0);
+        int count = 0;
+        for(char c : chars){
+            if (c=='\"'){count++;}
+        }
+        if(count%2==0){
+
+            if (count == 2 && value.startsWith("\"") && value.endsWith("\"") && (!value.contains("+") || (value.indexOf("+")>value.indexOf("\"") && value.lastIndexOf("+")<value.lastIndexOf("\"")))) {
+                return true;
+            } else if (count == 2 && value.startsWith("\"") && value.contains("+") && (value.indexOf("+")>value.lastIndexOf("\""))) {
+                temp2 = value.substring(value.lastIndexOf("+")+1);
+                value = value.substring(0,value.length()-temp2.length()-1);
+                temp1 = value;
+                if (checkStringExpr(temp1) && (checkStringExpr(temp2) || checkArithExpr(temp2) || checkLogicExpr(temp2))) {
+                    return true;
+                } else {return false;}
+            } else if (count == 2 && value.contains("+") && (value.indexOf("+")<value.indexOf("\""))) {
+                temp1 = value.substring(0,value.indexOf("+"));
+                value = value.substring(value.indexOf("+")+1);
+                temp2 = value;
+                if (checkStringExpr(temp2) && (checkStringExpr(temp1) || checkArithExpr(temp1) || checkLogicExpr(temp1))) {
+                    return true;
+                } else {return false;}
+            } else if (count > 2 && value.contains("+") && value.indexOf("+")>value.indexOf("\"")) {
+                value = value.substring(1);
+                temp1 = "\""+value.substring(0,value.indexOf("\""));
+                value = value.substring(temp1.length());
+                if (value.startsWith("+")) {
+                    temp2 = value.substring(1);
+                    if(checkStringExpr(temp1) && checkStringExpr(temp2)) {
+                        return true;
+                    } else {return false;}
+                } else {return false;}
+            } else if (count > 2 && value.contains("+") && value.indexOf("+")<value.indexOf("\"")) {
+                temp1 = value.substring(0,value.indexOf("+"));
+                value = value.substring(temp1.length());
+                temp2 = value.substring(1);
+                if((checkStringExpr(temp1) || checkArithExpr(temp1) || checkLogicExpr(temp1)) && checkStringExpr(temp2)) {
+                    return true;
+                } else {return false;}
+            } else if (count == 0 && checkVarType(value)=="STRING") {
+                 
+                    return true;
+            }
+        }
+
+        return false;
     }
 }

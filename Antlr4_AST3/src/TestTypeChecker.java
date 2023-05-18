@@ -37,7 +37,18 @@ public class TestTypeChecker {
     public void testCheckArithExpr(){
         TypeCheck.declVar("x","INT","7");
         TypeCheck.assignVar("x", "x++");
-        boolean v = TypeCheck.checkArithExpr("x+3*x-(4*2)");
+        boolean v = TypeCheck.checkArithExpr("-x+3*x-(4*2)");
+        assertEquals(true, v);
+    }
+
+    @Test
+    public void testCheckLogicExpr(){
+        TypeCheck.declVar("x","BOOL","true");
+        TypeCheck.assignVar("x", "false");
+        TypeCheck.assignVar("x", "!x");
+        TypeCheck.declVar("y","INT","7");
+        TypeCheck.assignVar("y", "y++");
+        boolean v = TypeCheck.checkLogicExpr("-y+3*y-(4*2)<y&&y!=0");
         assertEquals(true, v);
     }
 }
