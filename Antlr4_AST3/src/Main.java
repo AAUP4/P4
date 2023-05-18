@@ -8,7 +8,7 @@ import java.io.File;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        CharStream input = CharStreams.fromFileName("C:\\Users\\night\\Documents\\Github\\P4\\Antlr4_AST3\\src\\test.expr");
+        //CharStream input = CharStreams.fromFileName("C:\\Users\\night\\Documents\\Github\\P4\\Antlr4_AST3\\src\\test.expr");
 //        CharStream input2 = CharStreams.fromFileName("C:\\Users\\night\\Documents\\Github\\P4\\Antlr4_AST3\\src\\test.club");
 
         String relativePath = "src/test.club";
@@ -28,7 +28,8 @@ public class Main {
         } else {
             System.out.println("AST is null.");
         }
-
+        TypeCheck.TypeMapSetup();
+        TypeCheck.processInput("deck.returnDiscardPile(Player.getPlayer(1))");
 
 
         /*Lexer Tokens and Parser for VecMath*/

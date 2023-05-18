@@ -1,6 +1,5 @@
 import org.antlr.v4.runtime.CommonToken;
 import org.antlr.v4.runtime.Token;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
