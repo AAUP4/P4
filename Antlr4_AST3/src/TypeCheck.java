@@ -183,7 +183,7 @@ public abstract class TypeCheck {
     }
 
 
-    public static boolean processInput(String input){
+    public static boolean processInput(String input, String context){
         
         boolean result = false; // is input valid
         boolean FparamTypeCheck = false;
@@ -487,21 +487,151 @@ public abstract class TypeCheck {
 
         //missing check on method, params, Aparams
             if (Fparams.size()>0 &&  (SETM.containsKey(method) || VM.containsKey(method) || IM.containsKey(method) || SM.containsKey(method) || ATTI.containsKey(method) || ATTS.containsKey(method) || ATTB.containsKey(method)) && input == ""){
-                if(SETM.containsKey(method)){
+                if (SETM.containsKey(method)){
                     FparamTypeCheck = SETM.get(method).equals(Fparams);
-
-                    
+                    int p = 0;
+                    for (String aparam : Aparams) {
+                        switch (Fparams.get(p)) {
+                            case "INT" :
+                                if (!checkArithExpr(aparam)) {return false;}
+                            case "STRING" :
+                            if (!checkStringExpr(aparam)) {return false;}
+                            case "BOOL" :
+                            if (!checkLogicExpr(aparam)) {return false;}
+                        }
+                        p++;
+                    }
+                    if (context == "VOID"){
+                        result = true;   
+                    }                
                 }
-                
-                
-                
-                result = true;
+                else if (VM.containsKey(method)){
+                    FparamTypeCheck = VM.get(method).equals(Fparams);
+                    int p = 0;
+                    for (String aparam : Aparams) {
+                        switch (Fparams.get(p)) {
+                            case "INT" :
+                                if (!checkArithExpr(aparam)) {return false;}
+                                break;
+                            case "STRING" :
+                            if (!checkStringExpr(aparam)) {return false;}
+                                break;
+                            case "BOOL" :
+                            if (!checkLogicExpr(aparam)) {return false;}
+                                break;
+                        }
+                        p++;
+                    }
+                    if (context == "VOID"){
+                        result = true;   
+                    }                    
+                }
+                else if (IM.containsKey(method)){
+                    FparamTypeCheck = IM.get(method).equals(Fparams);
+                    int p = 0;
+                    for (String aparam : Aparams) {
+                        switch (Fparams.get(p)) {
+                            case "INT" :
+                                if (!checkArithExpr(aparam)) {return false;}
+                            case "STRING" :
+                            if (!checkStringExpr(aparam)) {return false;}
+                            case "BOOL" :
+                            if (!checkLogicExpr(aparam)) {return false;}
+                        }
+                        p++;
+                    }
+                    if (context == "INT"){
+                        result = true;   
+                    }                   
+                }
+                else if (SM.containsKey(method)){
+                    FparamTypeCheck = SM.get(method).equals(Fparams);
+                    int p = 0;
+                    for (String aparam : Aparams) {
+                        switch (Fparams.get(p)) {
+                            case "INT" :
+                                if (!checkArithExpr(aparam)) {return false;}
+                            case "STRING" :
+                            if (!checkStringExpr(aparam)) {return false;}
+                            case "BOOL" :
+                            if (!checkLogicExpr(aparam)) {return false;}
+                        }
+                        p++;
+                    }
+                    if (context == "STRING"){
+                        result = true;   
+                    }                    
+                }
+                else if (ATTI.containsKey(method)){
+                    FparamTypeCheck = ATTI.get(method).equals(Fparams);
+                    int p = 0;
+                    for (String aparam : Aparams) {
+                        switch (Fparams.get(p)) {
+                            case "INT" :
+                                if (!checkArithExpr(aparam)) {return false;}
+                            case "STRING" :
+                            if (!checkStringExpr(aparam)) {return false;}
+                            case "BOOL" :
+                            if (!checkLogicExpr(aparam)) {return false;}
+                        }
+                        p++;
+                    }
+                    if (context == "INT"){
+                        result = true;   
+                    }                    
+                }
+                else if (ATTS.containsKey(method)){
+                    FparamTypeCheck = ATTS.get(method).equals(Fparams);
+                    int p = 0;
+                    for (String aparam : Aparams) {
+                        switch (Fparams.get(p)) {
+                            case "INT" :
+                                if (!checkArithExpr(aparam)) {return false;}
+                            case "STRING" :
+                            if (!checkStringExpr(aparam)) {return false;}
+                            case "BOOL" :
+                            if (!checkLogicExpr(aparam)) {return false;}
+                        }
+                        p++;
+                    }
+                    if (context == "STRING"){
+                        result = true;   
+                    }                    
+                }
+                else if (ATTB.containsKey(method)){
+                    FparamTypeCheck = ATTB.get(method).equals(Fparams);
+                    int p = 0;
+                    for (String aparam : Aparams) {
+                        switch (Fparams.get(p)) {
+                            case "INT" :
+                                if (!checkArithExpr(aparam)) {return false;}
+                            case "STRING" :
+                            if (!checkStringExpr(aparam)) {return false;}
+                            case "BOOL" :
+                            if (!checkLogicExpr(aparam)) {return false;}
+                        }
+                        p++;
+                    }
+                    if (context == "BOOL"){
+                        result = true;   
+                    }                    
+                }
+                   
             }    
                 
         }
 
-
+        System.out.println("context: "+context);
         System.out.println("method: "+method);
+        System.out.println("Fparams: ");
+        for (String param : Fparams) {
+            System.out.print(param+" , ");
+        }
+        System.out.println();
+        System.out.println("Aparams: ");
+        for (String param : Aparams) {
+            System.out.print(param+" , ");
+        }
         return result;
     }
    
@@ -748,21 +878,25 @@ public abstract class TypeCheck {
         String temp1 = "";
         String temp2 = "";
         value.trim();
-        ArrayList<Character> chars = new ArrayList<Character>();
         
-        int count = 0; 
+        char[] chars;
+        chars = value.toCharArray();
 
-        for (int i = 0; i < value.length()-1; i++) {
-            chars.add(value.charAt(i));
-        }
+
+
+        int count = 0;
 
         while(value.contains(" ")){
                 value = value.substring(0, value.indexOf(" "))+value.substring(value.indexOf(" ")+1);
+                
             }
 
         for(char c : chars){
             if (c=='\"'){count++;}
         }
+
+
+
         if(count%2==0){
 
             if (count == 2 && value.startsWith("\"") && value.endsWith("\"") && (!value.contains("+") || (value.indexOf("+")>value.indexOf("\"") && value.lastIndexOf("+")<value.lastIndexOf("\"")))) {
@@ -795,12 +929,20 @@ public abstract class TypeCheck {
                 temp1 = value.substring(0,value.indexOf("+"));
                 value = value.substring(temp1.length());
                 temp2 = value.substring(1);
-                if((checkStringExpr(temp1) || checkArithExpr(temp1) || checkLogicExpr(temp1)) && checkStringExpr(temp2)) {
+                if ((checkStringExpr(temp1) || checkArithExpr(temp1) || checkLogicExpr(temp1)) && checkStringExpr(temp2)) {
                     return true;
                 } else {return false;}
-            } else if (count == 0 && checkVarType(value)=="STRING") {
-                 
+            } else if (count == 0) {
+                if (value.contains("+")) {
+                    temp1 = value.substring(0,value.indexOf("+"));
+                    value = value.substring(temp1.length());
+                    temp2 = value.substring(1);
+                    if (checkStringExpr(temp1) && checkStringExpr(temp2)) {
+                        return true;
+                    } else {return false;}
+                } else if (checkVarType(value)=="STRING") {
                     return true;
+                } 
             }
         }
 

@@ -1,5 +1,6 @@
 import static org.junit.Assert.assertEquals;
 
+import java.lang.ProcessBuilder.Redirect.Type;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -8,10 +9,20 @@ import org.junit.Assert.*;
 public class TestTypeChecker {
 
     @Test 
-    public void TestTypeChecker() {
+    public void TestTypeCheckerInt() {
         TypeCheck.TypeMapSetup();
         
-        boolean result = TypeCheck.processInput("deck.returnDiscardPile(Player.getPlayer(15243))");        
+        boolean result = TypeCheck.processInput("deck.returnDiscardPile(Player.getPlayer(1))","VOID");        
+        // System.out.print(TypeCheck.method);
+        assertEquals(true, result);
+        
+    }
+    @Test 
+    public void TestTypeCheckerString() {
+        TypeCheck.TypeMapSetup();
+        TypeCheck.declVar("syv", "INT", "7");
+        
+        boolean result = TypeCheck.processInput("Game.print(\"hello\" + syv)","VOID");        
         // System.out.print(TypeCheck.method);
         assertEquals(true, result);
         
@@ -19,7 +30,9 @@ public class TestTypeChecker {
     @Test 
     public void TestTypeChecker2() {
         TypeCheck.TypeMapSetup();
-        boolean result = TypeCheck.VM.containsKey("deck.returnDiscardPile(Player.getPlayer(INT))");        
+        TypeCheck.declVar("syv", "INT", "7");
+
+        boolean result = TypeCheck.processInput("deck.returnDiscardPile(Player.getPlayer(12+4 + syv))","VOID");        
         assertEquals(true, result);
     }
     
@@ -59,19 +72,45 @@ public class TestTypeChecker {
     @Test
     public void testCheckStringExpr(){
         TypeCheck.declVar("str", "STRING", "\"hello\"");
-        // TypeCheck.declVar("strr", "STRING", "\"There\"");
+        TypeCheck.declVar("strr", "STRING", "\"There\"");
+        TypeCheck.declVar("moo", "BOOL", "true");
         
-        boolean b = TypeCheck.checkStringExpr("str");
+        boolean b = TypeCheck.checkStringExpr("str + strr + str");
         assertEquals(true, b);
     }
 
     @Test
     public void testCheckLogicExprStringCompare(){
-        // TypeCheck.declVar("str", "STRING", "\"hello\"");
-        // TypeCheck.declVar("strr", "STRING", "\"There\"");
+        TypeCheck.declVar("str", "STRING", "\"hello\"");
+        TypeCheck.declVar("strr", "STRING", "\"There\"");
         
-        // boolean w = TypeCheck.checkLogicExpr("str==strr");
-        // assertEquals(true, w);
+        boolean w = TypeCheck.checkLogicExpr("str == \"3\"");
+        assertEquals(true, w);
+    }
+    @Test
+    public void testcheckValidValueBOOL(){
+        boolean b = TypeCheck.checkValidValue("true","BOOL");
+        assertEquals(true, b);
+    }
+    @Test
+    public void testcheckValidValueINT(){
+        boolean b = TypeCheck.checkValidValue("5+4","INT");
+        assertEquals(true, b);
+    }
+    @Test
+    public void testcheckValidValueSTRING(){
+        boolean b = TypeCheck.checkValidValue("\"hello\"","STRING");
+        assertEquals(true, b);
+    }
+
+
+    @Test
+    public void testAssignVarSTRING(){
+        TypeCheck.declVar("str", "STRING", "\"hello\"");
+        assertEquals(TypeCheck.VarString.get("str"),"\"hello\"");
+        
+        TypeCheck.assignVar("str", "\"there\"");
+        assertEquals(TypeCheck.VarString.get("str"),"\"there\"");    
     }
 
 
