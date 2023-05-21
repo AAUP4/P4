@@ -35,9 +35,9 @@ public class TestTypeChecker {
     }
     @Test
     public void testCheckArithExpr(){
-        TypeCheck.declVar("x","INT","7");
-        TypeCheck.assignVar("x", "x++");
-        boolean v = TypeCheck.checkArithExpr("-x+3*x-(4*2)");
+        TypeCheck.declVar("z","INT","7");
+        TypeCheck.assignVar("z", "z++");
+        boolean v = TypeCheck.checkArithExpr("-z+3*z-(4*2)");
         assertEquals(true, v);
     }
 
@@ -47,8 +47,33 @@ public class TestTypeChecker {
         TypeCheck.assignVar("x", "false");
         TypeCheck.assignVar("x", "!x");
         TypeCheck.declVar("y","INT","7");
-        TypeCheck.assignVar("y", "y++");
-        boolean v = TypeCheck.checkLogicExpr("-y+3*y-(4*2)<y&&y!=0");
+        TypeCheck.assignVar("y", "7");
+        TypeCheck.declVar("z","INT", "5");
+        TypeCheck.assignVar("z", "7");
+        
+
+        boolean v = TypeCheck.checkLogicExpr("z<y||z>y && z != y && y == z");
+                
         assertEquals(true, v);
     }
+    @Test
+    public void testCheckStringExpr(){
+        TypeCheck.declVar("str", "STRING", "\"hello\"");
+        // TypeCheck.declVar("strr", "STRING", "\"There\"");
+        
+        boolean b = TypeCheck.checkStringExpr("str");
+        assertEquals(true, b);
+    }
+
+    @Test
+    public void testCheckLogicExprStringCompare(){
+        // TypeCheck.declVar("str", "STRING", "\"hello\"");
+        // TypeCheck.declVar("strr", "STRING", "\"There\"");
+        
+        // boolean w = TypeCheck.checkLogicExpr("str==strr");
+        // assertEquals(true, w);
+    }
+
+
+
 }

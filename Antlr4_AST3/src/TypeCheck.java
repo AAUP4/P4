@@ -600,6 +600,9 @@ public abstract class TypeCheck {
             while(value.contains(")")){
                 value = value.substring(0, value.indexOf(")"))+value.substring(value.indexOf(")")+1);
             }
+            while(value.contains(" ")){
+                value = value.substring(0, value.indexOf(" "))+value.substring(value.indexOf(" ")+1);
+            }
 
             if (value.endsWith("++") || value.endsWith("--")) {
                 if (checkVarType(value.substring(0,value.indexOf("++")).trim())=="INT") {
@@ -659,6 +662,9 @@ public abstract class TypeCheck {
             }
             while(value.contains(")")){
                 value = value.substring(0, value.indexOf(")"))+value.substring(value.indexOf(")")+1);
+            }
+            while(value.contains(" ")){
+                value = value.substring(0, value.indexOf(" "))+value.substring(value.indexOf(" ")+1);
             }
 
             if (value.startsWith("!")) {
@@ -742,9 +748,18 @@ public abstract class TypeCheck {
         String temp1 = "";
         String temp2 = "";
         value.trim();
-        char[] chars = {};
-        value.getChars(0, value.length()-1, chars, 0);
-        int count = 0;
+        ArrayList<Character> chars = new ArrayList<Character>();
+        
+        int count = 0; 
+
+        for (int i = 0; i < value.length()-1; i++) {
+            chars.add(value.charAt(i));
+        }
+
+        while(value.contains(" ")){
+                value = value.substring(0, value.indexOf(" "))+value.substring(value.indexOf(" ")+1);
+            }
+
         for(char c : chars){
             if (c=='\"'){count++;}
         }
