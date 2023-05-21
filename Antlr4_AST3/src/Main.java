@@ -29,7 +29,7 @@ public class Main {
             System.out.println("AST is null.");
         }
         TypeCheck.TypeMapSetup();
-        TypeCheck.processInput("deck.returnDiscardPile(Player.getPlayer(1))");
+        TypeCheck.processInput("deck.returnDiscardPile(Player.getPlayer(1))","VOID");
 
 
         /*Lexer Tokens and Parser for VecMath*/
