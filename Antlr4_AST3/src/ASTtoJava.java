@@ -8,21 +8,7 @@ public class ASTtoJava {
     private String lInput;
     public ASTtoJava(String input){
         this.lInput = input;
-    }
-    
-    // public static List<String> tokenize(String input) {
-    //     input = input.replaceAll("[< >]", " ");
-    //     List<String> tokens = new ArrayList<>();
-    //     Pattern pattern = Pattern.compile("(<.*?>)|(\"[^\"]*\")|('[^']*')");
-    //     Matcher matcher = pattern.matcher(input);
-
-    //     while (matcher.find()) {
-    //         String token = matcher.group();
-    //         tokens.add(token);
-    //     }
-
-    //     return tokens;
-    // }
+    }   
 
     public void convertToJava(String input){
         input = input.replaceAll("[< > ' ,]", " ");
@@ -81,14 +67,26 @@ public class ASTtoJava {
                     }
                     
                 }
+                if(tokens[i+1].equals("IF")){
+                    // convertIf();
+                }
             }
-            if(string.equals("))")){
-                // System.out.println("YAY!");
-                
+            // if we find a double closing parent
+            if(string.equals("))") || string.equals(")))")){    
+                //Check if there is is anything after these            
                 if(tokens.length > i + 2){
+                    // If its followed by round we set curly closing
                     if(tokens[i+2].equals("ROUND") && tokens.length - 1 > i){
                         setEndCurlyBracket();
                     }
+                    if(tokens[i+2].equals("TURN") && tokens.length - 1 > i){
+                        setEndCurlyBracket();
+                    }
+                    if(tokens[i+2].equals("FUNCID") && tokens.length - 1 > i){
+                        setEndCurlyBracket();
+                    }
+
+                    // if there is nothing after this we set curly closing
                 } else if(tokens.length == i + 1){
                     setEndCurlyBracket();
                 }
@@ -127,6 +125,13 @@ public class ASTtoJava {
     public static String setEndCurlyBracket(){
         System.out.println("}");
         return "}";
+    }
+    public static String convertPrint(){
+        return "";
+    }
+    public static String convertIf(String logicalOp, String varID, String Val){
+        System.out.println("We here");
+        return "";
     }
 
 

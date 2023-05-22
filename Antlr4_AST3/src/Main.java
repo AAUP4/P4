@@ -26,11 +26,14 @@ public class Main {
             System.out.println(ast.toStringTree());
             
             
-            ASTtoJava ASTtoJava = new ASTtoJava(ast.toStringTree());
-            System.out.println("Test:");            
+            // ASTtoJava ASTtoJava = new ASTtoJava(ast.toStringTree());
+                      
+            System.out.println(CLUBtoJava.readFileLines());
+            System.out.println("Test:");  
+            CLUBtoJava.ConvertToJava();
             // ASTtoJava.convertToJava("(<ASSIGN, '='> <INT, 'int'> <VARID, 'ill'> <INTVAL, '42069'>)");
             // ASTtoJava.convertToJava("(<ASSIGN, '='> <BOOL, 'bool'> <VARID, 'b'> <BOOLVAL, 'true'>)");
-            ASTtoJava.convertToJava(ast.toStringTree());
+            // ASTtoJava.convertToJava(ast.toStringTree());
             // System.out.println(ASTtoJava.tokenize(("<ASSIGN, '='> <STRING, 'string'> <VARID, 's'> <STRINGVAL, '\"yeet machine\"'>)")));
 
         } else {
@@ -38,7 +41,9 @@ public class Main {
         }
         TypeCheck.TypeMapSetup();
         // TypeCheck.processInput("deck.returnDiscardPile(Player.getPlayer(1))","VOID");
+        
 
+        
 
         /*Lexer Tokens and Parser for VecMath*/
         /*

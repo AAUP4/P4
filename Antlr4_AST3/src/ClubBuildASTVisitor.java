@@ -33,12 +33,12 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
         }
         return ast;
     }
-    @Override
-    public AST visitTurn(CLUBParser.TurnContext ctx){
-        AST ast = new AST(ctx.TURN().getSymbol());
-        
-        return ast;
-    }
+    // @Override
+    // public AST visitTurn(CLUBParser.TurnContext ctx){
+    //     AST ast = new AST(ctx.TURN().getSymbol());
+
+    //     return ast;
+    // }
 
     @Override
     public AST visitStmt1(CLUBParser.Stmt1Context ctx) {
