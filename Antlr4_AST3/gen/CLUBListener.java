@@ -47,16 +47,6 @@ public interface CLUBListener extends ParseTreeListener {
 	 */
 	void exitTurn(CLUBParser.TurnContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CLUBParser#funcs}.
-	 * @param ctx the parse tree
-	 */
-	void enterFuncs(CLUBParser.FuncsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CLUBParser#funcs}.
-	 * @param ctx the parse tree
-	 */
-	void exitFuncs(CLUBParser.FuncsContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link CLUBParser#func}.
 	 * @param ctx the parse tree
 	 */

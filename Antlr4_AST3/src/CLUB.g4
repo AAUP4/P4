@@ -1,16 +1,12 @@
 grammar CLUB;
 
-tokens { VEC }       // define imaginary token for vector literal
-
-
-program : setup round turn funcs EOF ;
+program : setup round turn func* EOF ;
 setup : 'Setup' '{' stmt* '}' ;
 round : 'Round' '{' stmt* '}' ;
 turn : ('Turn' '(' 'Player' 'player' ')' '{' stmt* '}')?
         ;
-funcs : func*
-        ;
-func : FUNCID '{' stmt* '}'
+
+func : left=FUNCID '{' stmt* '}'
          ;
 stmt : tParam op='=' logicOrExpr ';'   #Stmt1
         | assignExpr  ';'              #Stmt2

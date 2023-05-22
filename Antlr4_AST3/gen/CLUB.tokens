@@ -47,7 +47,6 @@ STRINGVAL=46
 INTPARAM=47
 BOOLPARAM=48
 STRINGPARAM=49
-VEC=50
 'Player'=1
 'player'=2
 'Player.getPlayer('=3

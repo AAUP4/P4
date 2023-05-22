@@ -8,7 +8,11 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
         ast.addChild(visit(ctx.setup()));
         ast.addChild(visit(ctx.round()));
         ast.addChild(visit(ctx.turn()));
-        ast.addChild(visit(ctx.funcs()));
+        int i = 0;
+        for (CLUBParser.FuncContext func : ctx.func()) {
+            ast.addChild(visit(ctx.func(i)));
+            i++;
+        }
         return ast;
     }
 
@@ -33,12 +37,28 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
         }
         return ast;
     }
-    // @Override
-    // public AST visitTurn(CLUBParser.TurnContext ctx){
-    //     AST ast = new AST(ctx.TURN().getSymbol());
+     @Override
+     public AST visitTurn(CLUBParser.TurnContext ctx){
+         AST ast = new AST(ctx.TURN().getSymbol());
+         int i = 0;
+         for (CLUBParser.StmtContext stmt : ctx.stmt()) {
+             ast.addChild(visit(ctx.stmt(i)));
+             i++;
+         }
+         return ast;
+    }
 
-    //     return ast;
-    // }
+
+    @Override
+    public AST visitFunc(CLUBParser.FuncContext ctx){
+        AST ast = new AST(ctx.left);
+        int i = 0;
+        for (CLUBParser.StmtContext stmt : ctx.stmt()) {
+            ast.addChild(visit(ctx.stmt(i)));
+            i++;
+        }
+        return ast;
+    }
 
     @Override
     public AST visitStmt1(CLUBParser.Stmt1Context ctx) {
@@ -230,41 +250,19 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
 
     @Override
     public AST visitPostF3(CLUBParser.PostF3Context ctx) {
-        AST ast = new AST();
+        AST ast = new AST(ctx.left);
         ast.addChild(visit(ctx.primaryExpr()));
-        ast.addChild(visit(ctx.params()));
         return ast;
     }
 
     @Override
     public AST visitPostF4(CLUBParser.PostF4Context ctx) {
-        AST ast = new AST(ctx.op);
-        ast.addChild(visit(ctx.primaryExpr()));
-        ast.addChild(visit(ctx.postfExpr()));
-        return ast;
+        return new AST(ctx.left);
     }
 
     @Override
     public AST visitPostF5(CLUBParser.PostF5Context ctx) {
-        AST ast = new AST();
-        AST left = new AST(ctx.left);
-        ast.addChild(left);
-        ast.addChild(visit(ctx.params()));
-        return ast;
-    }
-
-    public AST visitPostF6(CLUBParser.PostF6Context ctx) {
-        AST ast = new AST();
-        ast.addChild(visit(ctx.primaryExpr()));
-        return ast;
-    }
-
-    @Override
-    public AST visitPostF7(CLUBParser.PostF7Context ctx) {
-        AST ast = new AST();
-        AST left = new AST(ctx.left);
-        ast.addChild(left);
-        return ast;
+        return new AST(ctx.left);
     }
 
     @Override
@@ -274,18 +272,12 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
 
     @Override
     public AST visitPrimary2(CLUBParser.Primary2Context ctx) {
-        AST ast = new AST();
-        AST left = new AST(ctx.left);
-        ast.addChild(left);
-        return ast;
+        return new AST(ctx.left);
     }
 
     @Override
     public AST visitVal(CLUBParser.ValContext ctx) {
-        AST ast = new AST();
-        AST left = new AST(ctx.left);
-        ast.addChild(left);
-        return ast;
+        return new AST(ctx.left);
     }
 }
 

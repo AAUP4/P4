@@ -34,12 +34,6 @@ public interface CLUBVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTurn(CLUBParser.TurnContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CLUBParser#funcs}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFuncs(CLUBParser.FuncsContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link CLUBParser#func}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

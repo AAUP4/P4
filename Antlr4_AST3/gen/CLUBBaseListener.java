@@ -64,18 +64,6 @@ public class CLUBBaseListener implements CLUBListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFuncs(CLUBParser.FuncsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFuncs(CLUBParser.FuncsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterFunc(CLUBParser.FuncContext ctx) { }
 	/**
 	 * {@inheritDoc}
