@@ -34,7 +34,6 @@ public class CLUBtoJava {
     }
 
     public static void ConvertToJava(){        
-        
         for (int i = 0; i < readFileLines().size(); i++ ) {
             if(readFileLines().get(i).equals("Setup")){
                 System.out.println("public void Setup()");
@@ -42,10 +41,10 @@ public class CLUBtoJava {
             else if(readFileLines().get(i).equals("Round")){
                 System.out.println("public void Round()");
             }
-            else if(readFileLines().get(i).equals("Turn(Player")){
-                System.out.print("public void Turn(Player");
+            else if(readFileLines().get(i).equals("Turn")){
+                System.out.print("public void Turn");
             }
-            else if(readFileLines().get(i).startsWith("player)")){
+            else if(readFileLines().get(i).startsWith("player")){
                 System.out.println(" player){");
             }
             else if(readFileLines().get(i).equals("bool")){
@@ -80,9 +79,6 @@ public class CLUBtoJava {
             }
             else if(readFileLines().get(i).equals("{")){
                 System.out.println("{");
-            }
-            else if(readFileLines().get(i).startsWith("for")){
-                System.out.print("for(int ");
             }
             else{
                 System.out.print(readFileLines().get(i));
