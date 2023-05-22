@@ -1,12 +1,16 @@
 Setup
 {
-int i = 3;
-x = y + z;
+    int i = 3;
+    string s = "yeet machine";
+    bool b = true;
 }
 Round
 {
+    int t = 5;
 }
+Turn(Player player){
 
+}
 
 
 

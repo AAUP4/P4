@@ -22,14 +22,22 @@ public class Main {
         ParseTree Ctree = Cparser.program();
 
         AST ast = new ClubBuildASTVisitor().visit(Ctree);
-
         if (ast != null) {
             System.out.println(ast.toStringTree());
+            
+            
+            ASTtoJava ASTtoJava = new ASTtoJava(ast.toStringTree());
+            System.out.println("Test:");            
+            // ASTtoJava.convertToJava("(<ASSIGN, '='> <INT, 'int'> <VARID, 'ill'> <INTVAL, '42069'>)");
+            // ASTtoJava.convertToJava("(<ASSIGN, '='> <BOOL, 'bool'> <VARID, 'b'> <BOOLVAL, 'true'>)");
+            ASTtoJava.convertToJava(ast.toStringTree());
+            // System.out.println(ASTtoJava.tokenize(("<ASSIGN, '='> <STRING, 'string'> <VARID, 's'> <STRINGVAL, '\"yeet machine\"'>)")));
+
         } else {
             System.out.println("AST is null.");
         }
         TypeCheck.TypeMapSetup();
-        TypeCheck.processInput("deck.returnDiscardPile(Player.getPlayer(1))","VOID");
+        // TypeCheck.processInput("deck.returnDiscardPile(Player.getPlayer(1))","VOID");
 
 
         /*Lexer Tokens and Parser for VecMath*/
