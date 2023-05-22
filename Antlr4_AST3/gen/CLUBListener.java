@@ -387,6 +387,42 @@ public interface CLUBListener extends ParseTreeListener {
 	 */
 	void exitPostF5(CLUBParser.PostF5Context ctx);
 	/**
+	 * Enter a parse tree produced by the {@code PostF6}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostF6(CLUBParser.PostF6Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PostF6}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostF6(CLUBParser.PostF6Context ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PostF7}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostF7(CLUBParser.PostF7Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PostF7}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostF7(CLUBParser.PostF7Context ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PostF8}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostF8(CLUBParser.PostF8Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PostF8}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostF8(CLUBParser.PostF8Context ctx);
+	/**
 	 * Enter a parse tree produced by the {@code Primary1}
 	 * labeled alternative in {@link CLUBParser#primaryExpr}.
 	 * @param ctx the parse tree

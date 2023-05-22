@@ -1,6 +1,6 @@
 Setup
 {
-    int i = 3;
+    int g = 3;
     string s = "hello there another word";
     
 }
@@ -21,7 +21,7 @@ Round
     }
 }
 Turn ( Player player ) {
-int i = 3;
+int p = 3;
 }
 
 

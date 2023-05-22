@@ -233,6 +233,27 @@ public interface CLUBVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPostF5(CLUBParser.PostF5Context ctx);
 	/**
+	 * Visit a parse tree produced by the {@code PostF6}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPostF6(CLUBParser.PostF6Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PostF7}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPostF7(CLUBParser.PostF7Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PostF8}
+	 * labeled alternative in {@link CLUBParser#postfExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPostF8(CLUBParser.PostF8Context ctx);
+	/**
 	 * Visit a parse tree produced by the {@code Primary1}
 	 * labeled alternative in {@link CLUBParser#primaryExpr}.
 	 * @param ctx the parse tree

@@ -25,7 +25,12 @@ public abstract class TypeCheck {
     static Map<String, String> VarBool = new HashMap<>();
     static Map<String, String> VarString = new HashMap<>();
 
+    static ArrayList<String> FuncIDs;
+
     public static void TypeMapSetup(){
+
+        FuncIDs = new ArrayList<>();
+
         ArrayList<String> V = new ArrayList<>(); Collections.addAll(V,"VOID");
         ArrayList<String> I = new ArrayList<>(); Collections.addAll(I,"INT");
         ArrayList<String> II = new ArrayList<>(); Collections.addAll(II,"INT", "INT");
@@ -195,7 +200,7 @@ public abstract class TypeCheck {
         String temp2 = "";
         
         //decls
-        if (input.contains("=")) {
+        if (input.contains("=") && input.charAt(input.indexOf("=")+1)!='=') {
             
             while((input.contains(" ") && !input.contains("\"")) || (input.contains(" ") && input.contains("\"") && input.indexOf(" ") < input.indexOf("\""))){
                 input = input.substring(0, input.indexOf(" "))+input.substring(input.indexOf(" ")+1);
@@ -719,8 +724,15 @@ public abstract class TypeCheck {
         
         return result;
     }
-   
 
+    static boolean declFunc(String funcID){
+        if(FuncIDs.contains(funcID)) { throw new IllegalArgumentException(funcID+" has already been declared.");}
+        else {
+            FuncIDs.add(funcID);
+            return true;
+        }
+
+    }
 
     static boolean declVar(String varID, String type, String value){
 
@@ -790,7 +802,17 @@ public abstract class TypeCheck {
         }else { throw new IllegalArgumentException(varID+" is not a variable."); }
 
     }
+    static boolean checkVarExist (String varID) {
+        if(VarType.containsKey(varID)) { return true; }
+        else { throw new IllegalArgumentException(varID+" is not a variable."); }
+    }
 
+    static boolean checkValidFuncID(String funcID){
+        if(FuncIDs.contains(funcID)) { return true;}
+        else {
+            throw new IllegalArgumentException(funcID+" has not been declared.");
+        }
+    }
 
     static boolean checkValidValue(String value, String context) {
         boolean result = false;
