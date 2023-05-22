@@ -1,4 +1,4 @@
-// Generated from C:/Users/night/Documents/GitHub/P4/Antlr4_AST3/src\CLUB.g4 by ANTLR 4.12.0
+// Generated from C:/Users/Kira/Documents/GitHub/P4/Antlr4_AST3/src\CLUB.g4 by ANTLR 4.12.0
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -83,18 +83,6 @@ public class CLUBBaseListener implements CLUBListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunc(CLUBParser.FuncContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTParams(CLUBParser.TParamsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTParams(CLUBParser.TParamsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -191,18 +179,6 @@ public class CLUBBaseListener implements CLUBListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTParam(CLUBParser.TParamContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterParams(CLUBParser.ParamsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitParams(CLUBParser.ParamsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -443,30 +419,6 @@ public class CLUBBaseListener implements CLUBListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitPostF5(CLUBParser.PostF5Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPostF6(CLUBParser.PostF6Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPostF6(CLUBParser.PostF6Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPostF7(CLUBParser.PostF7Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPostF7(CLUBParser.PostF7Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

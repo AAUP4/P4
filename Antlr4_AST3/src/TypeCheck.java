@@ -191,9 +191,71 @@ public abstract class TypeCheck {
         String method = ""; // method call to check against method hashtables
         ArrayList<String> Fparams = new ArrayList<>(); // INT, BOOL, STRING
         ArrayList<String> Aparams = new ArrayList<>(); // Actual parameters
+        String temp1 = "";
+        String temp2 = "";
         
-
-        if(input.contains(".")) {
+        //decls
+        if (input.contains("=")) {
+            
+            while((input.contains(" ") && !input.contains("\"")) || (input.contains(" ") && input.contains("\"") && input.indexOf(" ") < input.indexOf("\""))){
+                input = input.substring(0, input.indexOf(" "))+input.substring(input.indexOf(" ")+1);
+            }
+            if (input.startsWith("int") || input.startsWith("bool") || input.startsWith("string")) {
+                if (input.startsWith("int")) {
+                    temp1 = input.substring(3,input.indexOf("="));
+                    temp2 = input.substring(input.indexOf("=")+1);
+                    if (declVar(temp1, "INT", temp2)) {
+                        result = true;
+                        System.out.println("declared variable!");
+                        System.out.println("type: "+VarType.get(temp1));
+                        System.out.println("varID: "+temp1);
+                        System.out.println("value: "+temp2);
+                    }
+                }
+                else if (input.startsWith("bool")) {
+                    temp1 = input.substring(4,input.indexOf("="));
+                    temp2 = input.substring(input.indexOf("=")+1);
+                    if (declVar(temp1, "BOOL", temp2)) {
+                        result = true;
+                        System.out.println("declared variable!");
+                        System.out.println("type: "+VarType.get(temp1));
+                        System.out.println("varID: "+temp1);
+                        System.out.println("value: "+temp2);
+                    }
+                }
+                else if (input.startsWith("string")) {
+                    temp1 = input.substring(6,input.indexOf("="));
+                    temp2 = input.substring(input.indexOf("=")+1);
+                    if (declVar(temp1, "STRING", temp2)) {
+                        result = true;
+                        System.out.println("declared variable!");
+                        System.out.println("type: "+VarType.get(temp1));
+                        System.out.println("varID: "+temp1);
+                        System.out.println("value: "+temp2);
+                    }
+                }
+                
+            }
+            //assigns
+            else {
+                
+                temp1 = input.substring(0,input.indexOf("="));
+                temp2 = input.substring(input.indexOf("=")+1);
+                if (assignVar(temp1, temp2)) {
+                    result = true;
+                    System.out.println("assigned variable!");
+                    System.out.println("type: "+VarType.get(temp1));
+                    System.out.println("varID: "+temp1);
+                    System.out.println("value: "+temp2);
+                    
+                }
+                
+            }
+        }
+        
+        
+        //methodcalls
+        else if((input.contains(".") && !input.contains("\"")) || (input.contains(".") && input.contains("\"") && input.indexOf(".") < input.indexOf("\""))) {
 
             //Starts with INT param
             if (input.startsWith("deck.returnDiscardPile(Player.getPlayer(")) {
@@ -485,7 +547,7 @@ public abstract class TypeCheck {
             }
             
 
-        //missing check on method, params, Aparams
+        //check on method, Fparams, Aparams
             if (Fparams.size()>0 &&  (SETM.containsKey(method) || VM.containsKey(method) || IM.containsKey(method) || SM.containsKey(method) || ATTI.containsKey(method) || ATTS.containsKey(method) || ATTB.containsKey(method)) && input == ""){
                 if (SETM.containsKey(method)){
                     FparamTypeCheck = SETM.get(method).equals(Fparams);
@@ -494,10 +556,13 @@ public abstract class TypeCheck {
                         switch (Fparams.get(p)) {
                             case "INT" :
                                 if (!checkArithExpr(aparam)) {return false;}
+                                break;
                             case "STRING" :
                             if (!checkStringExpr(aparam)) {return false;}
+                            break;
                             case "BOOL" :
                             if (!checkLogicExpr(aparam)) {return false;}
+                            break;
                         }
                         p++;
                     }
@@ -530,20 +595,26 @@ public abstract class TypeCheck {
                     FparamTypeCheck = IM.get(method).equals(Fparams);
                     int p = 0;
                     for (String aparam : Aparams) {
+                        
                         switch (Fparams.get(p)) {
                             case "INT" :
                                 if (!checkArithExpr(aparam)) {return false;}
+                                break;
                             case "STRING" :
-                            if (!checkStringExpr(aparam)) {return false;}
+                                if (!checkStringExpr(aparam)) {return false;}
+                                break;
                             case "BOOL" :
-                            if (!checkLogicExpr(aparam)) {return false;}
+                                if (!checkLogicExpr(aparam)) {return false;}
+                                break;
                         }
                         p++;
                     }
                     if (context == "INT"){
                         result = true;   
                     }                   
+                
                 }
+                
                 else if (SM.containsKey(method)){
                     FparamTypeCheck = SM.get(method).equals(Fparams);
                     int p = 0;
@@ -551,10 +622,13 @@ public abstract class TypeCheck {
                         switch (Fparams.get(p)) {
                             case "INT" :
                                 if (!checkArithExpr(aparam)) {return false;}
+                                break;
                             case "STRING" :
                             if (!checkStringExpr(aparam)) {return false;}
+                            break;
                             case "BOOL" :
                             if (!checkLogicExpr(aparam)) {return false;}
+                            break;
                         }
                         p++;
                     }
@@ -569,10 +643,13 @@ public abstract class TypeCheck {
                         switch (Fparams.get(p)) {
                             case "INT" :
                                 if (!checkArithExpr(aparam)) {return false;}
+                                break;
                             case "STRING" :
                             if (!checkStringExpr(aparam)) {return false;}
+                            break;
                             case "BOOL" :
                             if (!checkLogicExpr(aparam)) {return false;}
+                            break;
                         }
                         p++;
                     }
@@ -587,10 +664,13 @@ public abstract class TypeCheck {
                         switch (Fparams.get(p)) {
                             case "INT" :
                                 if (!checkArithExpr(aparam)) {return false;}
+                                break;
                             case "STRING" :
                             if (!checkStringExpr(aparam)) {return false;}
+                            break;
                             case "BOOL" :
                             if (!checkLogicExpr(aparam)) {return false;}
+                            break;
                         }
                         p++;
                     }
@@ -605,10 +685,13 @@ public abstract class TypeCheck {
                         switch (Fparams.get(p)) {
                             case "INT" :
                                 if (!checkArithExpr(aparam)) {return false;}
+                                break;
                             case "STRING" :
                             if (!checkStringExpr(aparam)) {return false;}
+                            break;
                             case "BOOL" :
                             if (!checkLogicExpr(aparam)) {return false;}
+                            break;
                         }
                         p++;
                     }
@@ -618,67 +701,77 @@ public abstract class TypeCheck {
                 }
                    
             }    
-                
+            System.out.println("context: "+context);
+            System.out.println("method: "+method);
+            System.out.println("Fparams: ");
+            for (String param : Fparams) {
+                System.out.print(param+" , ");
+            }
+            System.out.println();
+            System.out.println("Aparams: ");
+            for (String param : Aparams) {
+                System.out.print(param+" , ");
+            }   
+            System.out.println(); 
         }
-
-        System.out.println("context: "+context);
-        System.out.println("method: "+method);
-        System.out.println("Fparams: ");
-        for (String param : Fparams) {
-            System.out.print(param+" , ");
-        }
-        System.out.println();
-        System.out.println("Aparams: ");
-        for (String param : Aparams) {
-            System.out.print(param+" , ");
-        }
+        
+       
+        
         return result;
     }
    
 
 
-    static void declVar(String varID, String type, String value){
+    static boolean declVar(String varID, String type, String value){
 
-        if(VarType.containsKey(varID)) { throw new IllegalArgumentException(varID+" has already been declared."); }
+        if(VarType.containsKey(varID)) { throw new IllegalArgumentException(varID+" has already been declared.");}
         else if (type == "INT") {
-            if (checkArithExpr(value)){
+            if (checkValidValue(value,type)){
                 VarType.put(varID,type);
                 VarInt.put(varID,value);
+                return true;
             }
         }
         else if (type == "BOOL") {
-            if (checkLogicExpr(value)){
+            if (checkValidValue(value,type)){
                 VarType.put(varID,type);
                 VarBool.put(varID,value);
+                return true;
             }
         }
         else if (type == "STRING") {
-            if (checkStringExpr(value)){
+            if (checkValidValue(value,type)){
                 VarType.put(varID,type);
                 VarString.put(varID,value);
+                return true;
             }
         }
+        return false;
     }
 
-    static void assignVar(String varID, String value){
+    static boolean assignVar(String varID, String value){
 
         if(VarType.containsKey(varID)) {
             if (VarType.get(varID) == "INT") {
                 if (checkArithExpr(value)){
                     VarInt.put(varID,value);
-                }
+                    return true;
+                } else { throw new IllegalArgumentException(value+" is not an arithmetic expression."); }
             }
             else if (VarType.get(varID) == "BOOL") {
                 if (checkLogicExpr(value)){
                     VarBool.put(varID,value);
-                }
+                    return true;
+                } else { throw new IllegalArgumentException(value+" is not a logic expression."); }
             }
             else if (VarType.get(varID) == "STRING") {
                 if (checkStringExpr(value)){
                     VarString.put(varID,value);
-                }
-            }
+                    return true;
+                } else { throw new IllegalArgumentException(value+" is not a string expression."); }
+            } 
         } else { throw new IllegalArgumentException(varID+" is not a variable."); }
+        return false;
     }
 
     static String checkVarType(String varID){
@@ -719,10 +812,10 @@ public abstract class TypeCheck {
 
 
     public static boolean checkArithExpr(String value) {
-        value.trim();
+        value = value.trim();
         String temp = "";
 
-        if (!value.contains("&") || !value.contains("|") || !value.contains("=") || !value.contains("\"") || !value.contains("<") || !value.contains(">") || !value.contains("!") || !value.contains(".") || !value.contains("{") || !value.contains("}") || !value.contains(",")) {
+        if (!value.contains("&") && !value.contains("|") && !value.contains("=") && !value.contains("\"") && !value.contains("<") && !value.contains(">") && !value.contains("!") && !value.contains(".") && !value.contains("{") && !value.contains("}") && !value.contains(",")) {
 
             while(value.contains("(")){
                 value = value.substring(0, value.indexOf("("))+value.substring(value.indexOf("(")+1);
@@ -763,29 +856,36 @@ public abstract class TypeCheck {
                     value = value.substring(temp.length()+1);
                 } else { return false;}
             } 
+
+
+
             Integer i = null;
-            value.trim();
             try {
+
                 i = Integer.parseInt(value);
-            } catch (NumberFormatException nfe) {
+            } catch (Exception nfe) {
                 i = null;
                 if (checkVarType(value)=="INT") {
                     return true;
                 }
             }
-            if (i != null) {return true;}
+            if (i != null) {
+                return true;}
 
         }
-
+        
+        else if (value.contains(".")) {
+            if (processInput(value,"INT")) {return true;}
+        }
         return false;
     }
 
     public static boolean checkLogicExpr(String value) {
-        value.trim();
+        value = value.trim();
         String temp1 = "";
         String temp2 = "";
 
-        if (!value.contains(".") || !value.contains("{") || !value.contains("}") || !value.contains(",")) {
+        if (!value.contains(".") && !value.contains("{") && !value.contains("}") && !value.contains(",")) {
 
             while(value.contains("(")){
                 value = value.substring(0, value.indexOf("("))+value.substring(value.indexOf("(")+1);
@@ -859,9 +959,8 @@ public abstract class TypeCheck {
                 } else { return false;}
             } 
             
-            
-            value.trim();
-            if(value=="true" || value=="false") {
+            value = value.trim();
+            if(value.equals("true") || value.equals("false")) {
                 return true;
             }
             else if (checkVarType(value)=="BOOL") {
@@ -869,7 +968,9 @@ public abstract class TypeCheck {
             }
 
         }
-
+        else if (value.contains(".")) {
+            if (processInput(value,"BOOL")) {return true;}
+        }
         return false;
     }
     
@@ -877,14 +978,18 @@ public abstract class TypeCheck {
     public static boolean checkStringExpr(String value) {
         String temp1 = "";
         String temp2 = "";
-        value.trim();
+        value = value.trim();
         
         char[] chars;
         chars = value.toCharArray();
 
-
-
         int count = 0;
+
+        if ((value.contains(".") && !value.contains("\"")) || (value.contains(".") && value.contains("\"") && value.indexOf(".")<value.indexOf("\""))) {
+            if (processInput(value,"STRING")) {
+                return true;
+            } else {return false;}
+        }
 
         while(value.contains(" ")){
                 value = value.substring(0, value.indexOf(" "))+value.substring(value.indexOf(" ")+1);

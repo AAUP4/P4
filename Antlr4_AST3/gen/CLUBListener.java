@@ -1,4 +1,4 @@
-// Generated from C:/Users/night/Documents/GitHub/P4/Antlr4_AST3/src\CLUB.g4 by ANTLR 4.12.0
+// Generated from C:/Users/Kira/Documents/GitHub/P4/Antlr4_AST3/src\CLUB.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -66,16 +66,6 @@ public interface CLUBListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunc(CLUBParser.FuncContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CLUBParser#tParams}.
-	 * @param ctx the parse tree
-	 */
-	void enterTParams(CLUBParser.TParamsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CLUBParser#tParams}.
-	 * @param ctx the parse tree
-	 */
-	void exitTParams(CLUBParser.TParamsContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Stmt1}
 	 * labeled alternative in {@link CLUBParser#stmt}.
@@ -168,16 +158,6 @@ public interface CLUBListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTParam(CLUBParser.TParamContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CLUBParser#params}.
-	 * @param ctx the parse tree
-	 */
-	void enterParams(CLUBParser.ParamsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CLUBParser#params}.
-	 * @param ctx the parse tree
-	 */
-	void exitParams(CLUBParser.ParamsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CLUBParser#assignExpr}.
 	 * @param ctx the parse tree
@@ -416,30 +396,6 @@ public interface CLUBListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPostF5(CLUBParser.PostF5Context ctx);
-	/**
-	 * Enter a parse tree produced by the {@code PostF6}
-	 * labeled alternative in {@link CLUBParser#postfExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterPostF6(CLUBParser.PostF6Context ctx);
-	/**
-	 * Exit a parse tree produced by the {@code PostF6}
-	 * labeled alternative in {@link CLUBParser#postfExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitPostF6(CLUBParser.PostF6Context ctx);
-	/**
-	 * Enter a parse tree produced by the {@code PostF7}
-	 * labeled alternative in {@link CLUBParser#postfExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterPostF7(CLUBParser.PostF7Context ctx);
-	/**
-	 * Exit a parse tree produced by the {@code PostF7}
-	 * labeled alternative in {@link CLUBParser#postfExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitPostF7(CLUBParser.PostF7Context ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Primary1}
 	 * labeled alternative in {@link CLUBParser#primaryExpr}.
