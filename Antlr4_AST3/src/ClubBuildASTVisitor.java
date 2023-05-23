@@ -120,6 +120,17 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
     }
 
     @Override
+    public AST visitStmt8(CLUBParser.Stmt8Context ctx) {
+        TypeCheck.checkValidValue(ctx.param.getText(),"INT");
+        return new AST(ctx.left);
+    }
+
+    @Override
+    public AST visitStmt9(CLUBParser.Stmt9Context ctx) {
+        return new AST(ctx.left);
+    }
+
+    @Override
     public AST visitTParam(CLUBParser.TParamContext ctx) {
         AST ast = new AST(); // Do this if it has no root node and several children.
         AST left = new AST(ctx.left);

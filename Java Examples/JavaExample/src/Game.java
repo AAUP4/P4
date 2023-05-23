@@ -9,7 +9,7 @@ public class Game {
 
     public static ArrayList<Card> discardPile = new ArrayList<Card>();
     private static final Scanner scanner = new Scanner(System.in);
-
+    public static Boolean running = true;
 
     public Card getCardIndex(int index){
         return discardPile.get(index);
@@ -25,7 +25,7 @@ public class Game {
 
         printScoreboard(scores);
 
-        System.exit(0);
+        running=false;
     }
     public static void exit(){
         System.out.println("It is a draw!");
@@ -37,7 +37,7 @@ public class Game {
 
         printScoreboard(scores);
 
-        System.exit(0);
+        running=false;
     }
     private static void printScoreboard(Map<String, Integer> scores) {
         List<Map.Entry<String, Integer>> sortedScores = new ArrayList<>(scores.entrySet());

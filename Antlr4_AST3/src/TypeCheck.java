@@ -23,6 +23,10 @@ public abstract class TypeCheck {
 
     public static void TypeMapSetup(){
 
+        VarType.put("player","OBJECT");
+        VarType.put("table","OBJECT");
+        VarType.put("deck","OBJECT");
+
         FuncIDs = new ArrayList<>();
 
         ArrayList<String> V = new ArrayList<>(); Collections.addAll(V,"VOID");
@@ -33,6 +37,8 @@ public abstract class TypeCheck {
         ArrayList<String> IIII = new ArrayList<>(); Collections.addAll(IIII,"INT", "INT", "INT", "INT");
         ArrayList<String> IIIII = new ArrayList<>(); Collections.addAll(IIIII,"INT", "INT", "INT", "INT", "INT");
         ArrayList<String> IIIIII = new ArrayList<>(); Collections.addAll(IIIIII,"INT", "INT", "INT", "INT", "INT", "INT");
+        ArrayList<String> IB = new ArrayList<>(); Collections.addAll(IB,"INT", "BOOL");
+        ArrayList<String> IIB = new ArrayList<>(); Collections.addAll(IIB,"INT", "INT", "BOOL");
         ArrayList<String> IIIIB = new ArrayList<>(); Collections.addAll(IIIIB,"INT", "INT", "INT", "INT", "BOOL");
         ArrayList<String> IS = new ArrayList<>(); Collections.addAll(IS,"INT", "STRING");
         ArrayList<String> ISI = new ArrayList<>(); Collections.addAll(ISI,"INT", "STRING", "INT");
@@ -42,7 +48,11 @@ public abstract class TypeCheck {
         ArrayList<String> ISIB = new ArrayList<>(); Collections.addAll(ISIB,"INT", "STRING", "INT", "BOOL");
         ArrayList<String> ISL = new ArrayList<>(); Collections.addAll(ISL,"INT", "SLIST");
         ArrayList<String> S = new ArrayList<>(); Collections.addAll(S,"STRING");
-        ArrayList<String> SI = new ArrayList<>(); Collections.addAll(S,"STRING", "INT");
+        ArrayList<String> SI = new ArrayList<>(); Collections.addAll(SI,"STRING", "INT");
+        ArrayList<String> SII = new ArrayList<>(); Collections.addAll(SII,"STRING", "INT", "INT");
+        ArrayList<String> SIII = new ArrayList<>(); Collections.addAll(SIII,"STRING", "INT", "INT", "INT");
+        ArrayList<String> SIB = new ArrayList<>(); Collections.addAll(SIB,"STRING", "INT", "BOOL");
+        ArrayList<String> SB = new ArrayList<>(); Collections.addAll(SB, "STRING", "BOOL");
 
         
         SETM.put("Player.create(INT)", I); //
@@ -52,74 +62,216 @@ public abstract class TypeCheck {
 
         
         VM.put("Game.exit()", V); //
+
         VM.put("Game.exit(Player.getPlayer(INT))", I); //
+        VM.put("Game.exit(player)", V); //-----
         
         VM.put("Game.print(STRING)", S); 
         
-        VM.put("table.discard(STRING,Game.discardPile)", S); 
-        VM.put("table.discard(STRING,Player.getPlayer(INT).getDiscardPile())", SI); 
+        VM.put("table.discard(STRING,Game.discardPile)", S);
+
+        VM.put("table.discard(STRING,Player.getPlayer(INT).getDiscardPile())", SI);
+        VM.put("table.discard(STRING,player.getDiscardPile())", S); //-----
+
         VM.put("table.discard(table.getCardIndex(INT).id,Game.discardPile)", I);  //
+
         VM.put("table.discard(table.getCardIndex(INT).id,Player.getPlayer(INT).getDiscardPile())", II); //
-        
+        VM.put("table.discard(table.getCardIndex(INT).id,player.getDiscardPile())", I); //------
+
         VM.put("table.discardAll(Game.discardPile)", V); //
+
         VM.put("table.discardAll(Player.getPlayer(INT).getDiscardPile())", I); //
-        
+        VM.put("table.discardAll(player.getDiscardPile())", V); //-----
+
         VM.put("table.draw(INT,deck)", I); //
         
         VM.put("table.getCardIndex(INT).flip()", I);//
         
         VM.put("Player.getPlayer(INT).discard(STRING,Game.discardPile)", IS);//
+        VM.put("player.discard(STRING,Game.discardPile)", S); //-----
+
         VM.put("Player.getPlayer(INT).discard(STRING,Player.getPlayer(INT).getDiscardPile())", ISI);//
         VM.put("Player.getPlayer(INT).discard(Player.getPlayer(INT).getCardIndex(INT),Game.discardPile)", III);//
         VM.put("Player.getPlayer(INT).discard(Player.getPlayer(INT).getCardIndex(INT),Player.getPlayer(INT).getDiscardPile())", IIII);//
+        VM.put("player.discard(STRING,Player.getPlayer(INT).getDiscardPile())", SI);//------
+        VM.put("player.discard(Player.getPlayer(INT).getCardIndex(INT),Game.discardPile)", II);//------
+        VM.put("Player.getPlayer(INT).discard(STRING,player.getDiscardPile())", IS);//------
+        VM.put("Player.getPlayer(INT).discard(player.getCardIndex(INT),Game.discardPile)", II);//------
+        VM.put("player.discard(STRING,player.getDiscardPile())", S);//------
+        VM.put("player.discard(player.getCardIndex(INT),Game.discardPile)", I);//------
+        VM.put("player.discard(Player.getPlayer(INT).getCardIndex(INT),Player.getPlayer(INT).getDiscardPile())", III);//------
+        VM.put("player.discard(player.getCardIndex(INT),Player.getPlayer(INT).getDiscardPile())", II);//------
+        VM.put("player.discard(Player.getPlayer(INT).getCardIndex(INT),player.getDiscardPile())", II);//------
+        VM.put("player.discard(player.getCardIndex(INT),player.getDiscardPile())", I);//------
+        VM.put("Player.getPlayer(INT).discard(player.getCardIndex(INT),Player.getPlayer(INT).getDiscardPile())", III);//------
+        VM.put("Player.getPlayer(INT).discard(player.getCardIndex(INT),player.getDiscardPile())", II);//------
+        VM.put("Player.getPlayer(INT).discard(Player.getPlayer(INT).getCardIndex(INT),player.getDiscardPile())", III);//------
+
         
         VM.put("Player.getPlayer(INT).discardAll(discardPile)", I);             //
+        VM.put("player.discardAll(discardPile)", V); //-----
+
         VM.put("Player.getPlayer(INT).discardAll(Player.getPlayer(INT).getDiscardPile())", II);//
+        VM.put("Player.getPlayer(INT).discardAll(player.getDiscardPile())", I); //------
+        VM.put("player.discardAll(Player.getPlayer(INT).getDiscardPile())", I); //------
+        VM.put("player.discardAll(player.getDiscardPile())", V); //------
         
         VM.put("Player.getPlayer(INT).draw(INT,deck)", II);                     //
-        
+        VM.put("player.draw(INT,deck)", I); //------
+
         VM.put("Player.getPlayer(INT).getCardIndex(INT).flip()", II);           //
-        
+        VM.put("player.getCardIndex(INT).flip()", I); //-----
+
         VM.put("Player.getPlayer(INT).getDiscardPileIndex(INT).flip()", II);//
-        
+        VM.put("player.getDiscardPileIndex(INT).flip()", I); //------
+
         VM.put("Player.getPlayer(INT).getTable().discard(STRING,Game.discardPile)", IS);//
+        VM.put("player.getTable().discard(STRING,Game.discardPile)", S); //------
+
         VM.put("Player.getPlayer(INT).getTable().discard(STRING,Player.getPlayer(INT).getDiscardPile())", ISI);//
         VM.put("Player.getPlayer(INT).getTable().discard(Player.getPlayer(INT).getTable().getCardIndex(INT).id,Game.discardPile)", III);//
+        VM.put("player.getTable().discard(STRING,Player.getPlayer(INT).getDiscardPile())", SI);//-----
+        VM.put("player.getTable().discard(Player.getPlayer(INT).getTable().getCardIndex(INT).id,Game.discardPile)", II);//-----
+        VM.put("Player.getPlayer(INT).getTable().discard(STRING,player.getDiscardPile())", IS);//-----
+        VM.put("Player.getPlayer(INT).getTable().discard(player.getTable().getCardIndex(INT).id,Game.discardPile)", II);//-----
+        VM.put("player.getTable().discard(STRING,player.getDiscardPile())", S);//-----
+        VM.put("player.getTable().discard(player.getTable().getCardIndex(INT).id,Game.discardPile)", I);//-----
+
         VM.put("Player.getPlayer(INT).getTable().discard(Player.getPlayer(INT).getTable().getCardIndex(INT).id,Player.getPlayer(INT).getDiscardPile())", IIII);//
-        
+        VM.put("player.getTable().discard(Player.getPlayer(INT).getTable().getCardIndex(INT).id,Player.getPlayer(INT).getDiscardPile())", III);//-----
+        VM.put("Player.getPlayer(INT).getTable().discard(player.getTable().getCardIndex(INT).id,Player.getPlayer(INT).getDiscardPile())", III);//-----
+        VM.put("Player.getPlayer(INT).getTable().discard(Player.getPlayer(INT).getTable().getCardIndex(INT).id,player.getDiscardPile())", III);//-----
+        VM.put("player.getTable().discard(player.getTable().getCardIndex(INT).id,Player.getPlayer(INT).getDiscardPile())", II);//-----
+        VM.put("Player.getPlayer(INT).getTable().discard(player.getTable().getCardIndex(INT).id,player.getDiscardPile())", II);//-----
+        VM.put("player.getTable().discard(Player.getPlayer(INT).getTable().getCardIndex(INT).id,player.getDiscardPile())", II);//-----
+        VM.put("player.getTable().discard(player.getTable().getCardIndex(INT).id,player.getDiscardPile())", I);//-----
+
         VM.put("Player.getPlayer(INT).getTable().discardAll(discardPile)", I);          //
+        VM.put("player.getTable().discardAll(discardPile)", V); //------
+
         VM.put("Player.getPlayer(INT).getTable().discardAll(Player.getPlayer(INT).getDiscardPile())", II);//
+        VM.put("player.getTable().discardAll(Player.getPlayer(INT).getDiscardPile())", I);//-----
+        VM.put("Player.getPlayer(INT).getTable().discardAll(player.getDiscardPile())", I);//-----
+        VM.put("player.getTable().discardAll(player.getDiscardPile())", V);//-----
         
         VM.put("Player.getPlayer(INT).getTable().draw(INT,deck)", II);          //
-        
+        VM.put("player.getTable().draw(INT,deck)", I); //------
+
         VM.put("Player.getPlayer(INT).getTable().getCardIndex(INT).flip()", II);//
+        VM.put("player.getTable().getCardIndex(INT).flip()", I); //------
         
         VM.put("Player.getPlayer(INT).getTable().print()", I);                      //
+        VM.put("player.getTable().print()", V); //-----
         
         VM.put("Player.getPlayer(INT).layDown(STRING,Player.getPlayer(INT).getTable(),BOOL)", ISIB);//
+        VM.put("player.layDown(STRING,Player.getPlayer(INT).getTable(),BOOL)", SIB);//-----
+        VM.put("Player.getPlayer(INT).layDown(STRING,player.getTable(),BOOL)", ISB);//-----
+        VM.put("player.layDown(STRING,player.getTable(),BOOL)", SB);//-----
+
         VM.put("Player.getPlayer(INT).layDown(STRING,table,BOOL)", ISB);            //
+        VM.put("player.layDown(STRING,table,BOOL)", SB);//-----
+
         VM.put("Player.getPlayer(INT).layDown(Player.getPlayer(INT).getCardIndex(INT),Player.getPlayer(INT).getTable(),BOOL)", IIIIB);//
+        VM.put("player.layDown(Player.getPlayer(INT).getCardIndex(INT),Player.getPlayer(INT).getTable(),BOOL)", IIIB);//-----
+        VM.put("Player.getPlayer(INT).layDown(player.getCardIndex(INT),Player.getPlayer(INT).getTable(),BOOL)", IIIB);//-----
+        VM.put("Player.getPlayer(INT).layDown(Player.getPlayer(INT).getCardIndex(INT),player.getTable(),BOOL)", IIIB);//-----
+        VM.put("player.layDown(player.getCardIndex(INT),Player.getPlayer(INT).getTable(),BOOL)", IIB);//-----
+        VM.put("Player.getPlayer(INT).layDown(player.getCardIndex(INT),player.getTable(),BOOL)", IIB);//-----
+        VM.put("player.layDown(Player.getPlayer(INT).getCardIndex(INT),player.getTable(),BOOL)", IIB);//-----
+        VM.put("player.layDown(player.getCardIndex(INT),player.getTable(),BOOL)", IB);//-----
+
         VM.put("Player.getPlayer(INT).layDown(Player.getPlayer(INT).getCardIndex(INT),table,BOOL)", IIIB);//
-        VM.put("Player.getPlayer(INT).layDown(STRING,Player.getPlayer(INT).getTable(),Player.getPlayer(INT).getCardIndex(INT).isFaceUp)", ISIII);//
+        VM.put("player.layDown(Player.getPlayer(INT).getCardIndex(INT),table,BOOL)", IIB);//-----
+        VM.put("Player.getPlayer(INT).layDown(player.getCardIndex(INT),table,BOOL)", IIB);//-----
+        VM.put("player.layDown(player.getCardIndex(INT),table,BOOL)", IB);//-----
+
+        VM.put("Player.getPlayer(INT).layDown(STRING,Player.getPlayer(INT).getTable(),Player.getPlayer(INT).getCardIndex(INT).isFaceUp)", ISIII);
+        VM.put("player.layDown(STRING,Player.getPlayer(INT).getTable(),Player.getPlayer(INT).getCardIndex(INT).isFaceUp)", SIII);//------
+        VM.put("Player.getPlayer(INT).layDown(STRING,player.getTable(),Player.getPlayer(INT).getCardIndex(INT).isFaceUp)", ISII);//------
+        VM.put("Player.getPlayer(INT).layDown(STRING,Player.getPlayer(INT).getTable(),player.getCardIndex(INT).isFaceUp)", ISII);//------
+        VM.put("player.layDown(STRING,player.getTable(),Player.getPlayer(INT).getCardIndex(INT).isFaceUp)", SII);//------
+        VM.put("Player.getPlayer(INT).layDown(STRING,player.getTable(),player.getCardIndex(INT).isFaceUp)", ISI);//------
+        VM.put("player.layDown(STRING,Player.getPlayer(INT).getTable(),player.getCardIndex(INT).isFaceUp)", SII);//------
+        VM.put("player.layDown(STRING,player.getTable(),player.getCardIndex(INT).isFaceUp)", SI);//------
+
         VM.put("Player.getPlayer(INT).layDown(STRING,table,Player.getPlayer(INT).getCardIndex(INT).isFaceUp)", ISII);//
+        VM.put("player.layDown(STRING,table,Player.getPlayer(INT).getCardIndex(INT).isFaceUp)", SII);//-----
+        VM.put("Player.getPlayer(INT).layDown(STRING,table,player.getCardIndex(INT).isFaceUp)", ISI);//-----
+        VM.put("player.layDown(STRING,table,player.getCardIndex(INT).isFaceUp)", SI);//-----
+
         VM.put("Player.getPlayer(INT).layDown(Player.getPlayer(INT).getCardIndex(INT),Player.getPlayer(INT).getTable(),Player.getPlayer(INT).getCardIndex(INT).isFaceUp)", IIIIII);//
-        VM.put("Player.getPlayer(INT).layDown(Player.getPlayer(INT).getCardIndex(INT),table,Player.getPlayer(INT).getCardIndex(INT).isFaceUp)", IIIII);//
+        VM.put("player.layDown(Player.getPlayer(INT).getCardIndex(INT),Player.getPlayer(INT).getTable(),Player.getPlayer(INT).getCardIndex(INT).isFaceUp)", IIIII);//-----
+        VM.put("Player.getPlayer(INT).layDown(player.getCardIndex(INT),Player.getPlayer(INT).getTable(),Player.getPlayer(INT).getCardIndex(INT).isFaceUp)", IIIII);//-----
+        VM.put("Player.getPlayer(INT).layDown(Player.getPlayer(INT).getCardIndex(INT),player.getTable(),Player.getPlayer(INT).getCardIndex(INT).isFaceUp)", IIIII);//-----
+        VM.put("Player.getPlayer(INT).layDown(Player.getPlayer(INT).getCardIndex(INT),Player.getPlayer(INT).getTable(),player.getCardIndex(INT).isFaceUp)", IIIII);//-----
+        VM.put("player.layDown(player.getCardIndex(INT),Player.getPlayer(INT).getTable(),Player.getPlayer(INT).getCardIndex(INT).isFaceUp)", IIII);//-----
+        VM.put("Player.getPlayer(INT).layDown(player.getCardIndex(INT),player.getTable(),Player.getPlayer(INT).getCardIndex(INT).isFaceUp)", IIII);//-----
+        VM.put("Player.getPlayer(INT).layDown(Player.getPlayer(INT).getCardIndex(INT),player.getTable(),player.getCardIndex(INT).isFaceUp)", IIII);//-----
+        VM.put("player.layDown(Player.getPlayer(INT).getCardIndex(INT),Player.getPlayer(INT).getTable(),player.getCardIndex(INT).isFaceUp)", IIII);//-----
+        VM.put("player.layDown(Player.getPlayer(INT).getCardIndex(INT),player.getTable(),Player.getPlayer(INT).getCardIndex(INT).isFaceUp)", IIII);//-----
+        VM.put("Player.getPlayer(INT).layDown(player.getCardIndex(INT),Player.getPlayer(INT).getTable(),player.getCardIndex(INT).isFaceUp)", IIII);//-----
+        VM.put("player.layDown(player.getCardIndex(INT),player.getTable(),Player.getPlayer(INT).getCardIndex(INT).isFaceUp)", III);//------
+        VM.put("player.layDown(player.getCardIndex(INT),Player.getPlayer(INT).getTable(),player.getCardIndex(INT).isFaceUp)", III);//-----
+        VM.put("player.layDown(Player.getPlayer(INT).getCardIndex(INT),player.getTable(),player.getCardIndex(INT).isFaceUp)", III);//-----
+        VM.put("Player.getPlayer(INT).layDown(player.getCardIndex(INT),player.getTable(),player.getCardIndex(INT).isFaceUp)", III);//-----
+        VM.put("player.layDown(player.getCardIndex(INT),table,player.getCardIndex(INT).isFaceUp)", II);//-----
         
         VM.put("Player.getPlayer(INT).takeCard(STRING,Player.getPlayer(INT).getDiscardPile())", ISI);//
+        VM.put("player.takeCard(STRING,Player.getPlayer(INT).getDiscardPile())", SI);//-----
+        VM.put("Player.getPlayer(INT).takeCard(STRING,player.getDiscardPile())", IS);//-----
+        VM.put("player.takeCard(STRING,player.getDiscardPile())", S);//-----
+
         VM.put("Player.getPlayer(INT).takeCard(STRING,Game.discardPile)", IS);          //
+        VM.put("player.takeCard(STRING,Game.discardPile)", S); //-----
+
         VM.put("Player.getPlayer(INT).takeCard(Player.getPlayer(INT).getDiscardPileIndex(INT).id,Player.getPlayer(INT).getDiscardPile())", IIII);//
+        VM.put("player.takeCard(Player.getPlayer(INT).getDiscardPileIndex(INT).id,Player.getPlayer(INT).getDiscardPile())", III);//-----
+        VM.put("Player.getPlayer(INT).takeCard(player.getDiscardPileIndex(INT).id,Player.getPlayer(INT).getDiscardPile())", III);//-----
+        VM.put("Player.getPlayer(INT).takeCard(Player.getPlayer(INT).getDiscardPileIndex(INT).id,player.getDiscardPile())", III);//-----
+        VM.put("player.takeCard(player.getDiscardPileIndex(INT).id,Player.getPlayer(INT).getDiscardPile())", II);//-----
+        VM.put("Player.getPlayer(INT).takeCard(player.getDiscardPileIndex(INT).id,player.getDiscardPile())", II);//-----
+        VM.put("player.takeCard(Player.getPlayer(INT).getDiscardPileIndex(INT).id,player.getDiscardPile())", II);//-----
+        VM.put("player.takeCard(player.getDiscardPileIndex(INT).id,player.getDiscardPile())", I);//-----
+
         VM.put("Player.getPlayer(INT).takeCard(Game.getDiscardPileIndex(INT).id,Game.discardPile)", II);//
+        VM.put("player.takeCard(Game.getDiscardPileIndex(INT).id,Game.discardPile)", II);//-----
         
         VM.put("Player.getPlayer(INT).takeCard(STRING,Player.getPlayer(INT).getTable())", ISI);//
+        VM.put("player.takeCard(STRING,Player.getPlayer(INT).getTable())", SI);//-----
+        VM.put("Player.getPlayer(INT).takeCard(STRING,player.getTable())", IS);//-----
+        VM.put("player.takeCard(STRING,player.getTable())", S);//-----
+
         VM.put("Player.getPlayer(INT).takeCard(STRING,table)", IS);                     //
+        VM.put("player.takeCard(STRING,table)", S); //-----
+
         VM.put("Player.getPlayer(INT).takeCard(Player.getPlayer(INT).getTable().getCardIndex(INT).id,Player.getPlayer(INT).getTable())", IIII);//
+        VM.put("player.takeCard(Player.getPlayer(INT).getTable().getCardIndex(INT).id,Player.getPlayer(INT).getTable())", III);//-----
+        VM.put("Player.getPlayer(INT).takeCard(player.getTable().getCardIndex(INT).id,Player.getPlayer(INT).getTable())", III);//-----
+        VM.put("Player.getPlayer(INT).takeCard(Player.getPlayer(INT).getTable().getCardIndex(INT).id,player.getTable())", III);//-----
+        VM.put("player.takeCard(player.getTable().getCardIndex(INT).id,Player.getPlayer(INT).getTable())", III);//-----
+        VM.put("Player.getPlayer(INT).takeCard(player.getTable().getCardIndex(INT).id,player.getTable())", II);//-----
+        VM.put("player.takeCard(Player.getPlayer(INT).getTable().getCardIndex(INT).id,player.getTable())", II);//-----
+        VM.put("player.takeCard(player.getTable().getCardIndex(INT).id,player.getTable())", I);//-----
+
         VM.put("Player.getPlayer(INT).takeCard(table.getCardIndex(INT).id,table)", II);//
+        VM.put("player.takeCard(table.getCardIndex(INT).id,table)", I);//-----
        
         VM.put("Player.getPlayer(INT).takeCard(STRING,Player.getPlayer(INT))", ISI);//
+        VM.put("player.takeCard(STRING,Player.getPlayer(INT))", SI);//-----
+        VM.put("Player.getPlayer(INT).takeCard(STRING,player)", IS);//-----
+        VM.put("player.takeCard(STRING,player)", S);//-----
+
         VM.put("Player.getPlayer(INT).takeCard(Player.getPlayer(INT).getCardIndex(INT).id,Player.getPlayer(INT))", IIII);//
+        VM.put("player.takeCard(Player.getPlayer(INT).getCardIndex(INT).id,Player.getPlayer(INT))", III);//-----
+        VM.put("Player.getPlayer(INT).takeCard(player.getCardIndex(INT).id,Player.getPlayer(INT))", III);//-----
+        VM.put("Player.getPlayer(INT).takeCard(Player.getPlayer(INT).getCardIndex(INT).id,player)", III);//-----
+        VM.put("player.takeCard(player.getCardIndex(INT).id,Player.getPlayer(INT))", II);//-----
+        VM.put("Player.getPlayer(INT).takeCard(player.getCardIndex(INT).id,player)", II);//-----
+        VM.put("player.takeCard(Player.getPlayer(INT).getCardIndex(INT).id,player)", II);//-----
+        VM.put("player.takeCard(player.getCardIndex(INT).id,player)", I);//-----
         
         VM.put("Player.getPlayer(INT).printHand()", I);                             //
-        
+        VM.put("player.printHand()", V); //-----
         VM.put("deck.shuffle()", V);                                                //
         
         VM.put("deck.getCard(INT).flip()", I);                                   //
@@ -129,12 +281,15 @@ public abstract class TypeCheck {
         VM.put("deck.size()", V);                                               //
         
         VM.put("deck.returnDiscardPile()", V);                                   //
+
         VM.put("deck.returnDiscardPile(Player.getPlayer(INT))", I);             //
+        VM.put("deck.returnDiscardPile(player)", V); //-----
 
 
 
         IM.put("table.getCardIndex(INT).getPoints()", I);                   //
         IM.put("table.size()", V);                                          //
+
         IM.put("Player.getPlayer(INT).getCardIndex(INT).getPoints()", II);//
         IM.put("Player.getPlayer(INT).getDiscardPileIndex(INT).getPoints()", II);//
         IM.put("Player.getPlayer(INT).getHandPoints()", I);                 //
@@ -142,6 +297,14 @@ public abstract class TypeCheck {
         IM.put("Player.getPlayer(INT).getTable().getCardIndex(INT).getPoints()", II);//
         IM.put("Player.getPlayer(INT).getTable().size()", I);                   //
         IM.put("Player.getPlayer(INT).getTablePoints()", I);                //
+        IM.put("player.getCardIndex(INT).getPoints()", I);//-----
+        IM.put("player.getDiscardPileIndex(INT).getPoints()", I);//-----
+        IM.put("player.getHandPoints()", V);    //-----
+        IM.put("player.handSize()", V);       //-----
+        IM.put("player.getTable().getCardIndex(INT).getPoints()", I);//-----
+        IM.put("player.getTable().size()", V);        //-----
+        IM.put("player.getTablePoints()", V);     //-----
+
         IM.put("Player.getPlayersAmount()", V);                          //
         IM.put("deck.getCard(INT).getPoints()", I);                      //
     
@@ -152,6 +315,7 @@ public abstract class TypeCheck {
 
 
         ATTI.put("Player.getPlayer(INT).score", I);                         //
+        ATTI.put("player.score", V);    //-----
 
         ATTS.put("Game.getDiscardPileIndex(INT).id", I);                    //
         ATTS.put("Game.getDiscardPileIndex(INT).rank", I);                  //
@@ -159,6 +323,7 @@ public abstract class TypeCheck {
         ATTS.put("table.getCardIndex(INT).id", I);                          //
         ATTS.put("table.getCardIndex(INT).rank", I);                        //
         ATTS.put("table.getCardIndex(INT).suit", I);                        //
+
         ATTS.put("Player.getPlayer(INT).name", I);                          //
         ATTS.put("Player.getPlayer(INT).getCardIndex(INT).id", II);         //
         ATTS.put("Player.getPlayer(INT).getCardIndex(INT).rank", II);       //
@@ -169,14 +334,30 @@ public abstract class TypeCheck {
         ATTS.put("Player.getPlayer(INT).getTable().getCardIndex(INT).id", II); //
         ATTS.put("Player.getPlayer(INT).getTable().getCardIndex(INT).rank", II); //
         ATTS.put("Player.getPlayer(INT).getTable().getCardIndex(INT).suit", II); //
+        ATTS.put("player.name", V);                          //-----
+        ATTS.put("player.getCardIndex(INT).id", I);         //-----
+        ATTS.put("player.getCardIndex(INT).rank", I);       //-----
+        ATTS.put("player.getCardIndex(INT).suit", I);       //-----
+        ATTS.put("player.getDiscardPileIndex(INT).id", I);  //-----
+        ATTS.put("player.getDiscardPileIndex(INT).rank", I);//-----
+        ATTS.put("player.getDiscardPileIndex(INT).suit", I);//-----
+        ATTS.put("player.getTable().getCardIndex(INT).id", I); //-----
+        ATTS.put("player.getTable().getCardIndex(INT).rank", I); //-----
+        ATTS.put("player.getTable().getCardIndex(INT).suit", I); //-----
+
         ATTS.put("deck.getCard(INT).id", I);                                //
         ATTS.put("deck.getCard(INT).rank", I);                              //
         ATTS.put("deck.getCard(INT).suit", I);                                  //
 
         ATTB.put("table.getCardIndex(INT).isFaceUp", I);                        //
+
         ATTB.put("Player.getPlayer(INT).getCardIndex(INT).isFaceUp", II);       //
         ATTB.put("Player.getPlayer(INT).getDiscardPileIndex(INT).isFaceUp", II);//
         ATTB.put("Player.getPlayer(INT).getTable().getCardIndex(INT).isFaceUp", II);//
+        ATTB.put("player.getCardIndex(INT).isFaceUp", I);       //-----
+        ATTB.put("player.getDiscardPileIndex(INT).isFaceUp", I);//-----
+        ATTB.put("player.getTable().getCardIndex(INT).isFaceUp", I);//-----
+
         ATTB.put("deck.getCard(INT).isFaceUp", I);                              //
 
     }
@@ -256,8 +437,396 @@ public abstract class TypeCheck {
         //methodcalls
         else if((input.contains(".") && !input.contains("\"")) || (input.contains(".") && input.contains("\"") && input.indexOf(".") < input.indexOf("\""))) {
 
+            //contains "player" as used in Turn()
+            if ((input.contains("INT")||input.contains("BOOL")||input.contains("STRING")) && ((input.contains("player") && !input.contains("\"")) || (input.contains("player") && input.contains("\"") && input.indexOf("player") < input.indexOf("\"")) ||  (input.contains("player") && input.contains("\"") && input.indexOf("player") > input.lastIndexOf("\"")))) {
+                if (input.startsWith("table.discard(")) {
+                    Fparams.add("STRING");
+                    method = method.concat("table.discard(STRING");
+                    input = input.substring(14);
+                    Aparams.add(input.substring(0, input.lastIndexOf(",player")));
+                    input = input.substring(input.lastIndexOf(",player"));
+                    method = method.concat(input);
+                    input = "";
+                }
+                else if (input.startsWith("table.discard(table.getCardIndex(")) {
+                    Fparams.add("INT");
+                    method = method.concat("table.discard(table.getCardIndex(INT");
+                    input = input.substring(33);
+                    Aparams.add(input.substring(0,input.indexOf(").")));
+                    input = input.substring(input.indexOf(")."));
+                    method = method.concat(input);
+                    input = "";
+                }
+                else if (input.startsWith("player")) {
+
+                    method = method.concat("player");
+                    input = input.substring(6);
+                    if (input.startsWith(".getTable().getCardIndex(")) {
+                        Fparams.add("INT");
+                        method = method.concat(".getTable().getCardIndex(INT");
+                        input = input.substring(25);
+                        Aparams.add(input.substring(0, input.indexOf(").")));
+                        input = input.substring(input.indexOf(")."));
+                        method = method.concat(input);
+                        input = "";
+                    }
+                    else if (input.startsWith(".getDiscardPileIndex(")) {
+                        Fparams.add("INT");
+                        method = method.concat(".getDiscardPileIndex(INT");
+                        input = input.substring(21);
+                        Aparams.add(input.substring(0, input.indexOf(").")));
+                        input = input.substring(input.indexOf(")."));
+                        method = method.concat(input);
+                        input = "";
+                    }
+                    else if (input.startsWith(".getCardIndex(")) {
+                        Fparams.add("INT");
+                        method = method.concat(".getCardIndex(INT");
+                        input = input.substring(14);
+                        Aparams.add(input.substring(0, input.indexOf(").")));
+                        input = input.substring(input.indexOf(")."));
+                        method = method.concat(input);
+                        input = "";
+                    }
+                    else if (input.startsWith(".takeCard(Player.getPlayer(")) {
+                        Fparams.add("INT");
+                        method = method.concat(".takeCard(Player.getPlayer(INT");
+                        input = input.substring(27);
+                        Aparams.add(input.substring(0, input.indexOf(").")));
+                        input = input.substring(input.indexOf(")."));
+                        if (input.startsWith(").getTable().getCardIndex(")) {
+                            Fparams.add("INT");
+                            method = method.concat(").getTable().getCardIndex(INT");
+                            input = input.substring(26);
+                            Aparams.add(input.substring(0, input.indexOf(").")));
+                            if (input.startsWith(").id,Player.getPlayer(")) {
+                                Fparams.add("INT");
+                                method = method.concat(").id,Player.getPlayer(INT");
+                                input = input.substring(22);
+                                Aparams.add(input.substring(0, input.indexOf(").")));
+                                input = input.substring(input.indexOf(")."));
+                                method = method.concat(input);
+                                input = "";
+                            }
+                        }
+                        else if (input.startsWith(").getDiscardPileIndex(")) {
+                            Fparams.add("INT");
+                            method = method.concat(").getDiscardPileIndex(INT");
+                            input = input.substring(22);
+                            Aparams.add(input.substring(0, input.indexOf(").")));
+                            if (input.startsWith(").id,Player.getPlayer(")) {
+                                Fparams.add("INT");
+                                method = method.concat(").id,Player.getPlayer(INT");
+                                input = input.substring(22);
+                                Aparams.add(input.substring(0, input.indexOf(").")));
+                                input = input.substring(input.indexOf(")."));
+                                method = method.concat(input);
+                                input = "";
+                            }
+                        }
+                        else if (input.startsWith(").getCardIndex(")) {
+                            Fparams.add("INT");
+                            method = method.concat(").getCardIndex(INT");
+                            input = input.substring(15);
+                            Aparams.add(input.substring(0, input.indexOf(").")));
+                            if (input.startsWith(").id,Player.getPlayer(")) {
+                                Fparams.add("INT");
+                                method = method.concat(").id,Player.getPlayer(INT");
+                                input = input.substring(22);
+                                Aparams.add(input.substring(0, input.indexOf(").")));
+                                input = input.substring(input.indexOf(")."));
+                                method = method.concat(input);
+                                input = "";
+                            }
+                        }
+                        method = method.concat(input);
+                        input = "";
+                    }
+                    else if (input.startsWith(".takeCard(player")) {
+                        method = method.concat(".takeCard(player");
+                        input = input.substring(16);
+                        if (input.startsWith(").getTable().getCardIndex(")) {
+                            Fparams.add("INT");
+                            method = method.concat(").getTable().getCardIndex(INT");
+                            input = input.substring(26);
+                            Aparams.add(input.substring(0, input.indexOf(").")));
+                            if (input.startsWith(").id,Player.getPlayer(")) {
+                                Fparams.add("INT");
+                                method = method.concat(").id,Player.getPlayer(INT");
+                                input = input.substring(22);
+                                Aparams.add(input.substring(0, input.indexOf(").")));
+                                input = input.substring(input.indexOf(")."));
+                                method = method.concat(input);
+                                input = "";
+                            }
+                        }
+                        else if (input.startsWith(").getDiscardPileIndex(")) {
+                            Fparams.add("INT");
+                            method = method.concat(").getDiscardPileIndex(INT");
+                            input = input.substring(22);
+                            Aparams.add(input.substring(0, input.indexOf(").")));
+                            if (input.startsWith(").id,Player.getPlayer(")) {
+                                Fparams.add("INT");
+                                method = method.concat(").id,Player.getPlayer(INT");
+                                input = input.substring(22);
+                                Aparams.add(input.substring(0, input.indexOf(").")));
+                                input = input.substring(input.indexOf(")."));
+                                method = method.concat(input);
+                                input = "";
+                            }
+                        }
+                        else if (input.startsWith(").getCardIndex(")) {
+                            Fparams.add("INT");
+                            method = method.concat(").getCardIndex(INT");
+                            input = input.substring(15);
+                            Aparams.add(input.substring(0, input.indexOf(").")));
+                            if (input.startsWith(").id,Player.getPlayer(")) {
+                                Fparams.add("INT");
+                                method = method.concat(").id,Player.getPlayer(INT");
+                                input = input.substring(22);
+                                Aparams.add(input.substring(0, input.indexOf(").")));
+                                input = input.substring(input.indexOf(")."));
+                                method = method.concat(input);
+                                input = "";
+                            }
+                        }
+                        method = method.concat(input);
+                        input = "";
+                    }
+                    else if (input.startsWith(").takeCard(table.getCardIndex(")) {
+                        Fparams.add("INT");
+                        method = method.concat(").takeCard(table.getCardIndex(INT");
+                        input = input.substring(30);
+                        Aparams.add(input.substring(0, input.indexOf(").")));
+                        input = input.substring(input.indexOf(")."));
+                        method = method.concat(input);
+                        input = "";
+                    }
+                    else if (input.startsWith(").takeCard(Game.getDiscardPileIndex(")) {
+                        Fparams.add("INT");
+                        method = method.concat(").takeCard(Game.getDiscardPileIndex(INT");
+                        input = input.substring(39);
+                        Aparams.add(input.substring(0, input.indexOf(").")));
+                        input = input.substring(input.indexOf(")."));
+                        method = method.concat(input);
+                        input = "";
+                    }
+                    else if (input.startsWith(").takeCard(")) {
+                        Fparams.add("STRING");
+                        method = method.concat(").takeCard(STRING");
+                        input = input.substring(11);
+                        Aparams.add(input.substring(0, input.lastIndexOf(",")));
+                        input = input.substring(input.lastIndexOf(","));
+                        if (input.startsWith(",Player.getPlayer(")) {
+                            Fparams.add("INT");
+                            method = method.concat(",Player.getPlayer(INT");
+                            input = input.substring(18);
+                            if (input.contains(").")) {
+                                Aparams.add(input.substring(0, input.indexOf(").")));
+                                input = input.substring(input.indexOf(")."));
+                                method = method.concat(input);
+                                input = "";
+                            } else {
+                                Aparams.add(input.substring(0, input.lastIndexOf("))")));
+                                input = input.substring(input.lastIndexOf("))"));
+                                method = method.concat(input);
+                                input = "";
+                            }
+                        } else {
+                            method = method.concat(input);
+                            input = "";
+                        }
+                    }
+                }
+                else if (input.startsWith("Player.getPlayer(")) {
+                    Fparams.add("INT");
+                    method = method.concat("Player.getPlayer(INT");
+                    input = input.substring(17);
+                    Aparams.add(input.substring(0, input.indexOf(").")));
+                    input = input.substring(input.indexOf(")."));
+                    if (input.startsWith(".getTable().getCardIndex(")) {
+                        Fparams.add("INT");
+                        method = method.concat(".getTable().getCardIndex(INT");
+                        input = input.substring(25);
+                        Aparams.add(input.substring(0, input.indexOf(").")));
+                        input = input.substring(input.indexOf(")."));
+                        method = method.concat(input);
+                        input = "";
+                    }
+                    else if (input.startsWith(".getDiscardPileIndex(")) {
+                        Fparams.add("INT");
+                        method = method.concat(".getDiscardPileIndex(INT");
+                        input = input.substring(21);
+                        Aparams.add(input.substring(0, input.indexOf(").")));
+                        input = input.substring(input.indexOf(")."));
+                        method = method.concat(input);
+                        input = "";
+                    }
+                    else if (input.startsWith(".getCardIndex(")) {
+                        Fparams.add("INT");
+                        method = method.concat(".getCardIndex(INT");
+                        input = input.substring(14);
+                        Aparams.add(input.substring(0, input.indexOf(").")));
+                        input = input.substring(input.indexOf(")."));
+                        method = method.concat(input);
+                        input = "";
+                    }
+                    else if (input.startsWith(".takeCard(Player.getPlayer(")) {
+                        Fparams.add("INT");
+                        method = method.concat(".takeCard(Player.getPlayer(INT");
+                        input = input.substring(27);
+                        Aparams.add(input.substring(0, input.indexOf(").")));
+                        input = input.substring(input.indexOf(")."));
+                        if (input.startsWith(").getTable().getCardIndex(")) {
+                            Fparams.add("INT");
+                            method = method.concat(").getTable().getCardIndex(INT");
+                            input = input.substring(26);
+                            Aparams.add(input.substring(0, input.indexOf(").")));
+                            if (input.startsWith(").id,Player.getPlayer(")) {
+                                Fparams.add("INT");
+                                method = method.concat(").id,Player.getPlayer(INT");
+                                input = input.substring(22);
+                                Aparams.add(input.substring(0, input.indexOf(").")));
+                                input = input.substring(input.indexOf(")."));
+                                method = method.concat(input);
+                                input = "";
+                            }
+                        }
+                        else if (input.startsWith(").getDiscardPileIndex(")) {
+                            Fparams.add("INT");
+                            method = method.concat(").getDiscardPileIndex(INT");
+                            input = input.substring(22);
+                            Aparams.add(input.substring(0, input.indexOf(").")));
+                            if (input.startsWith(").id,Player.getPlayer(")) {
+                                Fparams.add("INT");
+                                method = method.concat(").id,Player.getPlayer(INT");
+                                input = input.substring(22);
+                                Aparams.add(input.substring(0, input.indexOf(").")));
+                                input = input.substring(input.indexOf(")."));
+                                method = method.concat(input);
+                                input = "";
+                            }
+                        }
+                        else if (input.startsWith(").getCardIndex(")) {
+                            Fparams.add("INT");
+                            method = method.concat(").getCardIndex(INT");
+                            input = input.substring(15);
+                            Aparams.add(input.substring(0, input.indexOf(").")));
+                            if (input.startsWith(").id,Player.getPlayer(")) {
+                                Fparams.add("INT");
+                                method = method.concat(").id,Player.getPlayer(INT");
+                                input = input.substring(22);
+                                Aparams.add(input.substring(0, input.indexOf(").")));
+                                input = input.substring(input.indexOf(")."));
+                                method = method.concat(input);
+                                input = "";
+                            }
+                        }
+                        method = method.concat(input);
+                        input = "";
+                    }
+                    else if (input.startsWith(".takeCard(player")) {
+                        method = method.concat(".takeCard(player");
+                        input = input.substring(16);
+                        if (input.startsWith(").getTable().getCardIndex(")) {
+                            Fparams.add("INT");
+                            method = method.concat(").getTable().getCardIndex(INT");
+                            input = input.substring(26);
+                            Aparams.add(input.substring(0, input.indexOf(").")));
+                            if (input.startsWith(").id,Player.getPlayer(")) {
+                                Fparams.add("INT");
+                                method = method.concat(").id,Player.getPlayer(INT");
+                                input = input.substring(22);
+                                Aparams.add(input.substring(0, input.indexOf(").")));
+                                input = input.substring(input.indexOf(")."));
+                                method = method.concat(input);
+                                input = "";
+                            }
+                        }
+                        else if (input.startsWith(").getDiscardPileIndex(")) {
+                            Fparams.add("INT");
+                            method = method.concat(").getDiscardPileIndex(INT");
+                            input = input.substring(22);
+                            Aparams.add(input.substring(0, input.indexOf(").")));
+                            if (input.startsWith(").id,Player.getPlayer(")) {
+                                Fparams.add("INT");
+                                method = method.concat(").id,Player.getPlayer(INT");
+                                input = input.substring(22);
+                                Aparams.add(input.substring(0, input.indexOf(").")));
+                                input = input.substring(input.indexOf(")."));
+                                method = method.concat(input);
+                                input = "";
+                            }
+                        }
+                        else if (input.startsWith(").getCardIndex(")) {
+                            Fparams.add("INT");
+                            method = method.concat(").getCardIndex(INT");
+                            input = input.substring(15);
+                            Aparams.add(input.substring(0, input.indexOf(").")));
+                            if (input.startsWith(").id,Player.getPlayer(")) {
+                                Fparams.add("INT");
+                                method = method.concat(").id,Player.getPlayer(INT");
+                                input = input.substring(22);
+                                Aparams.add(input.substring(0, input.indexOf(").")));
+                                input = input.substring(input.indexOf(")."));
+                                method = method.concat(input);
+                                input = "";
+                            }
+                        }
+                        method = method.concat(input);
+                        input = "";
+                    }
+                    else if (input.startsWith(").takeCard(table.getCardIndex(")) {
+                        Fparams.add("INT");
+                        method = method.concat(").takeCard(table.getCardIndex(INT");
+                        input = input.substring(30);
+                        Aparams.add(input.substring(0, input.indexOf(").")));
+                        input = input.substring(input.indexOf(")."));
+                        method = method.concat(input);
+                        input = "";
+                    }
+                    else if (input.startsWith(").takeCard(Game.getDiscardPileIndex(")) {
+                        Fparams.add("INT");
+                        method = method.concat(").takeCard(Game.getDiscardPileIndex(INT");
+                        input = input.substring(39);
+                        Aparams.add(input.substring(0, input.indexOf(").")));
+                        input = input.substring(input.indexOf(")."));
+                        method = method.concat(input);
+                        input = "";
+                    }
+                    else if (input.startsWith(").takeCard(")) {
+                        Fparams.add("STRING");
+                        method = method.concat(").takeCard(STRING");
+                        input = input.substring(11);
+                        Aparams.add(input.substring(0, input.lastIndexOf(",")));
+                        input = input.substring(input.lastIndexOf(","));
+                        if (input.startsWith(",Player.getPlayer(")) {
+                            Fparams.add("INT");
+                            method = method.concat(",Player.getPlayer(INT");
+                            input = input.substring(18);
+                            if (input.contains(").")) {
+                                Aparams.add(input.substring(0, input.indexOf(").")));
+                                input = input.substring(input.indexOf(")."));
+                                method = method.concat(input);
+                                input = "";
+                            } else {
+                                Aparams.add(input.substring(0, input.lastIndexOf("))")));
+                                input = input.substring(input.lastIndexOf("))"));
+                                method = method.concat(input);
+                                input = "";
+                            }
+                        } else {
+                            method = method.concat(input);
+                            input = "";
+                        }
+                    }
+
+
+                }
+            }
+
             //Starts with INT param
-            if (input.startsWith("deck.returnDiscardPile(Player.getPlayer(")) {
+            else if (input.startsWith("deck.returnDiscardPile(Player.getPlayer(")) {
                 Fparams.add("INT");
                 method = method.concat("deck.returnDiscardPile(Player.getPlayer(INT");
                 input = input.substring(40);
@@ -285,12 +854,11 @@ public abstract class TypeCheck {
                     input = input.substring(input.indexOf("(")+1);
                     Aparams.add(input.substring(0,input.indexOf(").")+1));
                     input = input.substring(input.indexOf(")."));
-                    method = method.concat(input);
-                    input = "";
-                } else {
-                    method = method.concat(input);
-                    input = "";
+
                 }
+                    method = method.concat(input);
+                    input = "";
+
             } else if (input.startsWith("Game.exit(Player.getPlayer(")) {
                 Fparams.add("INT");
                 method = method.concat("Game.exit(Player.getPlayer(INT");
@@ -541,7 +1109,7 @@ public abstract class TypeCheck {
                 }
             }
                 
-            if (Fparams.size()==0 && (VM.containsKey(input) || IM.containsKey(input) || SM.containsKey(input))) {                
+            if (Fparams.size()==0 && (SETM.containsKey(input) || VM.containsKey(input) || IM.containsKey(input) || SM.containsKey(input) || ATTI.containsKey(input) || ATTS.containsKey(input) || ATTB.containsKey(input))) {
                 result = true;
             }
             
