@@ -9,7 +9,7 @@ Round();
 Game.exit();
 }
 public static void Setup()
-{Vars.g=3;Vars.s="hello there another word";}
+{Vars.g=3;Vars.s="hello there another word";table.draw(3,deck);Test();}
 public static void Round()
 {Vars.t=0;Vars.i=2;if(Vars.i>5||Vars.i<8&&Vars.i>6)
 {Vars.y=3;}

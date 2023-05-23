@@ -14,7 +14,7 @@ stmt : tParam op='=' logicOrExpr ';'   #Stmt1
         | iterStmt                     #Stmt4
         | left=VMETHODID ';'           #Stmt5
         | left=FUNCID'('')' ';'        #Stmt6
-        | left=TURN'(''Player.getPlayer('param=INTPARAM'))' ';'   #Stmt7
+        | left=TURN'(''Player.getPlayer('param=(INTVAL|VARID)'))' ';'   #Stmt7
         ;
 iterStmt : WHILE '(' logicOrExpr ')' '{' stmt* '}'                                                       #While
         | FOR '(' tParam op='=' addExpr ';' logicOrExpr ';' right=VARID rop=('++'|'--')')' '{' stmt* '}' #For
@@ -224,9 +224,9 @@ FUNCID : [A-Z][a-zA-Z]*
         ;
 STRINGVAL : '"'~[/"]*'"' 
         ;
-INTPARAM : (('(')*('-')? INTVAL|VARID ) (('('|')')*('+'|'-'|'*'|'/') INTVAL|VARID ('('|')')*)*
+INTPARAM : (('(')* ('-')? (INTVAL|VARID) ) (('+'|'-'|'*'|'/') ('('|')')* (INTVAL|VARID) ('('|')')* )*
         ;
 BOOLPARAM : ('('?('!')?'('?(BOOLVAL|VARID)|('('?(INTPARAM|VARID)('<'|'>'|'>='|'<=')(INTPARAM|VARID)')'?)')'?)(('&&'|'||'|'=='|'!=') ('('?('!')?'('?(BOOLVAL|VARID)|('('?(INTPARAM|VARID)('<'|'>'|'>='|'<=')(INTPARAM|VARID)')'?))')'?)*')'?
         ;
-STRINGPARAM : (INTVAL|STRINGVAL|BOOLVAL|VARID) ('+' INTVAL|STRINGVAL|BOOLVAL|VARID)*
+STRINGPARAM : (INTVAL|STRINGVAL|BOOLVAL|VARID) ('+' (INTVAL|STRINGVAL|BOOLVAL|VARID))*
         ;

@@ -2,34 +2,29 @@ Setup
 {
     int g = 3;
     string s = "hello there another word";
-    
+    table.draw(3,deck);
+    Test();
 }
 Round
 {
-    bool b = true;
-    int h = 3;
-    int i = 0;
     int t = 0;
-    while ( b ) {
-        h = h + 1;
-    }
+    int i = 2;
     if ( i > 5 || i < 8 && i > 6 ) {
         int y = 3;
     }
     for ( int u = 3; u > 8; u++ ) {
         t = t + 1;
     }
+    Turn(Player.getPlayer(1));
 }
 Turn ( Player player ) {
-int p = 3;
+    int p = 3;
 }
 
-int getScore() {
-    
+Test{
+    int k = 5;
 }
-string printscore() {
-    
-}
+
 
 
 

@@ -2,7 +2,8 @@ Setup
 {
     int g = 3;
     string s = "hello there another word";
-    
+    table.draw(3,deck);
+    Test();
 }
 Round
 {
@@ -14,7 +15,7 @@ Round
     for ( int u = 3; u > 8; u++ ) {
         t = t + 1;
     }
-    Turn( Player.getPlayer(1) );
+    Turn(Player.getPlayer(1));
 }
 Turn ( Player player ) {
     int p = 3;

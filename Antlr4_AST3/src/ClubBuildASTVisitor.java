@@ -16,8 +16,14 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
             ast.addChild(visit(ctx.func(i)));
             i++;
         }
-        for (String funcCall : FuncCalls) {
-            if (!TypeCheck.FuncIDs.contains(funcCall)) { throw new IllegalArgumentException("Function "+funcCall+" has not been declared."); }
+        if(!FuncCalls.isEmpty()) {
+            for (String funcCall : FuncCalls) {
+                if(!TypeCheck.FuncIDs.isEmpty()) {
+                    if (!TypeCheck.FuncIDs.contains(funcCall)) {
+                        throw new IllegalArgumentException("Function " + funcCall + " has not been declared.");
+                    }
+                } else {throw new IllegalArgumentException("Function " + funcCall + " has not been declared.");}
+            }
         }
         return ast;
     }
