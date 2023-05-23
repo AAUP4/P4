@@ -12,6 +12,10 @@ import java.util.StringTokenizer;
 
 public class CLUBtoJava {
 
+    HashMap<String, int> intDecl = new HashMap();
+    HashMap<String, String> stringDecl = new HashMap();
+    HashMap<String, Boolean> boolDecl = new HashMap();
+
 
     static String relativePath = "src/test.club";
     static String absolutePath = System.getProperty("user.dir") + "/" + relativePath;
@@ -49,12 +53,18 @@ public class CLUBtoJava {
             }
             else if(readFileLines().get(i).equals("bool")){
                 System.out.print("Boolean ");
+                boolDecl.put(readFileLines().get(i+1), readFileLines().get(i+3));
+                i+=3;
             }
             else if(readFileLines().get(i).equals("int")){
                 System.out.print("int ");
+                intDecl.put(readFileLines().get(i+1), readFileLines().get(i+3));
+                i+=3;
             }
             else if(readFileLines().get(i).equals("string")){
                 System.out.print("String ");
+                stringDecl.put(readFileLines().get(i+1), readFileLines().get(i+3));
+                i+=3;
             }
             else if(readFileLines().get(i).startsWith("\"")) {
                 int j = 0;
