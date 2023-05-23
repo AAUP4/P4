@@ -1,4 +1,4 @@
-// Generated from C:/Users/ida-0/Documents/GitHub/P4/Antlr4_AST3/src\CLUB.g4 by ANTLR 4.12.0
+// Generated from C:/Users/Kira/Documents/GitHub/P4/Antlr4_AST3/src\CLUB.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -74,6 +74,20 @@ public interface CLUBVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStmt5(CLUBParser.Stmt5Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Stmt6}
+	 * labeled alternative in {@link CLUBParser#stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStmt6(CLUBParser.Stmt6Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Stmt7}
+	 * labeled alternative in {@link CLUBParser#stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStmt7(CLUBParser.Stmt7Context ctx);
 	/**
 	 * Visit a parse tree produced by the {@code While}
 	 * labeled alternative in {@link CLUBParser#iterStmt}.
@@ -239,20 +253,6 @@ public interface CLUBVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitPostF5(CLUBParser.PostF5Context ctx);
-	/**
-	 * Visit a parse tree produced by the {@code PostF6}
-	 * labeled alternative in {@link CLUBParser#postfExpr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPostF6(CLUBParser.PostF6Context ctx);
-	/**
-	 * Visit a parse tree produced by the {@code PostF7}
-	 * labeled alternative in {@link CLUBParser#postfExpr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPostF7(CLUBParser.PostF7Context ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Primary1}
 	 * labeled alternative in {@link CLUBParser#primaryExpr}.

@@ -102,6 +102,18 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
     }
 
     @Override
+    public AST visitStmt6(CLUBParser.Stmt6Context ctx) {
+        FuncCalls.add(ctx.left.getText());
+        return new AST(ctx.left);
+    }
+
+    @Override
+    public AST visitStmt7(CLUBParser.Stmt7Context ctx) {
+        TypeCheck.checkValidValue(ctx.param.getText(),"INT");
+        return new AST(ctx.left);
+    }
+
+    @Override
     public AST visitTParam(CLUBParser.TParamContext ctx) {
         AST ast = new AST(); // Do this if it has no root node and several children.
         AST left = new AST(ctx.left);
@@ -287,34 +299,22 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
         return ast;
     }
 
+
+
     @Override
     public AST visitPostF3(CLUBParser.PostF3Context ctx) {
-        if(!TypeCheck.checkValidValue(ctx.primaryExpr().getText(),"INT")){ throw new IllegalArgumentException("Input is not a valid arithmetic expression.");}
-        AST ast = new AST(ctx.left);
-        ast.addChild(visit(ctx.primaryExpr()));
-        return ast;
-    }
-
-    @Override
-    public AST visitPostF4(CLUBParser.PostF4Context ctx) {
-        FuncCalls.add(ctx.left.getText());
-        return new AST(ctx.left);
-    }
-
-    @Override
-    public AST visitPostF5(CLUBParser.PostF5Context ctx) {
         if(!TypeCheck.processInput(ctx.left.getText(),"BOOL")){ throw new IllegalArgumentException("Input is not a valid method call.");}
         return new AST(ctx.left);
     }
 
     @Override
-    public AST visitPostF6(CLUBParser.PostF6Context ctx) {
+    public AST visitPostF4(CLUBParser.PostF4Context ctx) {
         if(!TypeCheck.processInput(ctx.left.getText(),"INT")){ throw new IllegalArgumentException("Input is not a valid method call.");}
         return new AST(ctx.left);
     }
 
     @Override
-    public AST visitPostF7(CLUBParser.PostF7Context ctx) {
+    public AST visitPostF5(CLUBParser.PostF5Context ctx) {
         if(!TypeCheck.processInput(ctx.left.getText(),"STRING")){ throw new IllegalArgumentException("Input is not a valid method call.");}
         return new AST(ctx.left);
     }
