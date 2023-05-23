@@ -1,4 +1,4 @@
-// Generated from C:/Users/Kira/Documents/GitHub/P4/Antlr4_AST3/src\CLUB.g4 by ANTLR 4.12.0
+// Generated from C:/Users/ida-0/Documents/GitHub/P4/Antlr4_AST3/src\CLUB.g4 by ANTLR 4.12.0
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -119,6 +119,18 @@ public class CLUBBaseListener implements CLUBListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStmt4(CLUBParser.Stmt4Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStmt5(CLUBParser.Stmt5Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStmt5(CLUBParser.Stmt5Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -431,18 +443,6 @@ public class CLUBBaseListener implements CLUBListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitPostF7(CLUBParser.PostF7Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPostF8(CLUBParser.PostF8Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPostF8(CLUBParser.PostF8Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

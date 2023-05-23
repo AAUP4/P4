@@ -12,6 +12,7 @@ stmt : tParam op='=' logicOrExpr ';'   #Stmt1
         | assignExpr  ';'              #Stmt2
         | selectStmt                   #Stmt3
         | iterStmt                     #Stmt4
+        | left=VMETHODID ';'           #Stmt5
         ;
 iterStmt : WHILE '(' logicOrExpr ')' '{' stmt* '}'                                                       #While
         | FOR '(' tParam op='=' addExpr ';' logicOrExpr ';' right=VARID rop=('++'|'--')')' '{' stmt* '}' #For
@@ -51,10 +52,9 @@ postfExpr : primaryExpr                                                 #PostF1
         | primaryExpr op=('++'|'--')                                    #PostF2
         | left='Turn' '(' 'Player.getPlayer(' primaryExpr ')' ')'       #PostF3
         | left=FUNCID                                                   #PostF4
-        | left=VMETHODID                                                #PostF5
-        | left=BMETHODID                                                #PostF6
-        | left=IMETHODID                                                #PostF7
-        | left=SMETHODID                                                #PostF8
+        | left=BMETHODID                                                #PostF5
+        | left=IMETHODID                                                #PostF6
+        | left=SMETHODID                                                #PostF7
         ;
 primaryExpr : val                                       #Primary1
         | left=VARID                                    #Primary2
