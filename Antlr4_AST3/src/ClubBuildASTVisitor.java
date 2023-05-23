@@ -96,6 +96,12 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
     }
 
     @Override
+    public AST visitStmt5(CLUBParser.Stmt5Context ctx) {
+        TypeCheck.processInput(ctx.left.getText(),"VOID");
+        return new AST(ctx.left);
+    }
+
+    @Override
     public AST visitTParam(CLUBParser.TParamContext ctx) {
         AST ast = new AST(); // Do this if it has no root node and several children.
         AST left = new AST(ctx.left);
@@ -297,24 +303,18 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
 
     @Override
     public AST visitPostF5(CLUBParser.PostF5Context ctx) {
-        if(!TypeCheck.processInput(ctx.left.getText(),"VOID")){ throw new IllegalArgumentException("Input is not a valid method call.");}
-        return new AST(ctx.left);
-    }
-
-    @Override
-    public AST visitPostF6(CLUBParser.PostF6Context ctx) {
         if(!TypeCheck.processInput(ctx.left.getText(),"BOOL")){ throw new IllegalArgumentException("Input is not a valid method call.");}
         return new AST(ctx.left);
     }
 
     @Override
-    public AST visitPostF7(CLUBParser.PostF7Context ctx) {
+    public AST visitPostF6(CLUBParser.PostF6Context ctx) {
         if(!TypeCheck.processInput(ctx.left.getText(),"INT")){ throw new IllegalArgumentException("Input is not a valid method call.");}
         return new AST(ctx.left);
     }
 
     @Override
-    public AST visitPostF8(CLUBParser.PostF8Context ctx) {
+    public AST visitPostF7(CLUBParser.PostF7Context ctx) {
         if(!TypeCheck.processInput(ctx.left.getText(),"STRING")){ throw new IllegalArgumentException("Input is not a valid method call.");}
         return new AST(ctx.left);
     }

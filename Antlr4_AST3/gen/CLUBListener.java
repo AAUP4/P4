@@ -1,4 +1,4 @@
-// Generated from C:/Users/Kira/Documents/GitHub/P4/Antlr4_AST3/src\CLUB.g4 by ANTLR 4.12.0
+// Generated from C:/Users/ida-0/Documents/GitHub/P4/Antlr4_AST3/src\CLUB.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -104,6 +104,18 @@ public interface CLUBListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStmt4(CLUBParser.Stmt4Context ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Stmt5}
+	 * labeled alternative in {@link CLUBParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterStmt5(CLUBParser.Stmt5Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Stmt5}
+	 * labeled alternative in {@link CLUBParser#stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitStmt5(CLUBParser.Stmt5Context ctx);
 	/**
 	 * Enter a parse tree produced by the {@code While}
 	 * labeled alternative in {@link CLUBParser#iterStmt}.
@@ -410,18 +422,6 @@ public interface CLUBListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPostF7(CLUBParser.PostF7Context ctx);
-	/**
-	 * Enter a parse tree produced by the {@code PostF8}
-	 * labeled alternative in {@link CLUBParser#postfExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterPostF8(CLUBParser.PostF8Context ctx);
-	/**
-	 * Exit a parse tree produced by the {@code PostF8}
-	 * labeled alternative in {@link CLUBParser#postfExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitPostF8(CLUBParser.PostF8Context ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Primary1}
 	 * labeled alternative in {@link CLUBParser#primaryExpr}.
