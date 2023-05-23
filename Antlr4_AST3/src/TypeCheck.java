@@ -8,17 +8,11 @@ public abstract class TypeCheck {
     static Map<String, ArrayList<String>> SETM = new HashMap<>();
     static Map<String, ArrayList<String>> VM = new HashMap<>();
     static Map<String, ArrayList<String>> IM = new HashMap<>();
-    // static Map<String, ArrayList<String>> BM = new HashMap<>();
     static Map<String, ArrayList<String>> SM = new HashMap<>();
-    // static Map<String, ArrayList<String>> CM = new HashMap<>();
-    // static Map<String, ArrayList<String>> PM = new HashMap<>();
-    // static Map<String, ArrayList<String>> TM = new HashMap<>();
-    // static Map<String, ArrayList<String>> ACM = new HashMap<>();
     static Map<String, ArrayList<String>> ATTI = new HashMap<>();
     static Map<String, ArrayList<String>> ATTB = new HashMap<>();
     static Map<String, ArrayList<String>> ATTS = new HashMap<>();
-    // static Map<String, ArrayList<String>> ATTT = new HashMap<>();
-    // static Map<String, ArrayList<String>> ATTAC = new HashMap<>();
+
 
     static Map<String, String> VarType = new HashMap<>();
     static Map<String, String> VarInt = new HashMap<>();
