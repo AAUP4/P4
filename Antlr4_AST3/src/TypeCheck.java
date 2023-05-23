@@ -556,6 +556,7 @@ public abstract class TypeCheck {
             if (Fparams.size()>0 &&  (SETM.containsKey(method) || VM.containsKey(method) || IM.containsKey(method) || SM.containsKey(method) || ATTI.containsKey(method) || ATTS.containsKey(method) || ATTB.containsKey(method)) && input == ""){
                 if (SETM.containsKey(method)){
                     FparamTypeCheck = SETM.get(method).equals(Fparams);
+                    if (!FparamTypeCheck) {return false;}
                     int p = 0;
                     for (String aparam : Aparams) {
                         switch (Fparams.get(p)) {
@@ -577,6 +578,7 @@ public abstract class TypeCheck {
                 }
                 else if (VM.containsKey(method)){
                     FparamTypeCheck = VM.get(method).equals(Fparams);
+                    if (!FparamTypeCheck) {return false;}
                     int p = 0;
                     for (String aparam : Aparams) {
                         switch (Fparams.get(p)) {
@@ -598,6 +600,7 @@ public abstract class TypeCheck {
                 }
                 else if (IM.containsKey(method)){
                     FparamTypeCheck = IM.get(method).equals(Fparams);
+                    if (!FparamTypeCheck) {return false;}
                     int p = 0;
                     for (String aparam : Aparams) {
                         
@@ -622,6 +625,7 @@ public abstract class TypeCheck {
                 
                 else if (SM.containsKey(method)){
                     FparamTypeCheck = SM.get(method).equals(Fparams);
+                    if (!FparamTypeCheck) {return false;}
                     int p = 0;
                     for (String aparam : Aparams) {
                         switch (Fparams.get(p)) {
@@ -643,6 +647,7 @@ public abstract class TypeCheck {
                 }
                 else if (ATTI.containsKey(method)){
                     FparamTypeCheck = ATTI.get(method).equals(Fparams);
+                    if (!FparamTypeCheck) {return false;}
                     int p = 0;
                     for (String aparam : Aparams) {
                         switch (Fparams.get(p)) {
@@ -664,6 +669,7 @@ public abstract class TypeCheck {
                 }
                 else if (ATTS.containsKey(method)){
                     FparamTypeCheck = ATTS.get(method).equals(Fparams);
+                    if (!FparamTypeCheck) {return false;}
                     int p = 0;
                     for (String aparam : Aparams) {
                         switch (Fparams.get(p)) {
@@ -685,6 +691,7 @@ public abstract class TypeCheck {
                 }
                 else if (ATTB.containsKey(method)){
                     FparamTypeCheck = ATTB.get(method).equals(Fparams);
+                    if (!FparamTypeCheck) {return false;}
                     int p = 0;
                     for (String aparam : Aparams) {
                         switch (Fparams.get(p)) {
@@ -692,11 +699,11 @@ public abstract class TypeCheck {
                                 if (!checkArithExpr(aparam)) {return false;}
                                 break;
                             case "STRING" :
-                            if (!checkStringExpr(aparam)) {return false;}
-                            break;
+                                if (!checkStringExpr(aparam)) {return false;}
+                                break;
                             case "BOOL" :
-                            if (!checkLogicExpr(aparam)) {return false;}
-                            break;
+                                if (!checkLogicExpr(aparam)) {return false;}
+                                break;
                         }
                         p++;
                     }
