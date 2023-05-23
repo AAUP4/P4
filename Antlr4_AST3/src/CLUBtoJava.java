@@ -42,20 +42,20 @@ public class CLUBtoJava {
     }
 
     public static String ConvertToJava(){  
-        String readFromFile = "";
+        String readFromFile = "public class Main {\npublic static Deck deck = new Deck();\npublic static Table table = new Table();\npublic static void main(String[] args) {\nSetup();\nfor (Player player : Player.getPlayers()){\nRound();\n}\nGame.exit();\n}\n";
         for (int i = 0; i < readFileLines().size(); i++ ) {
             if(readFileLines().get(i).equals("Setup")){
-                System.out.println("public void Setup()");
+                System.out.println("public static void Setup()");
                 //readFromFile.concat("Test");
-                readFromFile += "public void Setup()";
+                readFromFile += "public static void Setup()";
             }
             else if(readFileLines().get(i).equals("Round")){
-                System.out.println("public void Round()");
-                readFromFile += "public void Round()";
+                System.out.println("public static void Round()");
+                readFromFile += "public static void Round()";
             }
             else if(readFileLines().get(i).equals("Turn")){
-                System.out.print("public void Turn");
-                readFromFile += "public void Turn";
+                System.out.print("public static void Turn");
+                readFromFile += "public static void Turn";
             }
             else if(readFileLines().get(i).startsWith("player")){
                 System.out.println(" player");
@@ -63,41 +63,41 @@ public class CLUBtoJava {
             }
             else if(readFileLines().get(i).equals("bool")){
                 if (readFileLines().get(i+2).equals("=")) {
-                    System.out.print(readFileLines().get(i+1));
-                    boolDecl.put(readFileLines().get(i+1), "Boolean ");
-                    readFromFile += readFileLines().get(i+1);
+                    System.out.print("Vars." + readFileLines().get(i+1));
+                    boolDecl.put(readFileLines().get(i+1), "public static Boolean ");
+                    readFromFile += "Vars." + readFileLines().get(i+1);
                     i+=1;
                     
                 }
                 else {
                     System.out.print("Boolean ");
-                    readFromFile += "Boolean ";
+                    readFromFile += "static Boolean ";
                 }
                 
             }
             else if(readFileLines().get(i).equals("int")){
                 if (readFileLines().get(i+2).equals("=")) {
                     System.out.print(readFileLines().get(i+1));
-                    readFromFile += readFileLines().get(i+1);
-                    intDecl.put(readFileLines().get(i+1), "int ");
+                    readFromFile += "Vars." + readFileLines().get(i+1);
+                    intDecl.put(readFileLines().get(i+1), "public static int ");
                     i+=1;
                 }
                 // in case its a new function do:
                 else {
                     System.out.print("int ");
-                    readFromFile += "int ";
+                    readFromFile += "static int ";
                 }
             }
             else if(readFileLines().get(i).equals("string")){
                 
                 if(readFileLines().get(i+2).equals("=")){
                     System.out.print(readFileLines().get(i+1));
-                    stringDecl.put(readFileLines().get(i+1), "String ");
-                    readFromFile += readFileLines().get(i+1);
+                    stringDecl.put(readFileLines().get(i+1), "public static String ");
+                    readFromFile += "Vars." + readFileLines().get(i+1);
                     i+=1;
                 } else {
-                    System.out.print("String ");
-                    readFromFile += "String ";
+                    System.out.print("static String ");
+                    readFromFile += "static String ";
                 }
             }
             else if(readFileLines().get(i).startsWith("\"")) {
@@ -127,13 +127,45 @@ public class CLUBtoJava {
                 System.out.println("{");
                 readFromFile += "\n{";
             }
+            else if (intDecl.containsKey(readFileLines().get(i))) {
+                readFromFile += "Vars." + readFileLines().get(i);
+            }
+            else if (stringDecl.containsKey(readFileLines().get(i))) {
+                readFromFile += "Vars." + readFileLines().get(i);
+            }
+            else if (boolDecl.containsKey(readFileLines().get(i))) {
+                readFromFile += "Vars." + readFileLines().get(i);
+            }
+            else if(readFileLines().get(i).contains("++")){
+                readFromFile += "Vars." + readFileLines().get(i);
+
+            }
+            else if (Character.isUpperCase(readFileLines().get(i).charAt(0))) {
+                if (readFileLines().get(i).equals("Round") ||
+                 readFileLines().get(i).equals("Setup") || 
+                 readFileLines().get(i).equals("Turn")){
+
+                } else {
+                    if (readFileLines().get(i).contains("{")) {
+                        readFromFile += "public void " + readFileLines().get(i).substring(0, readFileLines().get(i).length()-1) + "(){";
+                    }
+                    else if (readFileLines().get(i).contains("(")){
+                        readFromFile += readFileLines().get(i);
+                    }
+                    else {
+                        readFromFile += readFileLines().get(i);
+                    }
+                }
+                
+                
+            }
             else{
                 System.out.print(readFileLines().get(i));
                 readFromFile += readFileLines().get(i);
             }                
         } 
-        readFromFile += "\n" + printVarDecl();
-        System.out.println("This is the string input: " + readFromFile);
+        readFromFile += "\n" + "}";
+        // System.out.println("This is the string input: " + readFromFile);
         return readFromFile;
     }
 
@@ -151,12 +183,16 @@ public class CLUBtoJava {
 
     public static void writeToJavaFile() {        
         try {
+            // Main File
             checkIfFileExistElseCreate("Javaoutput.java");
             FileWriter fileWriter = new FileWriter("Javaoutput.java");
-            
-            
             fileWriter.write(ConvertToJava());
             fileWriter.close();
+            // Vars file
+            checkIfFileExistElseCreate("Vars.java");
+            FileWriter varWriter = new FileWriter("Vars.java");
+            varWriter.write("public abstract class Vars {\n" + printVarDecl() + "}");
+            varWriter.close();
             System.out.println("Its lit");
         }
         catch (IOException e) {
@@ -166,7 +202,7 @@ public class CLUBtoJava {
 
     public static void checkIfFileExistElseCreate(String fileName) {
         try {
-            File obj = new File("Javaoutput.txt");
+            File obj = new File(fileName);
         if(obj.createNewFile()){
             System.out.println("File created: " + obj.getName());
         } else {
@@ -177,4 +213,8 @@ public class CLUBtoJava {
             e.printStackTrace();
         }
     }
+/* TODO: Make 2 files Main and Vars and*/
+/* TODO: Generate file 2 and make sure Main imports it */
+// TODO: 
 }
+

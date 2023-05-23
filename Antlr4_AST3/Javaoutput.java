@@ -1,26 +1,23 @@
-public void Setup()
-{g=3;s="hello there another word";}
-public void Round()
-{b=true;h=3;i=0;t=0;while(b)
-{h=h+1;}
-if(i>5||i<8&&i>6)
-{y=3;}
-for(u=3;u>8;u++)
-{t=t+1;}
+public class Main {
+public static Deck deck = new Deck();
+public static Table table = new Table();
+public static void main(String[] args) {
+Setup();
+for (Player player : Player.getPlayers()){
+Round();
 }
-public void Turn(Player player)
-{p=3;}
-int getScore()
-{}
-String printscore()
-{}
+Game.exit();
+}
+public static void Setup()
+{Vars.g=3;Vars.s="hello there another word";}
+public static void Round()
+{Vars.t=0;Vars.i=2;if(Vars.i>5||Vars.i<8&&Vars.i>6)
+{Vars.y=3;}
+for(Vars.u=3;Vars.u>8;Vars.u++)
+{Vars.t=Vars.t+1;}
+Turn(Player.getPlayer(1));}
+public static void Turn(Player player)
+{Vars.p=3;}
+public void Test(){Vars.k=5;}
 
-int p;
-int t;
-int u;
-int g;
-int h;
-int i;
-int y;
-String s;
-Boolean b;
+}
