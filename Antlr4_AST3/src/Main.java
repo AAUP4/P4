@@ -30,7 +30,8 @@ public class Main {
                       
             System.out.println(CLUBtoJava.readFileLines());
             System.out.println("Test:");  
-            CLUBtoJava.ConvertToJava();
+            //CLUBtoJava.ConvertToJava();
+            CLUBtoJava.writeToJavaFile();
             // ASTtoJava.convertToJava("(<ASSIGN, '='> <INT, 'int'> <VARID, 'ill'> <INTVAL, '42069'>)");
             // ASTtoJava.convertToJava("(<ASSIGN, '='> <BOOL, 'bool'> <VARID, 'b'> <BOOLVAL, 'true'>)");
             // ASTtoJava.convertToJava(ast.toStringTree());
@@ -54,7 +55,7 @@ public class Main {
         for (AST ast : new VecMathBuildASTVisitor().visit(tree).getChildren()) {
             System.out.println(ast.toStringTree());
         }*/
-    }
+    }    
 }
 
 
