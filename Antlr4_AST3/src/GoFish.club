@@ -8,14 +8,15 @@ Round
 {
     int t = 1;
     int trick = 0;
+    bool turnAgain = false;
 
     while ( deck.size()>0 && Player.getPlayer(1).handSize()>0 && Player.getPlayer(2).handSize()>0 ) {
         Turn(Player.getPlayer(t));
-        if ( t == 1 ) {
-           t = 2;
+        if ( t == 1 && ! turnAgain ) {
+            t = 2;
         }
-        if ( t == 2 ) {
-           t = 1;
+        if ( t == 2 && ! turnAgain ) {
+            t = 1;
         }
     }
 
@@ -24,21 +25,53 @@ Round
 
 }
 Turn ( Player player ) {
+    bool found = false;
+    bool check = false;
+    string whenReady = player.name+"'s turn. Press ENTER when ready!";
+    string start = Game.input(whenReady);
     player.printHand();
-    string card = Game.input("What card will you ask for? ");
-    if ( player.name == Player.getPlayer(1).name ) {
-        for ( int i = 0; i < Player.getPlayer(2).handSize(); i++ ) {
-            if ( Player.getPlayer(2).getCardIndex(i).rank == card ) {
-                player.takeCard(Player.getPlayer(2).getCardIndex(i).id,Player.getPlayer(2));
+    string card = "";
+    if ( player.handSize() > 0 ) {
+        card = Game.input("What card will you ask for? ");
+        while ( ! check ) {
+            for ( int c = 0; c < player.handSize(); c++) {
+                if ( player.getCardIndex(c).rank == card ) {
+                    check = true;
+                }
+            }
+            if ( ! check ) {
+                card = Game.input("You do not have that card rank. Try again: ");
             }
         }
     }
-    if ( player.name == Player.getPlayer(2).name ) {
+    if ( ! player.handSize() > 0 ) {
+        Game.print("You do not have any cards left!");
+    }
+    if ( player.name == Player.getPlayer(1).name && player.handSize() > 0 ) {
+        for ( int i = 0; i < Player.getPlayer(2).handSize(); i++ ) {
+            if ( Player.getPlayer(2).getCardIndex(i).rank == card ) {
+                player.takeCard(Player.getPlayer(2).getCardIndex(i).id,Player.getPlayer(2));
+                found = true;
+                turnAgain = true;
+                Game.print("You found a "+card+"!");
+            }
+        }
+         if ( ! found ) {
+            Game.print("You did not find any "+card+"'s.");
+         }
+    }
+    if ( player.name == Player.getPlayer(2).name && player.handSize() > 0 ) {
         for ( int j = 0; j < Player.getPlayer(1).handSize(); j++ ) {
             if ( Player.getPlayer(1).getCardIndex(i).rank == card ) {
                 player.takeCard(Player.getPlayer(1).getCardIndex(i).id,Player.getPlayer(1));
+                found = true;
+                turnAgain = true;
+                Game.print("You found a "+card+"!");
             }
         }
+        if ( ! found ) {
+            Game.print("You did not find any "+card+"'s.");
+            }
     }
     for ( int k = 0; k < player.handSize(); k++ ) {
         if ( player.getCardIndex(i).rank == card ) {
@@ -47,6 +80,22 @@ Turn ( Player player ) {
     }
     if ( trick == 4 ) {
          player.score++;
+         for ( int u = player.handSize(); u > 0; u-- ) {
+            if ( player.getCardIndex(u-1).rank == card ) {
+                player.discard(player.getCardIndex(u-1),Game.discardPile);
+            }
+         }
+
+         Game.print("You got a trick of "+card+"'s!");
+         Game.print("It is your turn again!");
+
+    }
+    if ( trick != 4 ) {
+        turnAgain = false;
+    }
+    if ( ! player.handSize() > 0 || ! turnAgain ) {
+        player.draw(1,deck);
+        Game.print("You drew a card. Your turn is now over.\n\n");
     }
 
 }

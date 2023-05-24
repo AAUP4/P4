@@ -15,7 +15,7 @@ stmt : tParam op='=' logicOrExpr ';'   #Stmt1
         | iterStmt                     #Stmt4
         | left=VMETHODID ';'           #Stmt5
         | left=FUNCID'('')' ';'        #Stmt6
-        | left=TURNCALL GETPLAYER param=(INTVAL|VARID)'))' ';'   #Stmt7
+        | left=TURNCALL param=PMETHODID')' ';'   #Stmt7
         | left=IMETHODID ('++'|'--')  ';'           #Stmt8
         ;
 iterStmt : WHILE '(' logicOrExpr ')' '{' stmt* '}'                                                       #While
@@ -353,6 +353,8 @@ SMETHODID : 'Game.input()'
            | 'deck.getCard('INTPARAM').rank'
            | 'deck.getCard('INTPARAM').suit'
         ;
+PMETHODID : 'Player.getPlayer(' INTPARAM')' ;
+
 GETPLAYER : 'Player.getPlayer(' ;
 PLAYER : 'player' ;
 PLAYER2 : 'Player player' ;

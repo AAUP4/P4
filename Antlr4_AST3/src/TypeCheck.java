@@ -9,6 +9,7 @@ public abstract class TypeCheck {
     static Map<String, ArrayList<String>> VM = new HashMap<>();
     static Map<String, ArrayList<String>> IM = new HashMap<>();
     static Map<String, ArrayList<String>> SM = new HashMap<>();
+    static Map<String, ArrayList<String>> PM = new HashMap<>();
     static Map<String, ArrayList<String>> ATTI = new HashMap<>();
     static Map<String, ArrayList<String>> ATTB = new HashMap<>();
     static Map<String, ArrayList<String>> ATTS = new HashMap<>();
@@ -60,6 +61,8 @@ public abstract class TypeCheck {
         ArrayList<String> SIB = new ArrayList<>(); Collections.addAll(SIB,"STRING", "INT", "BOOL");
         ArrayList<String> SB = new ArrayList<>(); Collections.addAll(SB, "STRING", "BOOL");
 
+
+        PM.put("Player.getPlayer(INT)", I);
         
         SETM.put("Player.create(INT)", I); //
         SETM.put("deck.addJokers(INT)", I); //
@@ -474,6 +477,15 @@ public abstract class TypeCheck {
                         method = method.concat(input);
                         input = "";
                     }
+                    else if (input.startsWith(".draw(")) {
+                        Fparams.add("INT");
+                        method = method.concat(".draw(INT");
+                        input = input.substring(6);
+                        Aparams.add(input.substring(0, input.length()-1));
+                        input = input.substring(input.length()-1);
+                        method = method.concat(input);
+                        input = "";
+                    }
                     else if (input.startsWith(".getDiscardPileIndex(")) {
                         Fparams.add("INT");
                         method = method.concat(".getDiscardPileIndex(INT");
@@ -487,8 +499,14 @@ public abstract class TypeCheck {
                         Fparams.add("INT");
                         method = method.concat(".getCardIndex(INT");
                         input = input.substring(14);
-                        Aparams.add(input.substring(0, input.indexOf(").")));
-                        input = input.substring(input.indexOf(")."));
+                        if (input.contains(").")) {
+                            Aparams.add(input.substring(0, input.indexOf(").")));
+                            input = input.substring(input.indexOf(")."));
+                        } else {
+                            Aparams.add(input.substring(0, input.length()-1));
+                            input = input.substring(input.length()-1);
+                        }
+
                         method = method.concat(input);
                         input = "";
 
@@ -900,9 +918,23 @@ public abstract class TypeCheck {
                 Fparams.add("INT");
                 method = method.concat("Player.getPlayer(INT");
                 input = input.substring(17);
-                Aparams.add(input.substring(0, input.indexOf(").")));
-                input = input.substring(input.indexOf(")."));
-                if (input.startsWith(").getTable().getCardIndex(")) {
+                if (input.contains(").")) {
+                    Aparams.add(input.substring(0, input.indexOf(").")));
+                    input = input.substring(input.indexOf(")."));
+                } else {
+                    Aparams.add(input.substring(0, input.length()-1));
+                    input = input.substring(input.length()-1);
+                }
+                if (input.startsWith(").draw(")) {
+                    Fparams.add("INT");
+                    method = method.concat(").draw(INT");
+                    input = input.substring(7);
+                    Aparams.add(input.substring(0, input.length()-1));
+                    input = input.substring(input.length()-1);
+                    method = method.concat(input);
+                    input = "";
+                }
+                else if (input.startsWith(").getTable().getCardIndex(")) {
                     Fparams.add("INT");
                     method = method.concat(").getTable().getCardIndex(INT");
                     input = input.substring(26);
@@ -1154,14 +1186,14 @@ public abstract class TypeCheck {
             }
             else {}
                 
-            if (Fparams.isEmpty() && ((SETM.containsKey(input) || VM.containsKey(input) || IM.containsKey(input) || SM.containsKey(input) || ATTI.containsKey(input) || ATTS.containsKey(input) || ATTB.containsKey(input))|| ((SETM.containsKey(method) || VM.containsKey(method) || IM.containsKey(method) || SM.containsKey(method) || ATTI.containsKey(method) || ATTS.containsKey(method) || ATTB.containsKey(method))) )) {
+            if (Fparams.isEmpty() && ((SETM.containsKey(input) || VM.containsKey(input) || IM.containsKey(input) || SM.containsKey(input) || PM.containsKey(input) || ATTI.containsKey(input) || ATTS.containsKey(input) || ATTB.containsKey(input))|| ((SETM.containsKey(method) || VM.containsKey(method) || IM.containsKey(method) || SM.containsKey(method) || ATTI.containsKey(method) || ATTS.containsKey(method) || ATTB.containsKey(method))) )) {
 
                 result = true;
             }
             
 
         //check on method, Fparams, Aparams
-            if (Fparams.size()>0 &&  (SETM.containsKey(method) || VM.containsKey(method) || IM.containsKey(method) || SM.containsKey(method) || ATTI.containsKey(method) || ATTS.containsKey(method) || ATTB.containsKey(method)) && input.isEmpty()){
+            if (Fparams.size()>0 &&  (SETM.containsKey(method) || VM.containsKey(method) || IM.containsKey(method) || SM.containsKey(method) || PM.containsKey(input) || ATTI.containsKey(method) || ATTS.containsKey(method) || ATTB.containsKey(method)) && input.isEmpty()){
                 if (SETM.containsKey(method) && context.equals("VOID")){
                     FparamTypeCheck = SETM.get(method).equals(Fparams);
                     if (!FparamTypeCheck) {return false;}
@@ -1251,6 +1283,28 @@ public abstract class TypeCheck {
                     }
 
                         result = true;   
+
+                }
+                if (PM.containsKey(method) && context.equals("VOID")){
+                    FparamTypeCheck = PM.get(method).equals(Fparams);
+                    if (!FparamTypeCheck) {return false;}
+                    int p = 0;
+                    for (String aparam : Aparams) {
+                        switch (Fparams.get(p)) {
+                            case "INT" :
+                                if (!checkArithExpr(aparam)) {return false;}
+                                break;
+                            case "STRING" :
+                                if (!checkStringExpr(aparam)) {return false;}
+                                break;
+                            case "BOOL" :
+                                if (!checkLogicExpr(aparam)) {return false;}
+                                break;
+                        }
+                        p++;
+                    }
+
+                    result = true;
 
                 }
                 else if (ATTI.containsKey(method) && context.equals("INT")){
@@ -1465,7 +1519,8 @@ public abstract class TypeCheck {
             }
 
             if (value.endsWith("++") || value.endsWith("--")) {
-                if (checkVarType(value.substring(0,value.indexOf("++")).trim())=="INT") {
+
+                if (checkValidValue(value.substring(0,value.length()-2),"INT")) {
                     return true;
                 } else { return false;}
             } else if (value.startsWith("-")) {

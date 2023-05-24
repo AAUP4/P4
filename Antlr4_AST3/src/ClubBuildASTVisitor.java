@@ -116,7 +116,7 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
 
     @Override
     public AST visitStmt7(CLUBParser.Stmt7Context ctx) {
-        TypeCheck.checkValidValue(ctx.param.getText(),"INT");
+        TypeCheck.checkValidValue(ctx.param.getText(),"VOID");
         return new AST(ctx.left);
     }
 
@@ -139,7 +139,6 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
     @Override
     public AST visitSelectStmt(CLUBParser.SelectStmtContext ctx) {
         AST ast = new AST(ctx.IF().getSymbol());
-        System.out.println("logic test: "+ctx.logicOrExpr().getText());
         if(!TypeCheck.checkValidValue(ctx.logicOrExpr().getText(),"BOOL")){ throw new IllegalArgumentException(ctx.logicOrExpr().getText()+" is not a valid logic expression.");}
         ast.addChild(visit(ctx.logicOrExpr()));
         int i = 0;
@@ -187,7 +186,7 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
 
     @Override
     public AST visitAssignExpr(CLUBParser.AssignExprContext ctx) {
-        if(!TypeCheck.processInput(ctx.left.getText()+ctx.op.getText()+ctx.logicOrExpr().getText(),"VOID")){ throw new IllegalArgumentException("Input is not a valid assignment.");}
+        if(!TypeCheck.processInput(ctx.left.getText()+ctx.op.getText()+ctx.logicOrExpr().getText(),ctx.left.getText().toUpperCase())){ throw new IllegalArgumentException("Input is not a valid assignment.");}
         AST ast = new AST(ctx.op);
         AST l = new AST(ctx.left);
         ast.addChild(l);
