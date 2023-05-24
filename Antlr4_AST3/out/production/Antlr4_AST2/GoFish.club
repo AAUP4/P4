@@ -44,7 +44,7 @@ Turn ( Player player ) {
             }
         }
     }
-    if ( ! player.handSize() > 0 ) {
+    if ( player.handSize() == 0 ) {
         Game.print("You do not have any cards left!");
     }
     if ( player.name == Player.getPlayer(1).name && player.handSize() > 0 ) {
@@ -82,7 +82,7 @@ Turn ( Player player ) {
          player.score++;
          for ( int u = player.handSize(); u > 0; u-- ) {
             if ( player.getCardIndex(u-1).rank == card ) {
-                player.discard(player.getCardIndex(u-1),Game.discardPile);
+                player.discard(player.getCardIndex(u-1).id,Game.discardPile);
             }
          }
 
@@ -93,7 +93,7 @@ Turn ( Player player ) {
     if ( trick != 4 ) {
         turnAgain = false;
     }
-    if ( ! player.handSize() > 0 || ! turnAgain ) {
+    if ( player.handSize() == 0 || ! turnAgain ) {
         player.draw(1,deck);
         Game.print("You drew a card. Your turn is now over.\n\n");
     }

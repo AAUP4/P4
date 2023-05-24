@@ -100,21 +100,21 @@ public abstract class TypeCheck {
         VM.put("player.discard(STRING,Game.discardPile)", S); //-----
 
         VM.put("Player.getPlayer(INT).discard(STRING,Player.getPlayer(INT).getDiscardPile())", ISI);//
-        VM.put("Player.getPlayer(INT).discard(Player.getPlayer(INT).getCardIndex(INT),Game.discardPile)", III);//
-        VM.put("Player.getPlayer(INT).discard(Player.getPlayer(INT).getCardIndex(INT),Player.getPlayer(INT).getDiscardPile())", IIII);//
+        VM.put("Player.getPlayer(INT).discard(Player.getPlayer(INT).getCardIndex(INT).id,Game.discardPile)", III);//
+        VM.put("Player.getPlayer(INT).discard(Player.getPlayer(INT).getCardIndex(INT).id,Player.getPlayer(INT).getDiscardPile())", IIII);//
         VM.put("player.discard(STRING,Player.getPlayer(INT).getDiscardPile())", SI);//------
-        VM.put("player.discard(Player.getPlayer(INT).getCardIndex(INT),Game.discardPile)", II);//------
+        VM.put("player.discard(Player.getPlayer(INT).getCardIndex(INT).id,Game.discardPile)", II);//------
         VM.put("Player.getPlayer(INT).discard(STRING,player.getDiscardPile())", IS);//------
-        VM.put("Player.getPlayer(INT).discard(player.getCardIndex(INT),Game.discardPile)", II);//------
+        VM.put("Player.getPlayer(INT).discard(player.getCardIndex(INT).id,Game.discardPile)", II);//------
         VM.put("player.discard(STRING,player.getDiscardPile())", S);//------
-        VM.put("player.discard(player.getCardIndex(INT),Game.discardPile)", I);//------
-        VM.put("player.discard(Player.getPlayer(INT).getCardIndex(INT),Player.getPlayer(INT).getDiscardPile())", III);//------
-        VM.put("player.discard(player.getCardIndex(INT),Player.getPlayer(INT).getDiscardPile())", II);//------
-        VM.put("player.discard(Player.getPlayer(INT).getCardIndex(INT),player.getDiscardPile())", II);//------
-        VM.put("player.discard(player.getCardIndex(INT),player.getDiscardPile())", I);//------
-        VM.put("Player.getPlayer(INT).discard(player.getCardIndex(INT),Player.getPlayer(INT).getDiscardPile())", III);//------
-        VM.put("Player.getPlayer(INT).discard(player.getCardIndex(INT),player.getDiscardPile())", II);//------
-        VM.put("Player.getPlayer(INT).discard(Player.getPlayer(INT).getCardIndex(INT),player.getDiscardPile())", III);//------
+        VM.put("player.discard(player.getCardIndex(INT).id,Game.discardPile)", I);//------
+        VM.put("player.discard(Player.getPlayer(INT).getCardIndex(INT).id,Player.getPlayer(INT).getDiscardPile())", III);//------
+        VM.put("player.discard(player.getCardIndex(INT).id,Player.getPlayer(INT).getDiscardPile())", II);//------
+        VM.put("player.discard(Player.getPlayer(INT).getCardIndex(INT).id,player.getDiscardPile())", II);//------
+        VM.put("player.discard(player.getCardIndex(INT).id,player.getDiscardPile())", I);//------
+        VM.put("Player.getPlayer(INT).discard(player.getCardIndex(INT).id,Player.getPlayer(INT).getDiscardPile())", III);//------
+        VM.put("Player.getPlayer(INT).discard(player.getCardIndex(INT).id,player.getDiscardPile())", II);//------
+        VM.put("Player.getPlayer(INT).discard(Player.getPlayer(INT).getCardIndex(INT).id,player.getDiscardPile())", III);//------
 
         
         VM.put("Player.getPlayer(INT).discardAll(discardPile)", I);             //
