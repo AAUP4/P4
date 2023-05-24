@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -42,7 +41,7 @@ public class CLUBtoJava {
     }
 
     public static String convertToJava(){  
-        String readFromFile = "public class Main {\npublic static Deck deck = new Deck();\npublic static Table table = new Table();\npublic static void main(String[] args) {\nSetup();\nwhile (Game.running) {\nRound();\n}\nSystem.exit(0);\n}\n";
+        String readFromFile = "";
         for (int i = 0; i < readFileLines().size(); i++ ) {
             if(readFileLines().get(i).equals("Setup")){
                 readFromFile += "public static void Setup()";
@@ -58,17 +57,17 @@ public class CLUBtoJava {
             }
             else if(readFileLines().get(i).equals("bool")){                
                 boolDecl.put(readFileLines().get(i+1), "public static Boolean ");
-                readFromFile += "Vars." + readFileLines().get(i+1);
+                readFromFile += readFileLines().get(i+1);
                 i+=1;
             }
             else if(readFileLines().get(i).equals("int")){
-                readFromFile += "Vars." + readFileLines().get(i+1);
+                readFromFile += readFileLines().get(i+1);
                 intDecl.put(readFileLines().get(i+1), "public static int ");
                 i+=1;
             }
-            else if(readFileLines().get(i).equals("string")){                
+        else if(readFileLines().get(i).equals("string")){                
                     stringDecl.put(readFileLines().get(i+1), "public static String ");
-                    readFromFile += "Vars." + readFileLines().get(i+1);
+                    readFromFile += readFileLines().get(i+1);
                     i+=1;
             }
             else if(readFileLines().get(i).contains("\"")) {
@@ -96,17 +95,19 @@ public class CLUBtoJava {
                 readFromFile += "\n{\n";
             }
             else if (intDecl.containsKey(readFileLines().get(i))) {
-                readFromFile += "Vars." + readFileLines().get(i);
+                readFromFile += readFileLines().get(i);
             }
             else if (stringDecl.containsKey(readFileLines().get(i))) {
-                readFromFile += "Vars." + readFileLines().get(i);
+                readFromFile += readFileLines().get(i);
             }
             else if (boolDecl.containsKey(readFileLines().get(i))) {
-                readFromFile += "Vars." + readFileLines().get(i);
+                readFromFile += readFileLines().get(i);
             }
             else if(readFileLines().get(i).contains("++")){
-                readFromFile += "Vars." + readFileLines().get(i);
-
+                readFromFile += readFileLines().get(i);
+            }
+            else if(readFileLines().get(i).contains("--")){
+                readFromFile += readFileLines().get(i);
             }
             else if (Character.isUpperCase(readFileLines().get(i).charAt(0))) {
                 if (readFileLines().get(i).equals("Round") ||
@@ -127,6 +128,41 @@ public class CLUBtoJava {
                 
                 
             }
+        // else if (readFileLines().get(i).contains("(") ) {
+        //     String line = readFileLines().get(i);
+        //     int startIndex = line.indexOf("(");
+        //     int endIndex = line.indexOf(")");
+
+        //     if (startIndex != -1 && endIndex != -1 && startIndex < endIndex) {
+        //         for (int j = startIndex + 1; j < endIndex; j++) {
+        //             char currentChar = line.charAt(j);
+        //             char previousChar = line.charAt(j - 1);
+                    
+        //             if (previousChar == '(' && Character.isLetter(currentChar)) {
+        //                 readFromFile += "Vars." + currentChar;
+        //             } else {
+        //                 readFromFile += previousChar + currentChar;
+        //             }
+        //         }
+        //     }
+        // }
+                
+                
+                
+            // //readFromFile += readFileLines().get(i).substring(0, readFileLines().get(i).indexOf("(" + 1));
+            // // readFileLines().get(i).charAt(readFileLines().get(i).indexOf("(" + 1)) != ')'
+            // for (int j = readFileLines().get(i).indexOf("("); j < readFileLines().get(i).length(); j++) {
+            //     if (readFileLines().get(i).charAt(j) == '(') {
+            //         if (readFileLines().get(i).charAt(j) != ')' && !Character.isDigit(readFileLines().get(i).charAt(j)) && readFileLines().get(i).charAt(j) != '(') {
+            //             readFromFile += readFileLines().get(i).charAt(j) + "Vars." + readFileLines().get(i).charAt(j+1);
+            //         }
+            //     }
+            //     else {
+            //         readFromFile += readFileLines().get(i).charAt(j);
+            //     }
+                
+            // }
+            
             else{
                 readFromFile += readFileLines().get(i);
             }                
@@ -151,15 +187,17 @@ public class CLUBtoJava {
     public static void writeToJavaFile() {        
         try {
             // Main File
+            String convert = convertToJava();
+            String readFromFile = "public class Main {\n" + printVarDecl() + "\npublic static Deck deck = new Deck();\npublic static Table table = new Table();\npublic static void main(String[] args) {\nSetup();\nwhile (Game.running) {\nRound();\n}\nSystem.exit(0);\n}\n";
             checkIfFileExistElseCreate("Javaoutput.java");
             FileWriter fileWriter = new FileWriter("Javaoutput.java");
-            fileWriter.write(convertToJava());
+            fileWriter.write(readFromFile+convert);
             fileWriter.close();
             // Vars file
-            checkIfFileExistElseCreate("Vars.java");
-            FileWriter varWriter = new FileWriter("Vars.java");
-            varWriter.write("public abstract class Vars {\n" + printVarDecl() + "}");
-            varWriter.close();
+            // checkIfFileExistElseCreate("Vars.java");
+            // FileWriter varWriter = new FileWriter("Vars.java");
+            // varWriter.write("public abstract class Vars {\n" + printVarDecl() + "}");
+            // varWriter.close();
         }
         catch (IOException e) {
             System.out.println("ERROR, file wasnt created!");
