@@ -100,6 +100,18 @@ public class CLUBBaseListener implements CLUBListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterStmt1_2(CLUBParser.Stmt1_2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStmt1_2(CLUBParser.Stmt1_2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterStmt2(CLUBParser.Stmt2Context ctx) { }
 	/**
 	 * {@inheritDoc}

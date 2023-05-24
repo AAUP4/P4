@@ -27,20 +27,28 @@ Round
 Turn ( Player player ) {
     bool found = false;
     bool check = false;
+    string card = "";
     string whenReady = player.name+"'s turn. Press ENTER when ready!";
+    string tryAgain = "";
+    string tryAgainTwo = "";
+
     string start = Game.input(whenReady);
     player.printHand();
-    string card = "";
     if ( player.handSize() > 0 ) {
         card = Game.input("What card will you ask for? ");
+        for ( int c = 0; c < player.handSize(); c++) {
+            if ( player.getCardIndex(c).rank == card ) {
+                check = true;
+            }
+        }
         while ( ! check ) {
-            for ( int c = 0; c < player.handSize(); c++) {
-                if ( player.getCardIndex(c).rank == card ) {
+            tryAgain = "You do not have any " + card;
+            tryAgainTwo = tryAgain + "'s. Try again: ";
+            card = Game.input(tryAgainTwo);
+            for ( int d = 0; d < player.handSize(); d++) {
+                if ( player.getCardIndex(d).rank == card ) {
                     check = true;
                 }
-            }
-            if ( ! check ) {
-                card = Game.input("You do not have that card rank. Try again: ");
             }
         }
     }

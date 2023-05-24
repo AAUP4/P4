@@ -10,6 +10,7 @@ turn : 'Turn' '(' PLAYER2 ')' '{' stmt* '}' #Turn1
 func : left=FUNCID '{' stmt* '}'
          ;
 stmt : tParam op='=' logicOrExpr ';'   #Stmt1
+        | tParam op='=' right=(INTPARAM|STRINGPARAM|BOOLPARAM) ';'   #Stmt1_2
         | assignExpr  ';'              #Stmt2
         | selectStmt                   #Stmt3
         | iterStmt                     #Stmt4

@@ -87,6 +87,15 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
         return ast;
     }
 
+    public AST visitStmt1_2(CLUBParser.Stmt1_2Context ctx) {
+        if(!TypeCheck.processInput(ctx.tParam().getText()+ctx.op.getText()+ctx.right.getText(),"VOID")){ throw new IllegalArgumentException("Input is not a valid declaration.");}
+        AST ast = new AST(ctx.op);
+        ast.addChild(visit(ctx.tParam()));
+        ast.addChild(new AST(ctx.right));
+
+        return ast;
+    }
+
     @Override
     public AST visitStmt2(CLUBParser.Stmt2Context ctx) {
         return visit(ctx.assignExpr());
@@ -326,6 +335,7 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
         if(!TypeCheck.checkVarExist(ctx.left.getText())){ throw new IllegalArgumentException("Input is not a valid variable.");}
         return new AST(ctx.left);
     }
+
 
     @Override
     public AST visitVal(CLUBParser.ValContext ctx) {

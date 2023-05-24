@@ -55,6 +55,13 @@ public interface CLUBVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStmt1(CLUBParser.Stmt1Context ctx);
 	/**
+	 * Visit a parse tree produced by the {@code Stmt1_2}
+	 * labeled alternative in {@link CLUBParser#stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStmt1_2(CLUBParser.Stmt1_2Context ctx);
+	/**
 	 * Visit a parse tree produced by the {@code Stmt2}
 	 * labeled alternative in {@link CLUBParser#stmt}.
 	 * @param ctx the parse tree
