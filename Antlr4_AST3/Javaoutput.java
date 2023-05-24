@@ -38,7 +38,7 @@ Game.exit(Player.getPlayer(2));
 }
 public static void Turn(Player player)
 {
-player.printHand();Vars.card=Game.input("WhatVars.cardwillyouaskfor?");if(player.name==Player.getPlayer(1).name)
+player.printHand();Vars.card=Game.input("What card will you ask for? ");if(player.name==Player.getPlayer(1).name)
 {
 for(Vars.i=0;Vars.i<Player.getPlayer(2).handSize();Vars.i++)
 {

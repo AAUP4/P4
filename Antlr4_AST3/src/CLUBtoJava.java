@@ -71,7 +71,7 @@ public class CLUBtoJava {
                     readFromFile += "Vars." + readFileLines().get(i+1);
                     i+=1;
             }
-            else if(readFileLines().get(i).startsWith("\"")) {
+            else if(readFileLines().get(i).contains("\"")) {
                 int j = 0;
                 Boolean keepGoing = true;
                 StringBuilder temp = new StringBuilder();
