@@ -3,13 +3,16 @@ Setup
     int g = 3;
     string s = "hello there another word";
     table.draw(3,deck);
+    Player.create(4);
     Test();
 }
 Round
 {
     int t = 0;
     int i = 2;
-    if ( i > 5 || i < 8 && i > 6 ) {
+    int x = 0;
+    
+    if ( x > 7 ) {
         int y = 3;
     }
     for ( int u = 3; u > 8; u++ ) {
@@ -19,6 +22,11 @@ Round
 }
 Turn ( Player player ) {
     int p = 3;
+    player.draw(2,deck);
+    if ( player.handSize() > 7 ) {
+        player.score++;
+        Game.exit(player);
+    }
 }
 
 Test{

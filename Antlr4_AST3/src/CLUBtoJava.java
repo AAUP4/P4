@@ -42,7 +42,7 @@ public class CLUBtoJava {
     }
 
     public static String ConvertToJava(){  
-        String readFromFile = "public class Main {\npublic static Deck deck = new Deck();\npublic static Table table = new Table();\npublic static void main(String[] args) {\nSetup();\nfor (Player player : Player.getPlayers()){\nRound();\n}\nGame.exit();\n}\n";
+        String readFromFile = "public class Main {\npublic static Deck deck = new Deck();\npublic static Table table = new Table();\npublic static void main(String[] args) {\nSetup();\nwhile (Game.running) {\nRound();\n}\nSystem.exit(0);\n}\n";
         for (int i = 0; i < readFileLines().size(); i++ ) {
             if(readFileLines().get(i).equals("Setup")){
                 System.out.println("public static void Setup()");
@@ -121,11 +121,11 @@ public class CLUBtoJava {
             }
             else if(readFileLines().get(i).equals("}")){
                 System.out.println("}");
-                readFromFile += "}\n";
+                readFromFile += "\n}\n";
             }
             else if(readFileLines().get(i).equals("{")){
                 System.out.println("{");
-                readFromFile += "\n{";
+                readFromFile += "\n{\n";
             }
             else if (intDecl.containsKey(readFileLines().get(i))) {
                 readFromFile += "Vars." + readFileLines().get(i);

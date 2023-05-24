@@ -1,4 +1,4 @@
-// Generated from C:/Users/Kira/Documents/GitHub/P4/Antlr4_AST3/src\CLUB.g4 by ANTLR 4.12.0
+// Generated from C:/Users/night/Documents/GitHub/P4/Antlr4_AST3/src\CLUB.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -95,13 +95,6 @@ public interface CLUBVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStmt8(CLUBParser.Stmt8Context ctx);
-	/**
-	 * Visit a parse tree produced by the {@code Stmt9}
-	 * labeled alternative in {@link CLUBParser#stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStmt9(CLUBParser.Stmt9Context ctx);
 	/**
 	 * Visit a parse tree produced by the {@code While}
 	 * labeled alternative in {@link CLUBParser#iterStmt}.

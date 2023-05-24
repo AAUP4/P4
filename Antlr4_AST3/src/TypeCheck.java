@@ -26,6 +26,12 @@ public abstract class TypeCheck {
         VarType.put("player","OBJECT");
         VarType.put("table","OBJECT");
         VarType.put("deck","OBJECT");
+        VarType.put("bool","KEYWORD");
+        VarType.put("int","KEYWORD");
+        VarType.put("string","KEYWORD");
+        VarType.put("if","KEYWORD");
+        VarType.put("while","KEYWORD");
+        VarType.put("for","KEYWORD");
 
         FuncIDs = new ArrayList<>();
 
@@ -593,7 +599,7 @@ public abstract class TypeCheck {
                         method = method.concat(input);
                         input = "";
                     }
-                    else if (input.startsWith(").takeCard(table.getCardIndex(")) {
+                    else if (input.startsWith(".takeCard(table.getCardIndex(")) {
                         Fparams.add("INT");
                         method = method.concat(").takeCard(table.getCardIndex(INT");
                         input = input.substring(30);
@@ -602,7 +608,7 @@ public abstract class TypeCheck {
                         method = method.concat(input);
                         input = "";
                     }
-                    else if (input.startsWith(").takeCard(Game.getDiscardPileIndex(")) {
+                    else if (input.startsWith(".takeCard(Game.getDiscardPileIndex(")) {
                         Fparams.add("INT");
                         method = method.concat(").takeCard(Game.getDiscardPileIndex(INT");
                         input = input.substring(39);
@@ -611,7 +617,7 @@ public abstract class TypeCheck {
                         method = method.concat(input);
                         input = "";
                     }
-                    else if (input.startsWith(").takeCard(")) {
+                    else if (input.startsWith(".takeCard(")) {
                         Fparams.add("STRING");
                         method = method.concat(").takeCard(STRING");
                         input = input.substring(11);

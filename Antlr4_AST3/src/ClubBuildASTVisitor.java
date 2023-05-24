@@ -119,14 +119,9 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
         return new AST(ctx.left);
     }
 
-    @Override
-    public AST visitStmt8(CLUBParser.Stmt8Context ctx) {
-        TypeCheck.checkValidValue(ctx.param.getText(),"INT");
-        return new AST(ctx.left);
-    }
 
     @Override
-    public AST visitStmt9(CLUBParser.Stmt9Context ctx) {
+    public AST visitStmt8(CLUBParser.Stmt8Context ctx) {
         return new AST(ctx.left);
     }
 
@@ -192,8 +187,8 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
     public AST visitAssignExpr(CLUBParser.AssignExprContext ctx) {
         if(!TypeCheck.processInput(ctx.left.getText()+ctx.op.getText()+ctx.logicOrExpr().getText(),"VOID")){ throw new IllegalArgumentException("Input is not a valid assignment.");}
         AST ast = new AST(ctx.op);
-        AST left = new AST(ctx.left);
-        ast.addChild(left);
+        AST l = new AST(ctx.left);
+        ast.addChild(l);
         ast.addChild(visit(ctx.logicOrExpr()));
         return ast;
     }
@@ -205,7 +200,6 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
 
     @Override
     public AST visitLogicOr2(CLUBParser.LogicOr2Context ctx) {
-        if(!TypeCheck.checkValidValue(ctx.logicAndExpr().getText()+ctx.op.getText()+ctx.logicOrExpr().getText(),"BOOL")){ throw new IllegalArgumentException("Input is not a valid logic expression.");}
         AST ast = new AST(ctx.op);
         ast.addChild(visit(ctx.logicAndExpr()));
         ast.addChild(visit(ctx.logicOrExpr()));
@@ -219,7 +213,6 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
 
     @Override
     public AST visitLogicAnd2(CLUBParser.LogicAnd2Context ctx) {
-        if(!TypeCheck.checkValidValue(ctx.equalExpr().getText()+ctx.op.getText()+ctx.logicAndExpr().getText(),"BOOL")){ throw new IllegalArgumentException("Input is not a valid logic expression.");}
         AST ast = new AST(ctx.op);
         ast.addChild(visit(ctx.equalExpr()));
         ast.addChild(visit(ctx.logicAndExpr()));
@@ -233,7 +226,6 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
 
     @Override
     public AST visitEqual2(CLUBParser.Equal2Context ctx) {
-        if(!TypeCheck.checkValidValue(ctx.relatExpr().getText()+ctx.op.getText()+ctx.equalExpr().getText(),"BOOL")){ throw new IllegalArgumentException("Input is not a valid logic expression.");}
         AST ast = new AST(ctx.op);
         ast.addChild(visit(ctx.relatExpr()));
         ast.addChild(visit(ctx.equalExpr()));
@@ -247,7 +239,6 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
 
     @Override
     public AST visitRelat2(CLUBParser.Relat2Context ctx) {
-        if(!TypeCheck.checkValidValue(ctx.addExpr().getText()+ctx.op.getText()+ctx.relatExpr().getText(),"BOOL")){ throw new IllegalArgumentException("Input is not a valid logic expression.");}
         AST ast = new AST(ctx.op);
         ast.addChild(visit(ctx.addExpr()));
         ast.addChild(visit(ctx.relatExpr()));
@@ -261,7 +252,6 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
 
     @Override
     public AST visitAdd2(CLUBParser.Add2Context ctx) {
-        if(!TypeCheck.checkValidValue(ctx.multExpr().getText()+ctx.op.getText()+ctx.addExpr().getText(),"INT")){ throw new IllegalArgumentException("Input is not a valid arithmetic expression.");}
         AST ast = new AST(ctx.op);
         ast.addChild(visit(ctx.multExpr()));
         ast.addChild(visit(ctx.addExpr()));
@@ -275,7 +265,6 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
 
     @Override
     public AST visitMult2(CLUBParser.Mult2Context ctx) {
-        if(!TypeCheck.checkValidValue(ctx.unaryExpr().getText()+ctx.op.getText()+ctx.multExpr().getText(),"INT")){ throw new IllegalArgumentException("Input is not a valid arithmetic expression.");}
         AST ast = new AST(ctx.op);
         ast.addChild(visit(ctx.unaryExpr()));
         ast.addChild(visit(ctx.multExpr()));
@@ -289,15 +278,6 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
 
     @Override
     public AST visitUnary2(CLUBParser.Unary2Context ctx) {
-        if(ctx.op.getText()=="-") {
-            if (!TypeCheck.checkValidValue(ctx.op.getText() + ctx.postfExpr().getText(), "INT")) {
-                throw new IllegalArgumentException("Input is not a valid arithmetic expression.");
-            }
-        } else {
-            if (!TypeCheck.checkValidValue(ctx.op.getText() + ctx.postfExpr().getText(), "BOOL")) {
-                throw new IllegalArgumentException("Input is not a valid logic expression.");
-            }
-        }
         AST ast = new AST(ctx.op);
         ast.addChild(visit(ctx.postfExpr()));
         return ast;
@@ -310,7 +290,6 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
 
     @Override
     public AST visitPostF2(CLUBParser.PostF2Context ctx) {
-        if(!TypeCheck.checkValidValue(ctx.primaryExpr().getText()+ctx.op.getText(),"INT")){ throw new IllegalArgumentException("Input is not a valid arithmetic expression.");}
         AST ast = new AST(ctx.op);
         ast.addChild(visit(ctx.primaryExpr()));
         return ast;
