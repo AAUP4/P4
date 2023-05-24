@@ -1,20 +1,14 @@
 Setup
 {
-    int y = 0;
+
 }
 Round
 {
 
-    int x = Player.getPlayer(1).handSize();
-    
-    if ( player.handSize()+y > Player.getPlayer(1).handSize() ) {
-        x = x++;
-        Game.exit(Player.getPlayer(1));
-    }
-
+}
+Turn ( Player player ){
 
 }
-
 
 
 

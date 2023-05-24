@@ -11,7 +11,7 @@ public class Main {
         //CharStream input = CharStreams.fromFileName("C:\\Users\\night\\Documents\\Github\\P4\\Antlr4_AST3\\src\\test.expr");
 //        CharStream input2 = CharStreams.fromFileName("C:\\Users\\night\\Documents\\Github\\P4\\Antlr4_AST3\\src\\test.club");
 
-        String relativePath = "src/test.club";
+        String relativePath = "src/GoFish.club";
         String absolutePath = System.getProperty("user.dir") + "/" + relativePath;
         CharStream input2 = CharStreams.fromFileName(absolutePath);
 

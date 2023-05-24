@@ -21,7 +21,7 @@ public class CLUBtoJava {
     static HashMap<String, String> boolDecl = new HashMap();
 
 
-    static String relativePath = "src/test.club";
+    static String relativePath = "src/GoFish.club";
     static String absolutePath = System.getProperty("user.dir") + "/" + relativePath;
 
     public static List<String> readFileLines() {

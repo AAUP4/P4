@@ -1,0 +1,52 @@
+Setup
+{
+    Player.create(2);
+    deck.shuffle();
+    deck.deal(7);
+}
+Round
+{
+    int t = 1;
+    int trick = 0;
+
+    while ( deck.size()>0 && Player.getPlayer(1).handSize()>0 && Player.getPlayer(2).handSize()>0 ) {
+        Turn(Player.getPlayer(t));
+        if ( t == 1 ) {
+           t = 2;
+        }
+        if ( t == 2 ) {
+           t = 1;
+        }
+    }
+
+    if ( Player.getPlayer(1).score > Player.getPlayer(2).score ) { Game.exit(Player.getPlayer(1)); }
+    if ( Player.getPlayer(1).score < Player.getPlayer(2).score ) { Game.exit(Player.getPlayer(2)); }
+
+}
+Turn ( Player player ) {
+    player.printHand();
+    string card = Game.input("What card will you ask for? ");
+    if ( player.name == Player.getPlayer(1).name ) {
+        for ( int i = 0; i < Player.getPlayer(2).handSize(); i++ ) {
+            if ( Player.getPlayer(2).getCardIndex(i).rank == card ) {
+                player.takeCard(Player.getPlayer(2).getCardIndex(i).id,Player.getPlayer(2));
+            }
+        }
+    }
+    if ( player.name == Player.getPlayer(2).name ) {
+        for ( int j = 0; j < Player.getPlayer(1).handSize(); j++ ) {
+            if ( Player.getPlayer(1).getCardIndex(i).rank == card ) {
+                player.takeCard(Player.getPlayer(1).getCardIndex(i).id,Player.getPlayer(1));
+            }
+        }
+    }
+    for ( int k = 0; k < player.handSize(); k++ ) {
+        if ( player.getCardIndex(i).rank == card ) {
+            trick = trick + 1;
+        }
+    }
+    if ( trick == 4 ) {
+         player.score++;
+    }
+
+}
