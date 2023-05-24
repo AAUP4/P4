@@ -41,7 +41,7 @@ public class CLUBtoJava {
         return tokens;
     }
 
-    public static String ConvertToJava(){  
+    public static String convertToJava(){  
         String readFromFile = "public class Main {\npublic static Deck deck = new Deck();\npublic static Table table = new Table();\npublic static void main(String[] args) {\nSetup();\nwhile (Game.running) {\nRound();\n}\nSystem.exit(0);\n}\n";
         for (int i = 0; i < readFileLines().size(); i++ ) {
             if(readFileLines().get(i).equals("Setup")){
@@ -153,7 +153,7 @@ public class CLUBtoJava {
             // Main File
             checkIfFileExistElseCreate("Javaoutput.java");
             FileWriter fileWriter = new FileWriter("Javaoutput.java");
-            fileWriter.write(ConvertToJava());
+            fileWriter.write(convertToJava());
             fileWriter.close();
             // Vars file
             checkIfFileExistElseCreate("Vars.java");
