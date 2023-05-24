@@ -3,8 +3,9 @@ grammar CLUB;
 program : setup round turn func* EOF ;
 setup : 'Setup' '{' stmt* '}' ;
 round : 'Round' '{' stmt* '}' ;
-turn : ('Turn' '(' PLAYER2 ')' '{' stmt* '}')?
-        ;
+turn : 'Turn' '(' PLAYER2 ')' '{' stmt* '}' #Turn1
+      |                                     #Turn2
+      ;
 
 func : left=FUNCID '{' stmt* '}'
          ;

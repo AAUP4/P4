@@ -1,4 +1,4 @@
-// Generated from C:/Users/night/Documents/GitHub/P4/Antlr4_AST3/src\CLUB.g4 by ANTLR 4.12.0
+// Generated from C:/Users/Kira/Documents/GitHub/P4/Antlr4_AST3/src\CLUB.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -37,15 +37,29 @@ public interface CLUBListener extends ParseTreeListener {
 	 */
 	void exitRound(CLUBParser.RoundContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CLUBParser#turn}.
+	 * Enter a parse tree produced by the {@code Turn1}
+	 * labeled alternative in {@link CLUBParser#turn}.
 	 * @param ctx the parse tree
 	 */
-	void enterTurn(CLUBParser.TurnContext ctx);
+	void enterTurn1(CLUBParser.Turn1Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link CLUBParser#turn}.
+	 * Exit a parse tree produced by the {@code Turn1}
+	 * labeled alternative in {@link CLUBParser#turn}.
 	 * @param ctx the parse tree
 	 */
-	void exitTurn(CLUBParser.TurnContext ctx);
+	void exitTurn1(CLUBParser.Turn1Context ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Turn2}
+	 * labeled alternative in {@link CLUBParser#turn}.
+	 * @param ctx the parse tree
+	 */
+	void enterTurn2(CLUBParser.Turn2Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Turn2}
+	 * labeled alternative in {@link CLUBParser#turn}.
+	 * @param ctx the parse tree
+	 */
+	void exitTurn2(CLUBParser.Turn2Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link CLUBParser#func}.
 	 * @param ctx the parse tree

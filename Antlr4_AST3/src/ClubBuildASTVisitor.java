@@ -52,7 +52,8 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
         return ast;
     }
      @Override
-     public AST visitTurn(CLUBParser.TurnContext ctx){
+     public AST visitTurn1(CLUBParser.Turn1Context ctx){
+
          TypeCheck.declFunc("Turn");
          AST ast = new AST(ctx.TURN().getSymbol());
          int i = 0;
@@ -138,7 +139,8 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
     @Override
     public AST visitSelectStmt(CLUBParser.SelectStmtContext ctx) {
         AST ast = new AST(ctx.IF().getSymbol());
-        if(!TypeCheck.checkValidValue(ctx.logicOrExpr().getText(),"BOOL")){ throw new IllegalArgumentException("Input is not a valid logic expression.");}
+        System.out.println("logic test: "+ctx.logicOrExpr().getText());
+        if(!TypeCheck.checkValidValue(ctx.logicOrExpr().getText(),"BOOL")){ throw new IllegalArgumentException(ctx.logicOrExpr().getText()+" is not a valid logic expression.");}
         ast.addChild(visit(ctx.logicOrExpr()));
         int i = 0;
         for (CLUBParser.StmtContext stmt : ctx.stmt()) {
@@ -151,7 +153,7 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
     @Override
     public AST visitWhile(CLUBParser.WhileContext ctx) {
         AST ast = new AST(ctx.WHILE().getSymbol());
-        if(!TypeCheck.checkValidValue(ctx.logicOrExpr().getText(),"BOOL")){ throw new IllegalArgumentException("Input is not a valid logic expression.");}
+        if(!TypeCheck.checkValidValue(ctx.logicOrExpr().getText(),"BOOL")){ throw new IllegalArgumentException(ctx.logicOrExpr().getText()+" is not a valid logic expression.");}
         ast.addChild(visit(ctx.logicOrExpr()));
         int i = 0;
         for (CLUBParser.StmtContext stmt : ctx.stmt()) {
@@ -169,11 +171,11 @@ public class ClubBuildASTVisitor extends CLUBBaseVisitor<AST> {
         if(!TypeCheck.processInput(ctx.tParam().getText()+"="+ctx.addExpr().getText(),"VOID")){ throw new IllegalArgumentException("Input is not a valid declaration.");}
         decl.addChild(visit(ctx.tParam()));
         decl.addChild(visit(ctx.addExpr()));
-        if(!TypeCheck.checkValidValue(ctx.logicOrExpr().getText(),"BOOL")){ throw new IllegalArgumentException("Input is not a valid logic expression.");}
+        if(!TypeCheck.checkValidValue(ctx.logicOrExpr().getText(),"BOOL")){ throw new IllegalArgumentException(ctx.logicOrExpr().getText()+" is not a valid logic expression.");}
         ast.addChild(visit(ctx.logicOrExpr()));
         AST incr = new AST(ctx.rop);
         ast.addChild(incr);
-        if(!TypeCheck.checkValidValue(ctx.right.getText()+ctx.rop.getText(),"INT")){ throw new IllegalArgumentException("Input is not a valid arithmetic expression.");}
+        if(!TypeCheck.checkValidValue(ctx.right.getText()+ctx.rop.getText(),"INT")){ throw new IllegalArgumentException(ctx.right.getText()+ctx.rop.getText()+" is not a valid arithmetic expression.");}
         incr.addChild(new AST(ctx.right));
         int i = 0;
         for (CLUBParser.StmtContext stmt : ctx.stmt()) {

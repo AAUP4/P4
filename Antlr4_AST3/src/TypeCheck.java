@@ -643,6 +643,10 @@ public abstract class TypeCheck {
                             input = "";
                         }
                     }
+                    else {
+                        method = method.concat(input);
+                        input = "";
+                    }
                 }
                 else if (input.startsWith("Player.getPlayer(")) {
                     Fparams.add("INT");
@@ -826,7 +830,10 @@ public abstract class TypeCheck {
                             input = "";
                         }
                     }
-
+                    else {
+                        method = method.concat(input);
+                        input = "";
+                    }
 
                 }
             }
@@ -840,7 +847,8 @@ public abstract class TypeCheck {
                 input = input.substring(input.lastIndexOf("))"));
                 method = method.concat(input);
                 input = "";
-            } else if (input.startsWith("table.discardAll(Player.getPlayer(")) {
+            }
+            else if (input.startsWith("table.discardAll(Player.getPlayer(")) {
                 Fparams.add("INT");
                 method = method.concat("table.discardAll(Player.getPlayer(INT");
                 input = input.substring(34);
@@ -848,7 +856,8 @@ public abstract class TypeCheck {
                 input = input.substring(input.indexOf(")."));
                 method = method.concat(input);
                 input = "";
-            } else if (input.startsWith("table.discard(table.getCardIndex(")) {
+            }
+            else if (input.startsWith("table.discard(table.getCardIndex(")) {
                 Fparams.add("INT");
                 method = method.concat("table.discard(table.getCardIndex(INT");
                 input = input.substring(33);
@@ -865,7 +874,8 @@ public abstract class TypeCheck {
                     method = method.concat(input);
                     input = "";
 
-            } else if (input.startsWith("Game.exit(Player.getPlayer(")) {
+            }
+            else if (input.startsWith("Game.exit(Player.getPlayer(")) {
                 Fparams.add("INT");
                 method = method.concat("Game.exit(Player.getPlayer(INT");
                 input = input.substring(27);
@@ -873,7 +883,8 @@ public abstract class TypeCheck {
                 input = input.substring(input.lastIndexOf("))"));
                 method = method.concat(input);
                 input = "";
-            } else if (input.startsWith("deck.getCard(")) {
+            }
+            else if (input.startsWith("deck.getCard(")) {
                 Fparams.add("INT");
                 method = method.concat("deck.getCard(INT");
                 input = input.substring(13);
@@ -881,7 +892,8 @@ public abstract class TypeCheck {
                 input = input.substring(input.indexOf(")."));
                 method = method.concat(input);
                 input = "";
-            } else if (input.startsWith("Player.getPlayer(")) {
+            }
+            else if (input.startsWith("Player.getPlayer(")) {
                 Fparams.add("INT");
                 method = method.concat("Player.getPlayer(INT");
                 input = input.substring(17);
@@ -895,7 +907,8 @@ public abstract class TypeCheck {
                     input = input.substring(input.indexOf(")."));
                     method = method.concat(input);
                     input = "";
-                } else if (input.startsWith(").getDiscardPileIndex(")) {
+                }
+                else if (input.startsWith(").getDiscardPileIndex(")) {
                     Fparams.add("INT");
                     method = method.concat(").getDiscardPileIndex(INT");
                     input = input.substring(22);
@@ -903,7 +916,8 @@ public abstract class TypeCheck {
                     input = input.substring(input.indexOf(")."));
                     method = method.concat(input);
                     input = "";
-                } else if (input.startsWith(").getCardIndex(")) {
+                }
+                else if (input.startsWith(").getCardIndex(")) {
                     Fparams.add("INT");
                     method = method.concat(").getCardIndex(INT");
                     input = input.substring(15);
@@ -911,7 +925,8 @@ public abstract class TypeCheck {
                     input = input.substring(input.indexOf(")."));
                     method = method.concat(input);
                     input = "";
-                } else if (input.startsWith(").takeCard(Player.getPlayer(")) {
+                }
+                else if (input.startsWith(").takeCard(Player.getPlayer(")) {
                     Fparams.add("INT");
                     method = method.concat(").takeCard(Player.getPlayer(INT");
                     input = input.substring(28);
@@ -962,7 +977,8 @@ public abstract class TypeCheck {
                     }
                     method = method.concat(input);
                     input = "";
-                } else if (input.startsWith(").takeCard(table.getCardIndex(")) {
+                }
+                else if (input.startsWith(").takeCard(table.getCardIndex(")) {
                     Fparams.add("INT");
                     method = method.concat(").takeCard(table.getCardIndex(INT");
                     input = input.substring(30);
@@ -970,7 +986,8 @@ public abstract class TypeCheck {
                     input = input.substring(input.indexOf(")."));
                     method = method.concat(input);
                     input = "";
-                } else if (input.startsWith(").takeCard(Game.getDiscardPileIndex(")) {
+                }
+                else if (input.startsWith(").takeCard(Game.getDiscardPileIndex(")) {
                     Fparams.add("INT");
                     method = method.concat(").takeCard(Game.getDiscardPileIndex(INT");
                     input = input.substring(39);
@@ -978,7 +995,8 @@ public abstract class TypeCheck {
                     input = input.substring(input.indexOf(")."));
                     method = method.concat(input);
                     input = "";
-                } else if (input.startsWith(").takeCard(")) {
+                }
+                else if (input.startsWith(").takeCard(")) {
                     Fparams.add("STRING");
                     method = method.concat(").takeCard(STRING");
                     input = input.substring(11);
@@ -993,20 +1011,27 @@ public abstract class TypeCheck {
                             input = input.substring(input.indexOf(")."));
                             method = method.concat(input);
                             input = "";
-                        } else {
+                        }
+                        else {
                             Aparams.add(input.substring(0, input.lastIndexOf("))")));
                             input = input.substring(input.lastIndexOf("))"));
                             method = method.concat(input);
                             input = "";
                         }
-                    } else  {
+                    }
+                    else  {
                         method = method.concat(input);
                         input = "";
                     } 
                 }
+                else {
+                    method = method.concat(input);
+                    input = "";
+                }
                 
                 
-            } else if (input.startsWith("table.getCardIndex(")) {
+            }
+            else if (input.startsWith("table.getCardIndex(")) {
                 Fparams.add("INT");
                 method = method.concat("table.getCardIndex(INT");
                 input = input.substring(19);
@@ -1014,7 +1039,8 @@ public abstract class TypeCheck {
                 input = input.substring(input.indexOf(")."));
                 method = method.concat(input);
                 input = "";
-            } else if (input.startsWith("Game.getDiscardPileIndex(")) {
+            }
+            else if (input.startsWith("Game.getDiscardPileIndex(")) {
                 Fparams.add("INT");
                 method = method.concat("Game.getDiscardPileIndex(INT");
                 input = input.substring(25);
@@ -1022,7 +1048,8 @@ public abstract class TypeCheck {
                 input = input.substring(input.indexOf(")."));
                 method = method.concat(input);
                 input = "";
-            } else if (input.startsWith("table.draw(")) {
+            }
+            else if (input.startsWith("table.draw(")) {
                 Fparams.add("INT");
                 method = method.concat("table.draw(INT");
                 input = input.substring(11);
@@ -1030,7 +1057,8 @@ public abstract class TypeCheck {
                 input = input.substring(input.indexOf(","));
                 method = method.concat(input);
                 input = "";
-            } else if (input.startsWith("deck.assignPoints(")) {
+            }
+            else if (input.startsWith("deck.assignPoints(")) {
                 Fparams.add("INT");
                 method = method.concat("deck.assignPoints(INT");
                 input = input.substring(18);
@@ -1043,14 +1071,16 @@ public abstract class TypeCheck {
                     if(input.contains(",")){
                         Aparams.add(input.substring(0, input.indexOf(",")));
                         input = input.substring(input.indexOf(","));
-                    } else {
+                    }
+                    else {
                         Aparams.add(input.substring(0, input.indexOf(")")));
                         input = input.substring(input.indexOf(")"));
                     }
                 }
                 method = method.concat(input);
                 input = "";
-            } else if (input.startsWith("deck.deal(")) {
+            }
+            else if (input.startsWith("deck.deal(")) {
                 Fparams.add("INT");
                 method = method.concat("deck.deal(INT");
                 input = input.substring(10);
@@ -1058,7 +1088,8 @@ public abstract class TypeCheck {
                 input = input.substring(input.lastIndexOf(")"));
                 method = method.concat(input);
                 input = "";
-            } else if (input.startsWith("deck.addJokers(")) {
+            }
+            else if (input.startsWith("deck.addJokers(")) {
                 Fparams.add("INT");
                 method = method.concat("deck.addJokers(INT");
                 input = input.substring(15);
@@ -1066,7 +1097,8 @@ public abstract class TypeCheck {
                 input = input.substring(input.lastIndexOf(")"));
                 method = method.concat(input);
                 input = "";
-            } else if (input.startsWith("Player.create(")) {
+            }
+            else if (input.startsWith("Player.create(")) {
                 Fparams.add("INT");
                 method = method.concat("Player.create(INT");
                 input = input.substring(14);
@@ -1085,7 +1117,8 @@ public abstract class TypeCheck {
                 input = input.substring(input.lastIndexOf(")"));
                 method = method.concat(input);
                 input = "";
-            } else if (input.startsWith("Game.input(") && !input.startsWith("Game.input()")){
+            }
+            else if (input.startsWith("Game.input(") && !input.startsWith("Game.input()")){
                 Fparams.add("STRING");
                 method = method.concat("Game.input(STRING");
                 input = input.substring(11);
@@ -1093,7 +1126,8 @@ public abstract class TypeCheck {
                 input = input.substring(input.lastIndexOf(")"));
                 method = method.concat(input);
                 input = "";
-            } else if ((input.startsWith("table.discard(") && !input.startsWith("table.discard(table.getCardIndex("))){
+            }
+            else if ((input.startsWith("table.discard(") && !input.startsWith("table.discard(table.getCardIndex("))){
                 Fparams.add("STRING");
                 method = method.concat("table.discard(STRING");
                 input = input.substring(14);
@@ -1107,7 +1141,8 @@ public abstract class TypeCheck {
                     input = input.substring(input.indexOf(")."));
                     method = method.concat(input);
                     input = "";
-                } else {
+                }
+                else {
                     Aparams.add(input.substring(0, input.lastIndexOf(")")));
                     input = input.substring(input.lastIndexOf(")"));
                     method = method.concat(input);
@@ -1122,7 +1157,7 @@ public abstract class TypeCheck {
 
         //check on method, Fparams, Aparams
             if (Fparams.size()>0 &&  (SETM.containsKey(method) || VM.containsKey(method) || IM.containsKey(method) || SM.containsKey(method) || ATTI.containsKey(method) || ATTS.containsKey(method) || ATTB.containsKey(method)) && input == ""){
-                if (SETM.containsKey(method)){
+                if (SETM.containsKey(method) && context.equals("VOID")){
                     FparamTypeCheck = SETM.get(method).equals(Fparams);
                     if (!FparamTypeCheck) {return false;}
                     int p = 0;
@@ -1140,11 +1175,11 @@ public abstract class TypeCheck {
                         }
                         p++;
                     }
-                    if (context == "VOID"){
+
                         result = true;   
-                    }                
+
                 }
-                else if (VM.containsKey(method)){
+                else if (VM.containsKey(method) && context.equals("VOID")){
                     FparamTypeCheck = VM.get(method).equals(Fparams);
                     if (!FparamTypeCheck) {return false;}
                     int p = 0;
@@ -1162,11 +1197,11 @@ public abstract class TypeCheck {
                         }
                         p++;
                     }
-                    if (context == "VOID"){
+
                         result = true;   
-                    }                    
+
                 }
-                else if (IM.containsKey(method)){
+                else if (IM.containsKey(method) && context.equals("INT")){
                     FparamTypeCheck = IM.get(method).equals(Fparams);
                     if (!FparamTypeCheck) {return false;}
                     int p = 0;
@@ -1185,13 +1220,13 @@ public abstract class TypeCheck {
                         }
                         p++;
                     }
-                    if (context == "INT"){
+
                         result = true;   
-                    }                   
+
                 
                 }
                 
-                else if (SM.containsKey(method)){
+                else if (SM.containsKey(method) && context.equals("STRING")){
                     FparamTypeCheck = SM.get(method).equals(Fparams);
                     if (!FparamTypeCheck) {return false;}
                     int p = 0;
@@ -1209,11 +1244,11 @@ public abstract class TypeCheck {
                         }
                         p++;
                     }
-                    if (context == "STRING"){
+
                         result = true;   
-                    }                    
+
                 }
-                else if (ATTI.containsKey(method)){
+                else if (ATTI.containsKey(method) && context.equals("INT")){
                     FparamTypeCheck = ATTI.get(method).equals(Fparams);
                     if (!FparamTypeCheck) {return false;}
                     int p = 0;
@@ -1231,11 +1266,11 @@ public abstract class TypeCheck {
                         }
                         p++;
                     }
-                    if (context == "INT"){
+
                         result = true;   
-                    }                    
+
                 }
-                else if (ATTS.containsKey(method)){
+                else if (ATTS.containsKey(method) && context.equals("STRING")){
                     FparamTypeCheck = ATTS.get(method).equals(Fparams);
                     if (!FparamTypeCheck) {return false;}
                     int p = 0;
@@ -1253,11 +1288,11 @@ public abstract class TypeCheck {
                         }
                         p++;
                     }
-                    if (context == "STRING"){
+
                         result = true;   
-                    }                    
+
                 }
-                else if (ATTB.containsKey(method)){
+                else if (ATTB.containsKey(method) && context.equals("BOOL")){
                     FparamTypeCheck = ATTB.get(method).equals(Fparams);
                     if (!FparamTypeCheck) {return false;}
                     int p = 0;
@@ -1275,13 +1310,14 @@ public abstract class TypeCheck {
                         }
                         p++;
                     }
-                    if (context == "BOOL"){
+
                         result = true;   
-                    }                    
+
                 }
                    
             }    
             System.out.println("context: "+context);
+            System.out.println("input: "+input);
             System.out.println("method: "+method);
             System.out.println("Fparams: ");
             for (String param : Fparams) {
@@ -1390,21 +1426,20 @@ public abstract class TypeCheck {
     }
 
     static boolean checkValidValue(String value, String context) {
-        boolean result = false;
-        if (context == "BOOL") {
-            if (checkLogicExpr(value)==true) {
-                result = true;
+        if (context.equals("BOOL")) {
+            if (checkLogicExpr(value)) {
+                return true;
             }
-        } else if (context == "STRING") {
-            if (checkStringExpr(value)==true) {
-                result = true;
+        } else if (context.equals("STRING")) {
+            if (checkStringExpr(value)) {
+                return true;
             }
-        } else if (context == "INT") {
-            if (checkArithExpr(value)==true) {
-                result = true;
+        } else if (context.equals("INT")) {
+            if (checkArithExpr(value)) {
+                return true;
             }
         }
-        return result;
+        return false;
     }
 
 
@@ -1412,13 +1447,14 @@ public abstract class TypeCheck {
         value = value.trim();
         String temp = "";
 
-        if (!value.contains("&") && !value.contains("|") && !value.contains("=") && !value.contains("\"") && !value.contains("<") && !value.contains(">") && !value.contains("!") && !value.contains(".") && !value.contains("{") && !value.contains("}") && !value.contains(",")) {
-
-            while(value.contains("(")){
-                value = value.substring(0, value.indexOf("("))+value.substring(value.indexOf("(")+1);
-            }
-            while(value.contains(")")){
-                value = value.substring(0, value.indexOf(")"))+value.substring(value.indexOf(")")+1);
+        if (!value.contains("&") && !value.contains("|") && !value.contains("=") && !value.contains("\"") && !value.contains("<") && !value.contains(">") && !value.contains("!") && !value.contains("{") && !value.contains("}") && !value.contains(",")) {
+            if (!value.contains(".")) {
+                while (value.contains("(")) {
+                    value = value.substring(0, value.indexOf("(")) + value.substring(value.indexOf("(") + 1);
+                }
+                while (value.contains(")")) {
+                    value = value.substring(0, value.indexOf(")")) + value.substring(value.indexOf(")") + 1);
+                }
             }
             while(value.contains(" ")){
                 value = value.substring(0, value.indexOf(" "))+value.substring(value.indexOf(" ")+1);
@@ -1452,10 +1488,12 @@ public abstract class TypeCheck {
                 if (checkArithExpr(temp)) {
                     value = value.substring(temp.length()+1);
                 } else { return false;}
-            } 
-
-
-
+            }
+            value = value.trim();
+            System.out.println("2intput test: "+value);
+            if (value.contains(".")) {
+                if (processInput(value,"INT")) {return true;}
+            }
             Integer i = null;
             try {
 
@@ -1471,9 +1509,7 @@ public abstract class TypeCheck {
 
         }
         
-        else if (value.contains(".")) {
-            if (processInput(value,"INT")) {return true;}
-        }
+
         return false;
     }
 
@@ -1482,13 +1518,14 @@ public abstract class TypeCheck {
         String temp1 = "";
         String temp2 = "";
 
-        if (!value.contains(".") && !value.contains("{") && !value.contains("}") && !value.contains(",")) {
-
-            while(value.contains("(")){
-                value = value.substring(0, value.indexOf("("))+value.substring(value.indexOf("(")+1);
-            }
-            while(value.contains(")")){
-                value = value.substring(0, value.indexOf(")"))+value.substring(value.indexOf(")")+1);
+        if ( !value.contains("{") && !value.contains("}") && !value.contains(",")) {
+            if (!value.contains(".")) {
+                while (value.contains("(")) {
+                    value = value.substring(0, value.indexOf("(")) + value.substring(value.indexOf("(") + 1);
+                }
+                while (value.contains(")")) {
+                    value = value.substring(0, value.indexOf(")")) + value.substring(value.indexOf(")") + 1);
+                }
             }
             while(value.contains(" ")){
                 value = value.substring(0, value.indexOf(" "))+value.substring(value.indexOf(" ")+1);
@@ -1555,9 +1592,13 @@ public abstract class TypeCheck {
                     return true;
                 } else { return false;}
             } 
-            
+
             value = value.trim();
-            if(value.equals("true") || value.equals("false")) {
+            System.out.println("intput test: "+value);
+            if (value.contains(".")) {
+                if (processInput(value,"INT")) {return true;}
+            }
+            else if(value.equals("true") || value.equals("false")) {
                 return true;
             }
             else if (checkVarType(value)=="BOOL") {
@@ -1565,9 +1606,7 @@ public abstract class TypeCheck {
             }
 
         }
-        else if (value.contains(".")) {
-            if (processInput(value,"BOOL")) {return true;}
-        }
+
         return false;
     }
     
@@ -1582,7 +1621,7 @@ public abstract class TypeCheck {
 
         int count = 0;
 
-        if ((value.contains(".") && !value.contains("\"")) || (value.contains(".") && value.contains("\"") && value.indexOf(".")<value.indexOf("\""))) {
+        if ((!value.contains("+") || (value.contains("+") && value.contains("\"") && value.indexOf("+")>value.indexOf("\"") && value.indexOf("+")<value.lastIndexOf("\""))) && ((value.contains(".") && !value.contains("\"")) || (value.contains(".") && value.contains("\"") && value.indexOf(".")<value.indexOf("\"")))) {
             if (processInput(value,"STRING")) {
                 return true;
             } else {return false;}

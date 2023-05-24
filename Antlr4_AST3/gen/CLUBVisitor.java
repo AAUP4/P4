@@ -1,4 +1,4 @@
-// Generated from C:/Users/night/Documents/GitHub/P4/Antlr4_AST3/src\CLUB.g4 by ANTLR 4.12.0
+// Generated from C:/Users/Kira/Documents/GitHub/P4/Antlr4_AST3/src\CLUB.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -28,11 +28,19 @@ public interface CLUBVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRound(CLUBParser.RoundContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CLUBParser#turn}.
+	 * Visit a parse tree produced by the {@code Turn1}
+	 * labeled alternative in {@link CLUBParser#turn}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTurn(CLUBParser.TurnContext ctx);
+	T visitTurn1(CLUBParser.Turn1Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Turn2}
+	 * labeled alternative in {@link CLUBParser#turn}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTurn2(CLUBParser.Turn2Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link CLUBParser#func}.
 	 * @param ctx the parse tree
