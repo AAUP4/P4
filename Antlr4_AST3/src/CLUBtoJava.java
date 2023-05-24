@@ -53,7 +53,7 @@ public class CLUBtoJava {
             else if(readFileLines().get(i).equals("Turn")){
                 readFromFile += "public static void Turn";
             }
-            else if(readFileLines().get(i).startsWith("player")){
+            else if(readFileLines().get(i).startsWith("player") && !readFileLines().get(i).startsWith("player.")){
                 readFromFile += " player";
             }
             else if(readFileLines().get(i).equals("bool")){                

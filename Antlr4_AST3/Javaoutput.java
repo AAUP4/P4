@@ -14,11 +14,13 @@ Vars.y=0;
 }
 public static void Round()
 {
-Vars.x=Player.getPlayer(1).handSize();if( player>Player.getPlayer(1).handSize())
+Vars.x=Player.getPlayer(1).handSize();if(player.handSize()+y>Player.getPlayer(1).handSize())
 {
 Vars.x=Vars.x++;Game.exit(Player.getPlayer(1));
 }
 
+}
+public static void Turn(Player player){
 }
 
 }
