@@ -17,7 +17,7 @@ public class Game {
 
     public static void exit(Player player){
         // Winner and scoreboard
-        System.out.println("The winner is "+player+"!");
+        System.out.println("The winner is "+player.name+"!");
         Map<String, Integer> scores = new HashMap<>();
         for(Player p : Player.getPlayers()){
             scores.put(p.name,p.score);

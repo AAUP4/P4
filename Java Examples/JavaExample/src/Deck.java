@@ -74,8 +74,7 @@ public class Deck {
     public void deal(int numberOfCardToDeal) {
         for (int i = 0; i < numberOfCardToDeal; i++) {
             for (Player player : Player.getPlayers()) {
-                player.draw(1, Main.deck);
-                this.cards.remove(this.cards.size() - 1);
+                player.draw(1, Main.deck);                
             }
         }
     }

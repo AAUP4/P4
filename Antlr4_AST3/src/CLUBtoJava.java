@@ -94,6 +94,10 @@ public class CLUBtoJava {
             else if(readFileLines().get(i).equals("{")){
                 readFromFile += "\n{\n";
             }
+            else if(readFileLines().get(i).equals("#")){
+                readFromFile += ".equals(" + readFileLines().get(i+1) + ")";
+                i++;
+            }
             else if (intDecl.containsKey(readFileLines().get(i))) {
                 readFromFile += readFileLines().get(i);
             }
