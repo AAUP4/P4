@@ -39,7 +39,7 @@ logicAndExpr : equalExpr                #LogicAnd1
 	    ;
 
 equalExpr : relatExpr                       #Equal1
-        | relatExpr op=('=='|'!=') equalExpr #Equal2
+        | relatExpr op=('=='|'!='|'#') equalExpr #Equal2
         ;
 relatExpr : addExpr                                 #Relat1
         | addExpr op=('<'|'>'|'<='|'>=') relatExpr  #Relat2
@@ -72,6 +72,7 @@ val : left=INTVAL
 AND : '&&' ;
 OR : '||' ;
 EQ : '==' ;
+SEQ : '#' ;
 NOTEQ : '!=' ;
 SMALLER : '<' ;
 LARGER : '>' ;

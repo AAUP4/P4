@@ -1505,7 +1505,7 @@ public abstract class TypeCheck {
         value = value.trim();
         String temp = "";
 
-        if (!value.contains("&") && !value.contains("|") && !value.contains("=") && !value.contains("\"") && !value.contains("<") && !value.contains(">") && !value.contains("!") && !value.contains("{") && !value.contains("}") && !value.contains(",")) {
+        if (!value.contains("&") && !value.contains("|") && !value.contains("=") && !value.contains("#") && !value.contains("\"") && !value.contains("<") && !value.contains(">") && !value.contains("!") && !value.contains("{") && !value.contains("}") && !value.contains(",")) {
             if (!value.contains(".")) {
                 while (value.contains("(")) {
                     value = value.substring(0, value.indexOf("(")) + value.substring(value.indexOf("(") + 1);
@@ -1607,9 +1607,17 @@ public abstract class TypeCheck {
                     return true;
                 } else { return false;}
             } if (value.contains("==")) {
-                temp1 = value.substring(0,value.indexOf("=="));
-                temp2 = value.substring(temp1.length()+2);
-                if ((checkLogicExpr(temp1) && checkLogicExpr(temp2))||(checkArithExpr(temp1) && checkArithExpr(temp2))||(checkStringExpr(temp1) && checkStringExpr(temp2))) {
+                temp1 = value.substring(0, value.indexOf("=="));
+                temp2 = value.substring(temp1.length() + 2);
+                if ((checkLogicExpr(temp1) && checkLogicExpr(temp2)) || (checkArithExpr(temp1) && checkArithExpr(temp2))) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } if (value.contains("#")) {
+                temp1 = value.substring(0,value.indexOf("#"));
+                temp2 = value.substring(temp1.length()+1);
+                if (checkStringExpr(temp1) && checkStringExpr(temp2)) {
                     return true;
                 } else { return false;}
             } if (value.contains("!=")) {
