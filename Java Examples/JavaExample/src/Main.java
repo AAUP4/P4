@@ -73,6 +73,10 @@ public class Main {
         tryAgainTwo = "";
         Game.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         start = Game.input(whenReady);
+        if (player.handSize() == 0 && deck.size() > 0) {
+            player.draw(1, deck);
+            Game.print("Your hand is empty. You drew a card!");
+        }
         player.printHand();
         if (player.handSize() > 0) {
             card = Game.input("What card will you ask for? ");
@@ -96,13 +100,10 @@ public class Main {
             }
 
         }
-        if (player.handSize() == 0) {
-            Game.print("You do not have any cards left!");
-        }
         if (player.name.equals(Player.getPlayer(1).name) && player.handSize() > 0) {
-            for (i = 0; i < Player.getPlayer(2).handSize(); i++) {
-                if (Player.getPlayer(2).getCardIndex(i).rank.equals(card)) {
-                    player.takeCard(Player.getPlayer(2).getCardIndex(i).id, Player.getPlayer(2));
+            for (i = Player.getPlayer(2).handSize(); i > 0; i--) {
+                if (Player.getPlayer(2).getCardIndex(i - 1).rank.equals(card)) {
+                    player.takeCard(Player.getPlayer(2).getCardIndex(i - 1).id, Player.getPlayer(2));
                     found = true;
                     turnAgain = true;
                     Game.print("You found a " + card + "!");
@@ -112,9 +113,9 @@ public class Main {
 
         }
         if (player.name.equals(Player.getPlayer(2).name) && player.handSize() > 0) {
-            for (j = 0; j < Player.getPlayer(1).handSize(); j++) {
-                if (Player.getPlayer(1).getCardIndex(j).rank.equals(card)) {
-                    player.takeCard(Player.getPlayer(1).getCardIndex(j).id, Player.getPlayer(1));
+            for (j = Player.getPlayer(1).handSize(); j > 0; j--) {
+                if (Player.getPlayer(1).getCardIndex(j - 1).rank.equals(card)) {
+                    player.takeCard(Player.getPlayer(1).getCardIndex(j - 1).id, Player.getPlayer(1));
                     found = true;
                     turnAgain = true;
                     Game.print("You found a " + card + "!");
@@ -175,7 +176,7 @@ public class Main {
             }
 
         }
-        
+
     }
 
 }

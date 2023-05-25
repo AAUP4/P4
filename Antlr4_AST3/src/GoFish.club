@@ -37,7 +37,7 @@ Turn ( Player player ) {
     string tryAgainTwo = "";
     Game.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     string start = Game.input(whenReady);
-    if ( player.handSize() == 0 && deck.size > 0 ) {
+    if ( player.handSize() == 0 && deck.size() > 0 ) {
         player.draw(1,deck);
         Game.print("Your hand is empty. You drew a card!");
     }
