@@ -6,11 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.StringTokenizer;
-
-
-
- 
+import java.util.StringTokenizer; 
 
 
 public class CLUBtoJava {
@@ -132,47 +128,13 @@ public class CLUBtoJava {
                 
                 
             }
-        // else if (readFileLines().get(i).contains("(") ) {
-        //     String line = readFileLines().get(i);
-        //     int startIndex = line.indexOf("(");
-        //     int endIndex = line.indexOf(")");
 
-        //     if (startIndex != -1 && endIndex != -1 && startIndex < endIndex) {
-        //         for (int j = startIndex + 1; j < endIndex; j++) {
-        //             char currentChar = line.charAt(j);
-        //             char previousChar = line.charAt(j - 1);
-                    
-        //             if (previousChar == '(' && Character.isLetter(currentChar)) {
-        //                 readFromFile += "Vars." + currentChar;
-        //             } else {
-        //                 readFromFile += previousChar + currentChar;
-        //             }
-        //         }
-        //     }
-        // }
-                
-                
-                
-            // //readFromFile += readFileLines().get(i).substring(0, readFileLines().get(i).indexOf("(" + 1));
-            // // readFileLines().get(i).charAt(readFileLines().get(i).indexOf("(" + 1)) != ')'
-            // for (int j = readFileLines().get(i).indexOf("("); j < readFileLines().get(i).length(); j++) {
-            //     if (readFileLines().get(i).charAt(j) == '(') {
-            //         if (readFileLines().get(i).charAt(j) != ')' && !Character.isDigit(readFileLines().get(i).charAt(j)) && readFileLines().get(i).charAt(j) != '(') {
-            //             readFromFile += readFileLines().get(i).charAt(j) + "Vars." + readFileLines().get(i).charAt(j+1);
-            //         }
-            //     }
-            //     else {
-            //         readFromFile += readFileLines().get(i).charAt(j);
-            //     }
-                
-            // }
             
             else{
                 readFromFile += readFileLines().get(i);
             }                
         } 
         readFromFile += "\n" + "}";
-        // System.out.println("This is the string input: " + readFromFile);
         return readFromFile;
     }
 
@@ -197,11 +159,6 @@ public class CLUBtoJava {
             FileWriter fileWriter = new FileWriter("Javaoutput.java");
             fileWriter.write(readFromFile+convert);
             fileWriter.close();
-            // Vars file
-            // checkIfFileExistElseCreate("Vars.java");
-            // FileWriter varWriter = new FileWriter("Vars.java");
-            // varWriter.write("public abstract class Vars {\n" + printVarDecl() + "}");
-            // varWriter.close();
         }
         catch (IOException e) {
             System.out.println("ERROR, file wasnt created!");
@@ -221,6 +178,5 @@ public class CLUBtoJava {
             e.printStackTrace();
         }
     }
-    //TODO: make sure player is not converted when there is a dot afterwards.
 }
 
