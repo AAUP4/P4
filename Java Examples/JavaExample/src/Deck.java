@@ -106,9 +106,22 @@ public class Deck {
             for (Card card : player.getHand()) {
                 cards.add(card);
                 player.getHand().remove(cards.size() - 1); // Changed from getCards, best regards - Skytte
-
+                
             }
+            for (Card card : player.getTable().getCards()) {
+                cards.add(card);
+                player.getTable().getCards().remove(cards.size() - 1); 
+                
+            }
+            returnDiscardPile(player);
         }
+        returnDiscardPile();
+        for (Card card : Main.table.getCards()) {
+            cards.add(card);
+            Main.table.getCards().remove(cards.size() - 1); 
+            
+        }
+
     }
 
     // Returns all cards from player discard pile to the deck.
